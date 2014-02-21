@@ -11,26 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140220030621) do
+ActiveRecord::Schema.define(version: 20140221025802) do
 
   create_table "cook_books", force: true do |t|
     t.integer  "user_id"
     t.integer  "recipe_id"
     t.string   "saved_recipes"
-    t.string   "notes"
+    t.text     "notes"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "endorsements", force: true do |t|
-    t.string   "comments"
+    t.text     "comments"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "stars",      limit: 1
   end
 
   create_table "ingredients", force: true do |t|
-    t.string   "name",        null: false
-    t.string   "description"
+    t.string   "name",        limit: 20, null: false
+    t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -39,17 +40,17 @@ ActiveRecord::Schema.define(version: 20140220030621) do
 
   create_table "recipes", force: true do |t|
     t.integer  "cookbook_id"
-    t.string   "instructions", null: false
+    t.text     "instructions", null: false
     t.string   "author_name",  null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|
-    t.string   "username",        null: false
-    t.string   "password_digest", null: false
+    t.string   "username",        limit: 15, null: false
+    t.string   "password_digest",            null: false
     t.string   "session_token"
-    t.string   "cook_book",       null: false
+    t.string   "cook_book",                  null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -58,8 +59,8 @@ ActiveRecord::Schema.define(version: 20140220030621) do
   add_index "users", ["username"], name: "index_users_on_username", unique: true
 
   create_table "utensils", force: true do |t|
-    t.string   "name",        null: false
-    t.string   "description"
+    t.string   "name",        limit: 20, null: false
+    t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

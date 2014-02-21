@@ -3,10 +3,15 @@ GroceryApp::Application.routes.draw do
   root to: "root#index"
 
   resources :users do
-    resources :foods
-    resources :groceries
+    resources :cookbook
   end
+
+  resources :recipes do
+  	resources :endorsements
+  end
+
   resource :session
-  resources :recipes
+  resources :ingredients
+  resources :utensils
 
 end

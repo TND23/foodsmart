@@ -4,7 +4,7 @@ class CreateCookBooks < ActiveRecord::Migration
     	t.integer :user_id
     	t.integer :recipe_id
     	t.string :saved_recipes
-    	t.string :notes
+    	t.text :notes
     	t.timestamps
     end
   end
