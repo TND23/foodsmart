@@ -8,6 +8,7 @@ GroceryApp::Application.routes.draw do
 
   #redo embedding
   resources :recipes do
+    #remove create
   	resources :endorsements, :only => [:create, :show, :destroy]
   end
 
