@@ -6,6 +6,12 @@ class User < ActiveRecord::Base
 	
 	validates :password_digest, :presence => { :message => "Password can't be blank" }
 	validates :password, :length => { :minimum => 6}
+	# add password confirmation
+	# validates :password, :confirmation => true
+	# validates :password_confirmation, :presence => true
+
+	# validate username has only letters and numbers
+	validates :username, format: {with: /\w+|\d+/}
 	validates :session_token, :presence => true
 	validates :username, :presence => true
 	validates :username, :uniqueness => true
@@ -27,6 +33,11 @@ class User < ActiveRecord::Base
     def password=(password)
     	@password = password
     	self.password_digest = BCrypt::Password.create(password)
+    end
+
+    def check_password(password)
+    	#use BCrypt is_password?() method
+    	BCrypt::Password.new(self.password_digest).is_password?(password)
     end
 
     def edit_recipe

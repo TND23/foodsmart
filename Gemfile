@@ -16,19 +16,21 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 
 gem 'protected_attributes'
-# See https://github.com/sstephenson/execjs#readme for more supported runtimes
-# gem 'therubyracer', platforms: :ruby
+# gem 'debugger', group: [:development, :test]
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
-
-# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
+# https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
 
-gem 'bcrypt-ruby', :require => 'bcrypt'
+# gem 'bcrypt-ruby', :require => 'bcrypt'
+
+# group :development do
+#   gem 'better_errors'
+#   gem 'binding_of_caller'
+# end
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
@@ -45,4 +47,3 @@ end
 # gem 'capistrano', group: :development
 
 # Use debugger
-# gem 'debugger', group: [:development, :test]
