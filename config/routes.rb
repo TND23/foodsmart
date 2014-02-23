@@ -2,16 +2,17 @@ GroceryApp::Application.routes.draw do
 
   root to: "root#index"
 
-  resources :users do
-    resources :cookbook
+  resources :users, :except => [:index, :edit, :update] do
+    resources :cookbook, :only => [:show]
   end
 
+  #redo embedding
   resources :recipes do
-  	resources :endorsements
+  	resources :endorsements, :only => [:create, :show, :destroy]
   end
 
-  resource :session
-  resources :ingredients
-  resources :utensils
+  resource :session, :only => [:create, :new, :destroy]
+  resources :ingredients, :only => [:create, :new, :edit, :show]
+  resources :utensils, :only => [:create, :new, :edit, :show]
 
 end
