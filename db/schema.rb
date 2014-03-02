@@ -11,9 +11,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140223074603) do
+ActiveRecord::Schema.define(version: 20140302033133) do
 
-  create_table "cook_books", force: true do |t|
+  create_table "cookbooks", force: true do |t|
     t.integer  "user_id"
     t.integer  "recipe_id"
     t.string   "saved_recipes"
@@ -66,7 +66,6 @@ ActiveRecord::Schema.define(version: 20140223074603) do
     t.string   "username",        limit: 15, null: false
     t.string   "password_digest",            null: false
     t.string   "session_token"
-    t.string   "cook_book",                  null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "cookbook_id"

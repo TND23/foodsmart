@@ -7,8 +7,10 @@ class UsersController < ApplicationController
 	end
 
 	def create
-		@user = User.new(params[:user])
+		@user = User.new(user_params)
     	if @user.save
+    		cookbook = CookBook.new()
+    		@user.cookbook_id = cookbook_id
     		render :json => @user
    		else
     		render :json => @user.errors.full_messages
@@ -21,6 +23,12 @@ class UsersController < ApplicationController
 
 	def show
 		
+	end
+
+	private
+
+	def user_params
+		params.require(:user).permit(:username, :password)
 	end
 	
 end

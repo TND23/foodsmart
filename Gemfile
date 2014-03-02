@@ -25,7 +25,7 @@ gem 'turbolinks'
 # https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
 
-# gem 'bcrypt-ruby', :require => 'bcrypt'
+gem 'bcrypt-ruby', :require => 'bcrypt'
 
 # group :development do
 #   gem 'better_errors'
