@@ -8,10 +8,11 @@ class UsersController < ApplicationController
 
 	def create
 		@user = User.new(params[:user])
-		if @user.save
-			self.user = current_user
-			redirect_to user_url(@user)
-		end
+    	if @user.save
+    		render :json => @user
+   		else
+    		render :json => @user.errors.full_messages
+    	end
 	end
 
 	def destroy

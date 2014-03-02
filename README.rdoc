@@ -1,28 +1,77 @@
-== README
+======================================
+Rails 
+======================================
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Models -- tier 1:
 
-Things you may want to cover:
+Cookbook validations
+Cookbook logic
+Endorsement logic
+Endorsement validations
+Ingredient logic
+Ingredient validations
+Recipe logic
+Recipe validations
+User logic
+User validations
+Utensil logic
+Utensil validations
 
-* Ruby version
+Views -- tier 2:
 
-* System dependencies
+Cookbook
+Endorsement
+Ingredient
+Recipe
+Root
+Sessions
+User
+Utensil
 
-* Configuration
+Controllers -- tier 1:
 
-* Database creation
+Application
+Cookbook
+Endorsement
+Ingredient
+Recipe
+Root
+Sessions
+User
+Utensil
 
-* Database initialization
+======================================
+Backbone
+======================================
 
-* How to run the test suite
+Models -- tier 3:
 
-* Services (job queues, cache servers, search engines, etc.)
+Recipe
+Ingredient
 
-* Deployment instructions
+Collections:
 
-* ...
+Recipes
+Ingredients
 
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+======================================
+Database:
+======================================
+Create relationships -- tier 1
+Seed database with initial recipes
+
+
+======================================
+API -- tier 4
+======================================
+Integrate with Facebook, Twitter
+
+
+======================================
+CSS -- tier 4
+======================================
+
+======================================
+Tests -- tier 1
+======================================
