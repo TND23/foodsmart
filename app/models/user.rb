@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
 	# validates :password_confirmation, :presence => true
 
 	# validate username has only letters and numbers
-	validates :username, format: {with: /\w+|\d+/}
+	validates :username, format: {with: /\w+|\d+/, on: :create}
 	validates :session_token, :presence => true
 	validates :username, :presence => true
 	validates :username, :uniqueness => true
