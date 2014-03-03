@@ -11,8 +11,9 @@ class User < ActiveRecord::Base
 	# validates :password_confirmation, :presence => true
 
 	# validate username has only letters and numbers
-	validates :username, format: {with: /\w+|\d+/, on: :create}
-	validates :session_token, :presence => true
+	validates :username, format: {without: /\s|\$|[<>,@!&:;{}()"+=#%\?\.\^\*\|]/, on: :create}
+	validates :username, :length => {:maximum => 15}
+    validates :session_token, :presence => true
 	validates :username, :presence => true
 	validates :username, :uniqueness => true
 	after_initialize :ensure_session_token
@@ -21,6 +22,8 @@ class User < ActiveRecord::Base
     has_many :recipes
     has_one :cookbook
 
+
+#   ---------- session and authenticity ------------
     def self.find_by_credentials(username, password)
     	user = User.find_by username
     	if user && user.password_digest == BCrypt::Password.new(self.password_digest).is_password?(password)
@@ -40,7 +43,21 @@ class User < ActiveRecord::Base
     	BCrypt::Password.new(self.password_digest).is_password?(password)
     end
 
-    def edit_recipe
+#--------- recipe logic ---------------
+
+    def edit_recipe(user, recipe)
+        #check if user has permission
+    end
+
+    def endorse_recipe(recipe)
+
+    end
+
+    def favorite_recipe(recipe)
+
+    end
+
+    def give_permission(user)
 
     end
 
@@ -48,11 +65,25 @@ class User < ActiveRecord::Base
 
     end
 
-    def endorse_recipe
+
+#------- management logic -------------
+
+    def remove_ingredients(ingredient)
 
     end
 
+    def add_ingredient_to_stock(ingredient)
+
+    end
+
+
     private
+
+    #--------- cookbook logic ---------------
+    
+    def set_cookbook
+        current_user.cookbook = Cookbook.create(current_user.id)
+    end
 
     def reset_session_token
     	self.session_token = SecureRandom::urlsafe_base64(16)
