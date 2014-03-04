@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
 	after_initialize :ensure_session_token
 
     has_many :endorsements
-    has_many :recipes
+    has_many :recipes, :through => :cookbook, :source => :recipe
     has_one :cookbook
 
 
@@ -45,7 +45,9 @@ class User < ActiveRecord::Base
 
 #--------- recipe logic ---------------
 
-    def edit_recipe(user, recipe)
+    def edit_recipe(recipe)
+        # if self.has_permission
+        return "ghost"
         #check if user has permission
     end
 
@@ -79,7 +81,7 @@ class User < ActiveRecord::Base
 
     private
 
-    #--------- cookbook logic ---------------
+    #--------- private logic ---------------
     
     def set_cookbook
         current_user.cookbook = Cookbook.create(current_user.id)

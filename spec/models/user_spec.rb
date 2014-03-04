@@ -5,7 +5,7 @@ describe User do
 		create(:user).should be_valid
 	end
 
-	it "cannot have invalid username" do
+	it "cannot have an invalid username" do
 		expect(build(:user, :username => "$%%")).not_to be_valid
 	end
 
@@ -22,7 +22,13 @@ describe User do
 	end
 
 	it "has a cookbook upon creation" do
+		expect(create(:user).cookbook_id).not_to be_empty
+	end
 
+	describe "associations" do
+		it { should have_one(:cookbook) }
+		it { should have_many(:recipes).through(:cookbook) }
+		it { should have_many(:endorsements) }
 	end
 		
 end

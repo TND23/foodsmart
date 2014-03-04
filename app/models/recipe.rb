@@ -1,7 +1,11 @@
 class Recipe < ActiveRecord::Base
 
 	attr_accessible :ingredients, :utensils
-	attr_readable :cookbooks
+	attr_reader :cookbooks
+
+	validates :instructions, :presence => true
+	validates :author_name, :presence => true
+	
 
 	belongs_to :user
 	has_and_belongs_to_many :ingredients
