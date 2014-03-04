@@ -12,7 +12,9 @@ class Cookbook < ActiveRecord::Base
 	def set_user(user)
 
 	end
-
-
+	
+	def maintain
+		#if a user deletes self, their referenced recipes are not deleted
+	end	
 	
 end

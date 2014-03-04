@@ -5,7 +5,7 @@ class Recipe < ActiveRecord::Base
 
 	validates :instructions, :presence => true
 	validates :author_name, :presence => true
-	
+
 
 	belongs_to :user
 	has_and_belongs_to_many :ingredients
@@ -18,13 +18,19 @@ class Recipe < ActiveRecord::Base
 
 	end
 
-	def self.has_ingredient?(ingredient)
+	def has_ingredient?(ingredient)
 
 	end
 
-	def self.has_endorsements?
+	def has_endorsements?
 
 	end
+
+	def send_to_deleted_user
+		#if user deletes self, the recipe is sent to "deleted_user"
+	end
+
+	
 
 	# helper with find_by_ingredients
 
