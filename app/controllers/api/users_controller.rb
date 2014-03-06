@@ -9,13 +9,11 @@ module Api
 
 		def create
 			@user = User.new(user_params)
-	    	if @user.save
-	    		cookbook = CookBook.new()
-	    		@user.cookbook_id = cookbook_id
-	    		render :json => @user
-	   		else
-	    		render :json => @user.errors.full_messages
-	    	end
+    		if @user.save
+    			render :show
+   			else
+    			render :json => @user.errors.full_messages
+    		end
 		end
 
 		def destroy
@@ -31,6 +29,5 @@ module Api
 		def user_params
 			params.require(:user).permit(:username, :password)
 		end
-		
 	end
 end

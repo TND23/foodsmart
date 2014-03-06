@@ -7,9 +7,9 @@ class User < ActiveRecord::Base
 	validates :password_digest, :presence => { :message => "Password can't be blank" }
 	validates :password, :length => { :minimum => 6}
 	# add password confirmation
+    validates_confirmation_of :password
 	# validates :password, :confirmation => true
 	# validates :password_confirmation, :presence => true
-
 	# validate username has only letters and numbers
 	validates :username, format: {without: /\s|\$|[<>,@!&:;{}()"+=#%\?\.\^\*\|]/, on: :create}
 	validates :username, :length => {:maximum => 15}
@@ -17,7 +17,8 @@ class User < ActiveRecord::Base
 	validates :username, :presence => true
 	validates :username, :uniqueness => true
 	after_initialize :ensure_session_token
-
+    after_initialize :ensure_cookbook
+    
     has_many :endorsements
     has_many :recipes, :through => :cookbook, :source => :recipe
     has_one :cookbook
@@ -94,6 +95,10 @@ class User < ActiveRecord::Base
 
     def ensure_session_token
     	self.session_token ||= self.session_token = SecureRandom::urlsafe_base64(16)
+    end
+
+    def ensure_cookbook
+        self.cookbook
     end
 
 end
