@@ -1,13 +1,13 @@
 require 'spec_helper'
 
 feature "basic user" do 
-	it "can view recipe list" do
+	it "can view own recipe list" do
 		visit(recipes_url) do
 			expect(page).to have_content("All Submitted Recipes")
 		end
 	end
 
-	it "can create a recipe" do
+	it "can visit the recipe construction page" do
 		visit(new_recipe_url) do
 			expect(page).to have_content("Ingredients:")
 			expect(page).to have_content("Utensils:")
@@ -16,7 +16,8 @@ feature "basic user" do
 	end
 
 	it "can delete account" do
-
+		@user = create(:user)
+		@user.destroy
 	end
 
 	it "can search for recipes" do
@@ -41,6 +42,18 @@ feature "basic user" do
 
 	it "can add notes to recipes in cookbook" do
 
+	end
+
+	feature "user without permission" do
+		context "without permission" do
+			it "can not give permission" do
+				fail
+			end
+
+			it "can not edit a recipe" do
+				fail
+			end
+		end
 	end
 
 	feature "cannot create an invalid recipe" do

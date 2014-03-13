@@ -1,11 +1,10 @@
 require 'spec_helper'
-# adding FactoryGirl::Syntax::Methods is nice
 describe User do
 	it "valid user is considered be valid" do
 		create(:user).should be_valid
 	end
 
-	it "cannot have invalid username" do
+	it "cannot have an invalid username" do
 		expect(build(:user, :username => "$%%")).not_to be_valid
 	end
 
@@ -21,8 +20,21 @@ describe User do
 		expect(build(:user, :password => "123")).not_to be_valid
 	end
 
-	it "has a cookbook upon creation" do
-
+	it "has a password digest" do
+		expect(build(:user).password_digest).not_to be_nil
 	end
-		
+
+	it "has a cookbook upon creation" do
+		expect(create(:user).cookbook_id).not_to be_nil
+	end
+
+	it "should have a session token" do
+		expect(create(:user).session_token).not_to be_nil
+	end
+
+	describe "associations" do
+		it { should have_one(:cookbook) }
+		it { should have_many(:recipes).through(:cookbook) }
+		it { should have_many(:endorsements) }
+	end
 end

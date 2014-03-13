@@ -1,6 +1,6 @@
-Sign in
+Register
 
-<form action="<%= api_users_url %>" method="get">
+<form action="<%= api_users_url %>" method="post">
 <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
 <div>User Name<input type="text" name="user[username]"></div>
 <div> Your password<input type="password"      name="user[password]"
@@ -10,3 +10,4 @@ Sign in
 
 </form>
 
+<div id ="login"><input type="submit" value="Log In"></div>
