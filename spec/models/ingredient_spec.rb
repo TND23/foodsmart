@@ -6,5 +6,10 @@ describe Ingredient do
 		expect(build(:ingredient, :description => null)).not_to be_valid
 	end
 
+	it { should have_and_belong_to_many(:recipes)}
+
+	it {should allow_mass_assignment_of(:name)}
+
+	it {should allow_mass_assignment_of(:description)}
 
 end

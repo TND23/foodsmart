@@ -12,7 +12,7 @@ gem 'protected_attributes'
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
-
+gem 'shoulda'
 gem 'bcrypt-ruby', :require => 'bcrypt'
 
 group :development, :test do
