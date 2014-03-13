@@ -5,10 +5,8 @@ module Api
 		end
 
 		def create
-			@user = User.find(params[:user_id])
-			@cookbook = Cookbook.new(params[:cookbook])
-			@cookbook.user_id = @user.id
-			@cookbook.save
+			cookbook = Cookbook.new(params[:user_id])
+			cookbook.save
 		end
 	end
 end

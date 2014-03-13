@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140302033133) do
+ActiveRecord::Schema.define(version: 20140306220023) do
 
   create_table "cookbooks", force: true do |t|
     t.integer  "user_id"
@@ -20,6 +20,11 @@ ActiveRecord::Schema.define(version: 20140302033133) do
     t.text     "notes"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "cookbooks_recipes", id: false, force: true do |t|
+    t.integer "cookbook_id"
+    t.integer "recipe_id"
   end
 
   create_table "endorsements", force: true do |t|
@@ -38,23 +43,16 @@ ActiveRecord::Schema.define(version: 20140302033133) do
 
   add_index "ingredients", ["name"], name: "index_ingredients_on_name", unique: true
 
+  create_table "ingredients_recipes", id: false, force: true do |t|
+    t.integer "ingredient_id"
+    t.integer "recipe_id"
+  end
+
   create_table "recipes", force: true do |t|
-    t.integer  "cookbook_id"
     t.text     "instructions", null: false
     t.string   "author_name",  null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "user_id"
-  end
-
-  create_table "recipes_cookbooks", id: false, force: true do |t|
-    t.integer "recipe_id"
-    t.integer "cookbook_id"
-  end
-
-  create_table "recipes_ingredients", id: false, force: true do |t|
-    t.integer "recipe_id"
-    t.integer "ingredient_id"
   end
 
   create_table "recipes_utensils", id: false, force: true do |t|
