@@ -1,3 +1,0 @@
-class EndorsementsController < ApplicationController
-
-end

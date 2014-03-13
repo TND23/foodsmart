@@ -21,10 +21,5 @@ class Recipe < ActiveRecord::Base
 	def self.has_endorsements?
 
 	end
-
-	# helper with find_by_ingredients
-
 	
-
-
 end
