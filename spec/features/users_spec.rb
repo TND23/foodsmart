@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-feature "basic user" do 
+feature "basic user experience" do 
 	it "can view own recipe list" do
 		visit(recipes_url) do
 			expect(page).to have_content("All Submitted Recipes")
@@ -44,13 +44,23 @@ feature "basic user" do
 
 	end
 
-	feature "user without permission" do
+	feature "basic user" do
 		context "without permission" do
 			it "can not give permission" do
 				fail
 			end
 
 			it "can not edit a recipe" do
+				fail
+			end
+		end
+
+		context "with permission" do
+			it "can not give permission" do
+				fail
+			end
+
+			it "can edit a recipe" do
 				fail
 			end
 		end

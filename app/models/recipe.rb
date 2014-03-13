@@ -9,7 +9,7 @@ class Recipe < ActiveRecord::Base
 	has_and_belongs_to_many :ingredients
 	has_and_belongs_to_many :utensils
 	has_and_belongs_to_many :cookbooks #in case of collaborative recipe
-	has_many :endorsements, :class_name => "Endorsement", :foreign_key => "user_id"
+	has_many :endorsements
 
 	def ingredients
 			
