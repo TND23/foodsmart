@@ -50,8 +50,5 @@ class Recipe < ActiveRecord::Base
 	def endorsements
 
 	end
-
-	
-
 	# helper with find_by_ingredients
 end
