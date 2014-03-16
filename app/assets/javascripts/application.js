@@ -15,5 +15,5 @@
 //= require turbolinks
 //= require backbone
 //= require underscore
-//= require topchef.js
+//= require recipeswap.js
 //= require_tree .

@@ -1,5 +1,5 @@
 module Api
-	class CookBooksController < ApplicationController
+	class CookBooksController < ApiController
 		def new
 			@cookbook = Cookbook.new
 		end

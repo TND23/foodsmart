@@ -17,8 +17,6 @@ class SessionsController < ApplicationController
 		end
 	end
 			
-
-
 	def destroy
 		session[:session_token] = nil
 		render :new

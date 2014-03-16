@@ -1,4 +1,4 @@
-window.TopChef = {
+window.RecipeSwap = {
 	Models: {},
 
 	initialize: function(){
@@ -6,4 +6,4 @@ window.TopChef = {
 	}
 };
 
-$(TopChef.initialize)
+$(RecipeSwap.initialize)

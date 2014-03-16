@@ -16,7 +16,6 @@ class User < ActiveRecord::Base
   before_create :ensure_cookbook_id
 	after_initialize :ensure_session_token
   has_many :endorsements, :dependent => :destroy
-  has_many :recipes, :through => :cookbook, :source => :recipe
   has_and_belongs_to_many :ingredients
   has_one :cookbook, :dependent => :destroy
 
@@ -43,17 +42,44 @@ class User < ActiveRecord::Base
 
 #--------- recipe logic ---------------
 
+  # this should be in the controller
   def edit_recipe(recipe)
+    return false unless self.has_permission?(recipe)
+
       # if self.has_permission
       #check if user has permission
   end
 
-  def endorse_recipe(recipe)
-    
+  def endorse_recipe(recipe, comments, stars)
+    if recipe.nil? || recipe.user_id = self.id
+      return false
+    elsif !recipe.endorsements.find_by_user_id(self.id).nil?
+      return false
+    else
+      endorsement = Endorsement.new(
+        :user_id => self.id, 
+        :comments => comments, 
+        :stars => stars,
+        :recipe_id => recipe.id
+      )
+      endorsement.save!
+    end
+  end
+
+  def has_permission?(recipe)
+    return true if recipe.user_id = self.id
   end
 
   def favorite_recipe(recipe)
-    
+    favorited_recipes = self.cookbook.saved_recipes
+    if favorited_recipes.nil?
+      favorited_recipes = {}
+    elsif
+      favorited_recipes[recipe.dish_name]
+      puts "would you like to replace #{recipe.dish_name} with a new version?"
+    else
+      favorited_recipes[recipe.dish_name] = recipe.id
+    end
   end
 
   def give_permission(user, recipe)
@@ -71,15 +97,27 @@ class User < ActiveRecord::Base
 #------- management logic -------------
 
   def remove_ingredients(ingredient)
-
+    if self.ingredients.find(ingredient.id).nil? 
+      puts "You don't have #{ingredient}"
+    else
+      self.ingredients.delete(ingredient)
+    end
   end
 
   def add_ingredient_to_stock(ingredient)
-
+    ingredient = Ingredient.find(ingredient.id)
+    if ingredient.nil?
+      puts "No such ingredient exists"
+    elsif self.ingredients.include?(ingredient)
+      puts "You've already go #{ingredient}"
+    else
+      self.ingredients << ingredient
+    end
   end
 
   def convert_ingredients(from, to)
-
+    #for instance, berries + sugar + lemon juice goes in the from, berry puree goes into the to
+    
   end
 
   private

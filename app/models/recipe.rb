@@ -1,14 +1,12 @@
 class Recipe < ActiveRecord::Base
-
 	attr_accessible :ingredients, :utensils
-	attr_reader :cookbooks
 	validates :instructions, :presence => true
 	validates :user_id, :presence => true
 	validates :ingredients, :null => false
-	belongs_to :user
+	belongs_to :author, :class_name => :user
 	has_and_belongs_to_many :ingredients
 	has_and_belongs_to_many :utensils
-	has_and_belongs_to_many :cookbooks #in case of collaborative recipe
+	has_and_belongs_to_many :cookbooks
 	has_many :endorsements
 
 	def calculate_rating
@@ -43,9 +41,12 @@ class Recipe < ActiveRecord::Base
 		end
 	end
 
-	def self.filter_by_ingredients
-
+	def self.filter_by_ingredients(*ingredients)
+		# options: find recipes that are in stock for a user
+		# filter by rating
 	end
+
+	# publish all recipes in a global place that is searchable
 
 	def send_to_deleted_user
 		#if user deletes self, the recipe is sent to "deleted_user"

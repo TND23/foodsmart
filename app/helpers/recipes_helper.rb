@@ -1,5 +1,7 @@
 module RecipesHelper
 
+	OPTIONS = {by_rating, by_ingredients, by_difficulty, by_time, by_type}
+
 	def find_by_ingredients(options = {}, *ingredients)
 		#allow options to limit the number of recipes
 		with_scope :find => options do
@@ -7,12 +9,8 @@ module RecipesHelper
 		end
 	end
 
-	def has_ingredient?(ingredient)
-
-	end
-
-	def recipe_tree
-
+	def set_filter_options(options = {})
+		
 	end
 	
 end

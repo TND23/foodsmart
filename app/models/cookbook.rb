@@ -1,6 +1,5 @@
 class Cookbook < ActiveRecord::Base
 	attr_accessible :notes, :user_id
-	# attr_accessor :recipes
 	has_and_belongs_to_many :recipes
 	belongs_to :user
 	validates :user_id, :presence => true
@@ -14,17 +13,38 @@ class Cookbook < ActiveRecord::Base
 		#if a user deletes self, their referenced recipes are not deleted
 	end
 
-	def self.search_for_recipes
+	def search_for_recipes_by_name(dish)
+		#searches in own cookbook
+	end
 
+	def search_for_recipes_by_ingredients(*ingredients)
+		#searches in own cookbook
 	end
 
 	def annotate_recipe(recipe)
-
+		#should comments have an associated recipe? 
+		#how can this be formatted?
 	end
 
 	def add_recipe(recipe_id)
-		@recipe = Recipe.find_by_id(params[:recipe_id])
-		@recipes << @recipe
+		if !self.recipes.nil?
+			self.recipes.each do |recipe|
+				if recipe.id == recipe_id
+					puts "You've already got that one!"
+					return false
+				end
+			end
+		end
+		if Recipe.find(recipe_id).nil?
+			puts "Sorry, we couldn't find the recipe."
+		else
+			recipe = Recipe.find_by_id(recipe_id)
+			self.recipes << recipe
+		end
+	end
+
+	def remove_recipe(recipe_id)
+		#removes recipe from own cookbook
 	end
 	
 end
