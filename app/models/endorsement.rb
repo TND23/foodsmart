@@ -5,11 +5,10 @@ class Endorsement < ActiveRecord::Base
 
 	def self.weigh_averages(*endorsements)
 		arr = []
-		endorsements.each do |endorsement|
-			arr << endorsement.stars.to_f
-		end
+		endorsements.each{ |endorsement| arr << endorsement.stars.to_f }
 		average_sum = arr.inject(:+) / arr.length
 		average_sum
+	end
 
 	def self.prevent_duplicates(user, recipe)
 

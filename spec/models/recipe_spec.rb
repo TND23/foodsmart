@@ -22,4 +22,13 @@ describe Recipe do
 		it { should belong_to(:user)}
 
 	end
+
+	describe "methods" do
+		before(:all)  do
+			recipe = Recipe.new
+			recipe.user_id = 1
+			recipe.dish = "Pumpkin Pie"
+		end
+	end
+
 end

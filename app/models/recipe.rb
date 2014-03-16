@@ -12,7 +12,7 @@ class Recipe < ActiveRecord::Base
 	def calculate_rating
 		endorsements = self.endorsements
 		return "No data" if endorsements.nil?
-		self.average_rating = Endorsement.weigh_averages(endorsements)
+		self.rating = Endorsement.weigh_averages(endorsements)
 	end
 
 	def add_ingredients(*ingredients)
