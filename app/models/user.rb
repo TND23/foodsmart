@@ -1,11 +1,11 @@
 class User < ActiveRecord::Base
 	#convert to omniauth ?
 
-	attr_accessible :username, :password, :cookbook, :cookbook_id
+	attr_accessible :username, :password
 	attr_reader :password
 	validates :password_digest, :presence => { :message => "Password can't be blank" }
 	validates :password, :length => { :minimum => 6}
-    # validates_confirmation_of :password
+  # validates_confirmation_of :password
 	# validates :password_confirmation, :presence => true
 	# validate username has only letters and numbers
 	validates :username, format: {without: /\s|\$|[<>,@!&:;{}()"+=#%\?\.\^\*\|]/, on: :create}
@@ -13,12 +13,12 @@ class User < ActiveRecord::Base
   validates :session_token, :presence => true
 	validates :username, :presence => true
 	validates :username, :uniqueness => true
-    after_create :set_cookbook
+  after_create :set_cookbook
 	after_initialize :ensure_session_token
-    # after_initialize :ensure_cookbook
-  has_many :endorsements
+  has_many :endorsements, :dependent => :destroy
   has_many :recipes, :through => :cookbook, :source => :recipe
-  has_one :cookbook
+  has_and_belongs_to_many :ingredients
+  has_one :cookbook, :dependent => :destroy
 
 
 #   ---------- session and authenticity ------------
@@ -60,6 +60,10 @@ class User < ActiveRecord::Base
 
   end
 
+  def create_recipe
+
+  end
+
   def submit_recipe
 
   end
@@ -74,7 +78,11 @@ class User < ActiveRecord::Base
 
   end
 
-# private
+  def convert_ingredients(from, to)
+
+  end
+
+  private
 #--------- private logic ---------------
   
 
@@ -91,4 +99,5 @@ class User < ActiveRecord::Base
       self.cookbook ||= @cookbook = Cookbook.new()
       self.cookbook_id = @cookbook.id
   end
+
 end

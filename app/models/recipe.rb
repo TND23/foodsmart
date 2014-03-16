@@ -11,8 +11,10 @@ class Recipe < ActiveRecord::Base
 	has_and_belongs_to_many :cookbooks #in case of collaborative recipe
 	has_many :endorsements
 
-	def ingredients
-			
+	def calculate_rating
+		endorsements = self.endorsements
+		return "No data" if endorsements.nil?
+		self.average_rating = Endorsement.weigh_averages(endorsements)
 	end
 
 	def add_ingredients(ingredients)
@@ -23,19 +25,11 @@ class Recipe < ActiveRecord::Base
 	
 	end
 
-	def ingredients=(ingredients)
-
-	end
-
 	def self.filter_by_ingredients
 
 	end
 
 	def has_ingredient?(ingredient)
-
-	end
-
-	def has_endorsements?
 
 	end
 

@@ -4,7 +4,8 @@ class CreateUsers < ActiveRecord::Migration
     	t.string :username, :null => false, :limit => 15
     	t.string :password_digest, :null => false
     	t.string :session_token
-    	t.string :cook_book, :null => false
+    	t.integer :cook_book_id, :null => false
+        t.integer :ingredient_id
     	t.timestamps
     end
     add_index :users, :username, :unique => true

@@ -1,6 +1,0 @@
-class EditRecipeTable < ActiveRecord::Migration
-  def change
-  	remove_column :recipes, :cookbook_id
-  	remove_column :recipes, :user_id
-  end
-end

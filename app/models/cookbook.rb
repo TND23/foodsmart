@@ -1,7 +1,6 @@
 class Cookbook < ActiveRecord::Base
 	attr_accessible :notes, :user_id
 	attr_reader :recipes
-	
 	has_and_belongs_to_many :recipes
 	belongs_to :user
 	validates :user_id, :presence => true
@@ -14,10 +13,17 @@ class Cookbook < ActiveRecord::Base
 		#if a user deletes self, their referenced recipes are not deleted
 	end
 
-	def find_recipe
+	def self.search_for_recipes
 
 	end
 
-	
+	def annotate_recipe(recipe)
+
+	end
+
+	def add_recipe(recipe_id)
+		@recipe = Recipe.find_by_id(params[:recipe_id])
+		
+	end
 	
 end
