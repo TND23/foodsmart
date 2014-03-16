@@ -1,12 +1,13 @@
 class Cookbook < ActiveRecord::Base
 	attr_accessible :notes, :user_id
-	attr_reader :recipes
+	# attr_accessor :recipes
 	has_and_belongs_to_many :recipes
 	belongs_to :user
 	validates :user_id, :presence => true
 
 	def recipes
-		@recipes ||= Recipe.find_by_cookbook_id(self.id)
+		# return "No recipes" if self.recipes.nil?
+		# @recipes ||= Recipe.find_by_cookbook_id(self.id)
 	end
 	
 	def maintain
@@ -23,7 +24,7 @@ class Cookbook < ActiveRecord::Base
 
 	def add_recipe(recipe_id)
 		@recipe = Recipe.find_by_id(params[:recipe_id])
-		
+		@recipes << @recipe
 	end
 	
 end

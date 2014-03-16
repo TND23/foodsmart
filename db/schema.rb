@@ -70,7 +70,7 @@ ActiveRecord::Schema.define(version: 20140306220023) do
     t.string   "username",        limit: 15, null: false
     t.string   "password_digest",            null: false
     t.string   "session_token"
-    t.integer  "cook_book_id",               null: false
+    t.integer  "cookbook_id"
     t.integer  "ingredient_id"
     t.datetime "created_at"
     t.datetime "updated_at"

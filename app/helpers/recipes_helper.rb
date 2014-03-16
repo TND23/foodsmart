@@ -10,5 +10,9 @@ module RecipesHelper
 	def has_ingredient?(ingredient)
 
 	end
+
+	def recipe_tree
+
+	end
 	
 end

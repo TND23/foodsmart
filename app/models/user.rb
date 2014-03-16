@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
   validates :session_token, :presence => true
 	validates :username, :presence => true
 	validates :username, :uniqueness => true
-  after_create :set_cookbook
+  before_create :ensure_cookbook_id
 	after_initialize :ensure_session_token
   has_many :endorsements, :dependent => :destroy
   has_many :recipes, :through => :cookbook, :source => :recipe
@@ -49,11 +49,11 @@ class User < ActiveRecord::Base
   end
 
   def endorse_recipe(recipe)
-
+    
   end
 
   def favorite_recipe(recipe)
-
+    
   end
 
   def give_permission(user, recipe)
@@ -95,9 +95,11 @@ class User < ActiveRecord::Base
   	self.session_token ||= self.session_token = SecureRandom::urlsafe_base64(16)
   end
 
-  def set_cookbook
-      self.cookbook ||= @cookbook = Cookbook.new()
-      self.cookbook_id = @cookbook.id
+  def ensure_cookbook_id
+    return self.cookbook_id unless self.cookbook_id.nil?
+    cookbook = Cookbook.new(:user_id => self.id)
+    cookbook.save
+    self.cookbook_id = cookbook.id
   end
 
 end
