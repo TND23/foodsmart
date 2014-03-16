@@ -51,8 +51,10 @@ class User < ActiveRecord::Base
   end
 
   def endorse_recipe(recipe, comments, stars)
+    #if exists or is own recipe
     if recipe.nil? || recipe.user_id = self.id
       return false
+      #if already endorsed
     elsif !recipe.endorsements.find_by_user_id(self.id).nil?
       return false
     else
@@ -62,6 +64,7 @@ class User < ActiveRecord::Base
         :stars => stars,
         :recipe_id => recipe.id
       )
+      recipe.add_endorsement(endorsement)
       endorsement.save!
     end
   end

@@ -56,6 +56,10 @@ class Recipe < ActiveRecord::Base
 
 	end
 
+	def add_endorsement(endorsement)
+		self.endorsements << endorsement
+	end
+
 end
 
 	# Refactoring

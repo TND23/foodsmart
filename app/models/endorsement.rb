@@ -3,9 +3,12 @@ class Endorsement < ActiveRecord::Base
 	belongs_to :recipe
 
 
-	def self.weigh_averages(*endorsements)
+	def self.weigh_averages(endorsements)
 		arr = []
-		endorsements.each{ |endorsement| arr << endorsement.stars.to_f }
+		endorsements.each do |endorsement|
+			puts endorsement.stars
+			arr << endorsement.stars.to_f
+		end
 		average_sum = arr.inject(:+) / arr.length
 		average_sum
 	end
@@ -13,5 +16,13 @@ class Endorsement < ActiveRecord::Base
 	def self.prevent_duplicates(user, recipe)
 
 	end
+
+
+	# def self.weigh_averages(endorsements)
+	# 	arr = []
+	# 	endorsements.each{ |endorsement|  arr << endorsement.stars.to_f }
+	# 	average_sum = arr.inject(:+) / arr.length
+	# 	average_sum
+	# end
 	
 end
