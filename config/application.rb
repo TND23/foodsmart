@@ -8,6 +8,7 @@ Bundler.require(:default, Rails.env)
 
 module GroceryApp
   class Application < Rails::Application
+    config.i18n.enforce_available_locales = false
 
     config.active_record.whitelist_attributes = true
     config.active_support.escape_html_entities_in_json = true
