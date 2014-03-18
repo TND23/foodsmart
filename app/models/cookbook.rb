@@ -4,10 +4,6 @@ class Cookbook < ActiveRecord::Base
 	belongs_to :user
 	validates :user_id, :presence => true
 
-	def recipes
-		# return "No recipes" if self.recipes.nil?
-		# @recipes ||= Recipe.find_by_cookbook_id(self.id)
-	end
 	
 	def maintain
 		#if a user deletes self, their referenced recipes are not deleted
@@ -29,10 +25,7 @@ class Cookbook < ActiveRecord::Base
 	def add_recipe(recipe_id)
 		if !self.recipes.nil?
 			self.recipes.each do |recipe|
-				if recipe.id == recipe_id
-					puts "You've already got that one!"
-					return false
-				end
+				puts "You've already got that one!"	if recipe.id == recipe_id
 			end
 		end
 		if Recipe.find(recipe_id).nil?

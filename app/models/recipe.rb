@@ -1,5 +1,5 @@
 class Recipe < ActiveRecord::Base
-	attr_accessible :ingredients, :utensils
+	attr_accessible :ingredients, :utensils, :instructions
 	validates :instructions, :presence => true
 	validates :user_id, :presence => true
 	validates :ingredients, :null => false
