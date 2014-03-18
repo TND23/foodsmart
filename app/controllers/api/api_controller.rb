@@ -1,11 +1,12 @@
 module Api
 	class ApiController < ApplicationController
-		before_filter :require_user
 
 		private
 		
 		def require_user
-			#TODO
+			if current_user.nil?
+				redirect_to :root
+			end
 		end
 
 

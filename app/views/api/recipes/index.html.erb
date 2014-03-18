@@ -1,0 +1,7 @@
+<h> Recipes </h>
+<form action="<%= api_recipes_url %>" method="get">
+<p>
+	<%= text_field_tag :search, params[:search] %>
+	<%= submit_tag "Search" %>
+</p>
+</form>

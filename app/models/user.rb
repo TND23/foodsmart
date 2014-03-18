@@ -22,22 +22,17 @@ class User < ActiveRecord::Base
 
 #   ---------- session and authenticity ------------
   def self.find_by_credentials(username, password)
-  	user = User.find_by username
-  	if user && user.password_digest == BCrypt::Password.new(user.password_digest).is_password?(password)
-  		user
+  	user = User.find_by_username username
+  	if user && user.password_digest == BCrypt::Password.new(user.password_digest)
+  	 return	user
   	else
-  		nil
+  		return nil
   	end
   end
 
   def password=(password)
   	@password = password
   	self.password_digest = BCrypt::Password.create(password)
-  end
-
-  def check_password(password)
-  	#use BCrypt is_password?() method
-  	BCrypt::Password.new(self.password_digest).is_password?(password)
   end
 
 #--------- recipe logic ---------------
@@ -51,8 +46,10 @@ class User < ActiveRecord::Base
   end
 
   def endorse_recipe(recipe, comments, stars)
+    #if exists or is own recipe
     if recipe.nil? || recipe.user_id = self.id
       return false
+      #if already endorsed
     elsif !recipe.endorsements.find_by_user_id(self.id).nil?
       return false
     else
@@ -62,6 +59,7 @@ class User < ActiveRecord::Base
         :stars => stars,
         :recipe_id => recipe.id
       )
+      recipe.add_endorsement(endorsement)
       endorsement.save!
     end
   end
@@ -120,14 +118,16 @@ class User < ActiveRecord::Base
     
   end
 
+  def reset_session_token
+    self.session_token = SecureRandom::urlsafe_base64(16)
+    self.save!
+  end
+
+
   private
 #--------- private logic ---------------
   
 
-  def reset_session_token
-  	self.session_token = SecureRandom::urlsafe_base64(16)
-  	self.save!
-  end
 
   def ensure_session_token
   	self.session_token ||= self.session_token = SecureRandom::urlsafe_base64(16)

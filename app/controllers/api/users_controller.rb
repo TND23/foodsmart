@@ -1,19 +1,18 @@
 module Api
 	class UsersController < ApiController
-		
-		# before_filter :require_current_user, :only => [:show]
 
 		def new
 			@user = User.new
 		end
 
 		def create
-			# @user = User.new(user_params)
-   #  		if @user.save
-   #  			render :json => @user
-   # 			else
-   #  			render :json => @user.errors.full_messages
-   #  		end
+			@user = User.new(user_params)
+    		if @user.save
+    			login_user(@user)
+    			redirect_to api_user_url(@user)
+   			else
+    			render :json => @user.errors.full_messages
+    		end
 		end
 
 		def destroy
@@ -21,7 +20,7 @@ module Api
 		end
 
 		def show
-			
+						
 		end
 
 		private

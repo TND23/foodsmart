@@ -1,6 +1,6 @@
 module RecipesHelper
 
-	OPTIONS = {by_rating, by_ingredients, by_difficulty, by_time, by_type}
+	OPTIONS = ["by_rating", "by_ingredients", "by_difficulty", "by_time", "by_type"]
 
 	def find_by_ingredients(options = {}, *ingredients)
 		#allow options to limit the number of recipes

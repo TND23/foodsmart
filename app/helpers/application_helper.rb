@@ -1,6 +1,6 @@
 module ApplicationHelper
 	
-	def is_a_mac?
+	def is_a_windows?
 		(request.env["HTTP_USER_AGENT"] =~ /Windows/) ? true: false
 	end
 
@@ -9,7 +9,7 @@ module ApplicationHelper
 	end
 
 	def mobile_device?
-		request.user_agent =~ /Mobile|Android/
+		(request.user_agent =~ /Mobile|Android/) ? true : false
 	end
 
 	def put_agent

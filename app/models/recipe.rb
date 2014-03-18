@@ -1,5 +1,5 @@
 class Recipe < ActiveRecord::Base
-	attr_accessible :ingredients, :utensils
+	attr_accessible :ingredients, :utensils, :instructions
 	validates :instructions, :presence => true
 	validates :user_id, :presence => true
 	validates :ingredients, :null => false
@@ -12,7 +12,7 @@ class Recipe < ActiveRecord::Base
 	def calculate_rating
 		endorsements = self.endorsements
 		return "No data" if endorsements.nil?
-		self.average_rating = Endorsement.weigh_averages(endorsements)
+		self.rating = Endorsement.weigh_averages(endorsements)
 	end
 
 	def add_ingredients(*ingredients)
@@ -54,6 +54,10 @@ class Recipe < ActiveRecord::Base
 
 	def author
 
+	end
+
+	def add_endorsement(endorsement)
+		self.endorsements << endorsement
 	end
 
 end

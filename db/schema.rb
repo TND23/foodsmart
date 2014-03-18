@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140316202945) do
+ActiveRecord::Schema.define(version: 20140317012017) do
 
   create_table "cookbooks", force: true do |t|
     t.integer  "user_id",       null: false
@@ -56,14 +56,16 @@ ActiveRecord::Schema.define(version: 20140316202945) do
   end
 
   create_table "recipes", force: true do |t|
-    t.text     "instructions",  null: false
+    t.text     "instructions",                  null: false
     t.integer  "cookbook_id"
-    t.integer  "user_id",       null: false
+    t.integer  "user_id",                       null: false
     t.integer  "ingredient_id"
     t.integer  "utensil_id"
-    t.string   "dishname",      null: false
+    t.string   "dishname",                      null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.float    "rating"
+    t.boolean  "rated",         default: false
   end
 
   create_table "recipes_utensils", id: false, force: true do |t|

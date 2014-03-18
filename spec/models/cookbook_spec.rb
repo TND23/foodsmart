@@ -35,7 +35,7 @@ describe Cookbook do
 
 		it "should find recipes" do
 			@cookbook.recipes.should 
-
+		end
 
 
 

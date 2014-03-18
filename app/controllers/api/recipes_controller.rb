@@ -1,8 +1,12 @@
 module Api
-	class RecipesController < ApplicationController
+
+	class RecipesController < ApiController
+
+		before_filter :require_user
+
 
 		def index
-
+			render :index
 		end
 
 		def new

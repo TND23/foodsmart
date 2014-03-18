@@ -5,6 +5,7 @@ FactoryGirl.define do
   	f.username "bob"
   	f.password "123456"
   	f.session_token "anunlikelysessiontoken"
+  	f.cookbook_id 1
   end
 
 end

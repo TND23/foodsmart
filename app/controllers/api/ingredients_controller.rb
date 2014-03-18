@@ -1,5 +1,8 @@
 module Api
+
 	class IngredientsController < ApplicationController
+		before_filter :require_user
+
 
 		def new
 			
