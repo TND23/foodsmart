@@ -2,7 +2,6 @@ require 'spec_helper'
 describe User do
 	it "valid user is considered be valid" do
 		create(:user).should be_valid
-		FactoryGirl.build(:user)
 	end
 
 	it "cannot have an invalid username" do
@@ -25,17 +24,21 @@ describe User do
 		expect(build(:user).password_digest).not_to be_nil
 	end
 
-	it "has a cookbook upon creation" do
-		expect(create(:user).cookbook_id).not_to be_nil
-	end
-
-	it "should have a session token" do
-		expect(create(:user).session_token).not_to be_nil
-	end
-
 	describe "associations" do
 		it { should have_one(:cookbook) }
 		it { should have_many(:recipes) }
 		it { should have_many(:endorsements) }
+	end
+
+	describe "attributes" do
+		it "should recognize username" do
+			user = create(:user, :username=> "Arby")
+			user.username.should eq("Arby")
+		end
+
+		it "should not make a visible password" do
+			user = create(:user, :password => "visible")
+			user.password_digest.should_not eq("visible")
+		end
 	end
 end

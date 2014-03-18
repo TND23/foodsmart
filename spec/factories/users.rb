@@ -1,11 +1,9 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
-
+require 'faker'
 FactoryGirl.define do
-  factory :user, aliases: [:author, :commenter] do |f|
-  	f.username "bob"
-  	f.password "123456"
-  	f.session_token "anunlikelysessiontoken"
-  	f.cookbook_id 1
+  factory :user, aliases: [:author, :commenter] do 
+  	username Faker::Name.first_name
+  	password "123456"
   end
 
 end

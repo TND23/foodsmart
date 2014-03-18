@@ -33,9 +33,27 @@ describe Cookbook do
 			@cookbook.saved_recipes.should eq(nil)
 		end
 
-		it "should find recipes"
+		it "should be able to add recipes" do
+			recipe = create(:recipe)
+			expect{
+				@cookbook.add_recipe(recipe.id)
+				}.to change{@cookbook.recipes.count}.by(1)
+		end
 
+		it "should be able to remove recipes" do
+			recipe = create(:recipe)
+			expect{
+				@cookbook.remove_recipe(recipe.id)
+			}.to change{@cookbook.recipes.count}.by(1)
+		end
 
+		it "should be able to add notes to recipes" 
+		# do
+		# 				recipe = create(:recipe)
+		# 	expect{
+		# 		@cookbook.annotate(recipe.id)
+		# 	}.to change{@cookbook.recipes.count}.by(1)
+		# end
 
 	end
 end
