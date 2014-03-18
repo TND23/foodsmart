@@ -3,7 +3,7 @@ class Recipe < ActiveRecord::Base
 	validates :instructions, :presence => true
 	validates :user_id, :presence => true
 	validates :ingredients, :null => false
-	belongs_to :author, :class_name => :user
+	belongs_to :user
 	has_and_belongs_to_many :ingredients
 	has_and_belongs_to_many :utensils
 	has_and_belongs_to_many :cookbooks

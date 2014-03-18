@@ -22,15 +22,15 @@ describe Cookbook do
 	describe "when created" do
 
 		before(:all) do
-			@cookbook = Cookbook.new(:user_id => 1)
+			@cookbook = create(:cookbook)
 		end
 
 		it "should not have notes" do
-			@cookbook.notes.should eq(nil)
+			@cookbook.notes.should eq("")
 		end
 
 		it "should not have saved recipes" do
-			@cookbook.saved_recipes.should eq(nil)
+			@cookbook.saved_recipes.should eq("")
 		end
 
 		it "should be able to add recipes" do

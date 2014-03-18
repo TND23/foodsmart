@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20140318221108) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "cookbooks", force: true do |t|
     t.integer  "user_id",       null: false
     t.integer  "recipe_id"
@@ -28,8 +31,8 @@ ActiveRecord::Schema.define(version: 20140318221108) do
   end
 
   create_table "endorsements", force: true do |t|
-    t.string   "comments",             null: false
-    t.integer  "stars",      limit: 1, null: false
+    t.string   "comments",   null: false
+    t.integer  "stars",      null: false
     t.integer  "recipe_id"
     t.integer  "user_id"
     t.datetime "created_at"
@@ -43,7 +46,7 @@ ActiveRecord::Schema.define(version: 20140318221108) do
     t.datetime "updated_at"
   end
 
-  add_index "ingredients", ["name"], name: "index_ingredients_on_name", unique: true
+  add_index "ingredients", ["name"], name: "index_ingredients_on_name", unique: true, using: :btree
 
   create_table "ingredients_recipes", id: false, force: true do |t|
     t.integer "ingredient_id"
@@ -77,14 +80,13 @@ ActiveRecord::Schema.define(version: 20140318221108) do
     t.string   "username",        limit: 15, null: false
     t.string   "password_digest",            null: false
     t.string   "session_token"
-    t.integer  "cookbook_id"
     t.integer  "ingredient_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "users", ["session_token"], name: "index_users_on_session_token", unique: true
-  add_index "users", ["username"], name: "index_users_on_username", unique: true
+  add_index "users", ["session_token"], name: "index_users_on_session_token", unique: true, using: :btree
+  add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
   create_table "utensils", force: true do |t|
     t.string   "name",        limit: 20, null: false
@@ -93,6 +95,6 @@ ActiveRecord::Schema.define(version: 20140318221108) do
     t.datetime "updated_at"
   end
 
-  add_index "utensils", ["name"], name: "index_utensils_on_name", unique: true
+  add_index "utensils", ["name"], name: "index_utensils_on_name", unique: true, using: :btree
 
 end

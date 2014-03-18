@@ -18,8 +18,8 @@ describe Endorsement do
 	end
 
 	it "the star rating should be between 0 and 5" do
-		expect(create(:endorsement, :stars=> -1)).not_to be_valid
-		expect(create(:endorsement, :stars=> 6)).not_to be_valid
+		expect(build(:endorsement, :stars=> -1)).not_to be_valid
+		expect(build(:endorsement, :stars=> 6)).not_to be_valid
 	end
 
 	context "::weigh_averages" do
@@ -40,13 +40,13 @@ describe Endorsement do
 	end
 
 	it "correctly finds duplicates" do
-		user = create(:user, :username=> "Bob", :password => "123456", :id => 2)
-		arr = []
-		e1 = Endorsement.new(:comments => "Nice recipe", :stars => 5, :recipe_id => 4, :user_id => 2)
-		e2 = Endorsement.new(:comments => "Terrible recipe", :stars => 1, :recipe_id => 4, :user_id => 2)
-		arr << e1 << e2
-		recipe = create(:recipe)
-		epxect(Endorsement.is_duplicate?(user, recipe)).to be_true
+		user = create(:user)
+		e1 = Endorsement.new(:comments => "Nice recipe", :stars => 5, :recipe_id => 13, :user_id => 2)
+		e2 = Endorsement.new(:comments => "Terrible recipe", :stars => 1, :recipe_id => 13, :user_id => 2)
+		user.endorsements << e1 << e2
+		recipe = create(:recipe, :rated => true, :id => 13)
+		recipe.endorsements << e1 << e2
+		expect(Endorsement.is_duplicate?(user, recipe)).to eq(true)
 	end
 
 end

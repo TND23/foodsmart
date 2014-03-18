@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
   has_many :endorsements, :dependent => :destroy
   has_and_belongs_to_many :ingredients
   has_one :cookbook, :dependent => :destroy
-
+  has_many :recipes
 
 #   ---------- session and authenticity ------------
   def self.find_by_credentials(username, password)
