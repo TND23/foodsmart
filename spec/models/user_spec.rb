@@ -2,6 +2,7 @@ require 'spec_helper'
 describe User do
 	it "valid user is considered be valid" do
 		create(:user).should be_valid
+		FactoryGirl.build(:user)
 	end
 
 	it "cannot have an invalid username" do
@@ -34,7 +35,7 @@ describe User do
 
 	describe "associations" do
 		it { should have_one(:cookbook) }
-		it { should have_many(:recipes).through(:cookbook) }
+		it { should have_many(:recipes) }
 		it { should have_many(:endorsements) }
 	end
 end

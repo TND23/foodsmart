@@ -33,10 +33,7 @@ describe Cookbook do
 			@cookbook.saved_recipes.should eq(nil)
 		end
 
-		it "should find recipes" do
-			@cookbook.recipes.should 
-		end
-
+		it "should find recipes"
 
 
 

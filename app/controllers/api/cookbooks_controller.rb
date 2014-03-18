@@ -1,6 +1,6 @@
 module Api
 
-	class CookBooksController < ApiController
+	class CookbooksController < ApiController
 
 		before_filter :require_user
 

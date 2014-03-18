@@ -20,49 +20,24 @@ feature "basic user experience" do
 		@user.destroy
 	end
 
-	it "can search for recipes" do
-
-	end
-
-	it "can create recipes" do
-
-	end
-
-	it "can endorse recipes" do
-
-	end
-
-	it "can add ingredients to stock" do
-
-	end
-
-	it "can add recipes to cookbook" do
-
-	end
-
-	it "can add notes to recipes in cookbook" do
-
-	end
+	it "can search for recipes" 
+	it "can create recipes" 
+	it "can endorse recipes"
+	it "can add ingredients to stock"
+	it "can add recipes to cookbook"
+	it "can add notes to recipes in cookbook" 
 
 	feature "basic user" do
 		context "without permission" do
-			it "can not give permission" do
-				fail
-			end
+			it "can not give permission"
 
-			it "can not edit a recipe" do
-				fail
-			end
+			it "can not edit a recipe"
 		end
 
 		context "with permission" do
-			it "can not give permission" do
-				fail
-			end
+			it "can not give permission"
 
-			it "can edit a recipe" do
-				fail
-			end
+			it "can edit a recipe"
 		end
 	end
 
