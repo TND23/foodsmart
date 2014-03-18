@@ -2,8 +2,9 @@ class Endorsement < ActiveRecord::Base
 	belongs_to :user
 	belongs_to :recipe
 	attr_accessible :comments, :stars, :user_id
-	attr_accessor :comments, :stars
-	validates :stars, inclusion: {in: (0..5), message: "Rating failed a lot"}
+	validates :stars, :presence => true
+	validates :stars, inclusion: {in: (0..5)}
+	validates :comments, :presence => true
 
 
 	def self.weigh_averages(endorsements)

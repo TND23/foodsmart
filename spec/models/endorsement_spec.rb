@@ -8,8 +8,8 @@ describe Endorsement do
 	end
 
 	it "should have a comment" do
-		expect(build(:endorsement, :comment=> nil)).not_to be_valid
-		expect(build(:endorsement, :comment=> "Anything else")).to be_valid
+		expect(build(:endorsement, :comments=> nil)).not_to be_valid
+		expect(build(:endorsement, :comments=> "Anything else")).to be_valid
 	end
 
 	it "should have a rating in stars" do
