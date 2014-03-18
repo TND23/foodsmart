@@ -35,10 +35,5 @@ describe User do
 			user = create(:user, :username=> "Arby")
 			user.username.should eq("Arby")
 		end
-
-		it "should not make a visible password" do
-			user = create(:user, :password => "visible")
-			user.password_digest.should_not eq("visible")
-		end
 	end
 end
