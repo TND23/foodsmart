@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140317012017) do
+ActiveRecord::Schema.define(version: 20140318193643) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,8 +31,8 @@ ActiveRecord::Schema.define(version: 20140317012017) do
   end
 
   create_table "endorsements", force: true do |t|
-    t.text     "comments"
-    t.integer  "stars",      limit: 2
+    t.string   "comments",   null: false
+    t.integer  "stars",      null: false
     t.integer  "recipe_id"
     t.integer  "user_id"
     t.datetime "created_at"
@@ -91,7 +91,7 @@ ActiveRecord::Schema.define(version: 20140317012017) do
 
   create_table "utensils", force: true do |t|
     t.string   "name",        limit: 20, null: false
-    t.text     "description"
+    t.string   "description",            null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
