@@ -6,21 +6,25 @@ module Api
 		end
 
 		def create
+			#redirect to show on success
 			@user = User.new(user_params)
-    		if @user.save
-    			login_user(@user)
-    			redirect_to api_user_url(@user)
-   			else
-    			render :json => @user.errors.full_messages
-    		end
+  		if @user.save
+  			login_user(@user)
+  			redirect_to api_user_url(@user)
+ 			else
+  			render :json => @user.errors.full_messages
+  		end
 		end
 
 		def destroy
-			
+			@user = User.find_by_credentials(params[:user][:username], params[:user][:password])
+			@user.destroy
+			redirect_to root_url
 		end
 
 		def show
-						
+			#implement show(bool)
+			#if bool = true the user is new
 		end
 
 		private

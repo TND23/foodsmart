@@ -4,7 +4,6 @@ class User < ActiveRecord::Base
 	attr_accessible :username, :password
 	attr_reader :password
 	validates :password_digest, :presence => { :message => "Password can't be blank" }
-	validates :password, :length => { :minimum => 6}
   # validates_confirmation_of :password
 	# validates :password_confirmation, :presence => true
 	# validate username has only letters and numbers
@@ -13,6 +12,8 @@ class User < ActiveRecord::Base
   validates :session_token, :presence => true
 	validates :username, :presence => true
 	validates :username, :uniqueness => true
+  validates :password, :length => { :minimum => 6}
+
   before_create :ensure_cookbook
 	after_initialize :ensure_session_token
   has_many :endorsements, :dependent => :destroy

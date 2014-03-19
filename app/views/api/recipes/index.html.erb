@@ -2,6 +2,15 @@
 <form action="<%= api_recipes_url %>" method="get">
 <p>
 	<%= text_field_tag :search, params[:search] %>
-	<%= submit_tag "Search" %>
+	<%= submit_tag "Search", :name => nil %>
 </p>
+
 </form>
+
+<%= @recipes.each do |recipe| %>
+
+<li><div> Dish name:	<%= recipe.dishname %></div></li>
+<!-- <div> Description:	<%= recipe.instructions %> </div>
+ <div> User id:	<%= recipe.user_id %> </div>
+ -->
+<% end %>

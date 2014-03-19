@@ -2,11 +2,12 @@ require "spec_helper"
 
 describe Api::UsersController do
   
-	describe "#create" do
+	describe "POST #create" do
 	  	#random name
 			name = (0..8).map{ (65 + rand(26)).chr }.join
 			user = FactoryGirl.build(:user, :username => name, :password => 123456)
 			user.reset_session_token
+   
     it "responds successfully with an HTTP 200 status code" do
       post :create, :user => { :username => name, :password => 123456 }
 
@@ -31,13 +32,35 @@ describe Api::UsersController do
     it "renders the correct template" do
     	response.should redirect_to api_user_url
     end
+
+    context "with invalid attributes" do
+      it "does not save the user" do
+        expect{
+          post :create, :user => FactoryGirl.attributes_for(:invalid_user)
+        }.to_not change(User,:count)
+      end
+    end
+
   end
 
-  describe "#destroy" do
+  describe "GET #new" do
+    it "renders the :new template"
+  end
+
+  describe "GET #show" do
+    it "renders the :show template"
+  end
+
+  describe "DELETE #destroy" do
+
+      #random name
+      name = (0..8).map{ (65 + rand(26)).chr }.join
+      user = FactoryGirl.build(:user, :username => name, :password => 123456)
+      user.reset_session_token
 
   	it "destroys the user" do
 	  	expect{
-	  		delete :destroy, :user => { :username => name, :password => 123456 }
+	  		delete :destroy, :user => FactoryGirl.attributes_for(:user)
 	  	}.to change{User.count}.by(1)
   	end
 
@@ -45,8 +68,6 @@ describe Api::UsersController do
   		#create a user with the controller (name must be unique)
   		name2 = (0..8).map{ (65 + rand(26)).chr }.join
       post :create, :user => { :username => name2, :password => 123456 }
-
-  		user.cookbook = Cookbook.new
   		expect{
 	  		delete :destroy, :user => { :username => name2, :password => 123456 }
 	  	}.to change{Cookbook.count}.by(1)
@@ -68,6 +89,7 @@ describe Api::UsersController do
 	  		delete :destroy, :user => { :username => name2, :password => 123456 }
 	  	}.to change{Endorsement.count}.by(1)	
   	end
+
   end
 	
 end

@@ -3,18 +3,17 @@ GroceryApp::Application.routes.draw do
 
   namespace :api do
 
-    resources :users, :except => [:index, :edit, :update] do
-      resources :cookbook, :only => [:show]
+    resources :users, :except => [:edit, :update] do
+      resources :cookbooks, :only => [:new, :show]
     end
 
     #redo embedding
     resources :recipes do
-      #remove create
-    	resources :endorsements, :only => [:create, :show, :destroy]
+    	resources :endorsements, :only => [:create, :show, :destroy, :update]
     end
 
     resource :session, :only => [:create, :new, :destroy]
     resources :ingredients, :only => [:create, :new, :edit, :show]
-    resources :utensils, :only => [:create, :new, :edit, :show]
+    resources :utensils, :only => [:create, :show, :update]
   end
 end

@@ -1,5 +1,5 @@
 class Recipe < ActiveRecord::Base
-	attr_accessible :ingredients, :utensils, :instructions
+	attr_accessible :ingredients, :utensils, :instructions, :dishname
 	validates :instructions, :presence => true
 	validates :user_id, :presence => true
 	validates :ingredients, :null => false
@@ -46,6 +46,14 @@ class Recipe < ActiveRecord::Base
 		# filter by rating
 	end
 
+	def self.search(search)
+		if search && !search.empty?
+			find(:all, :conditions => ['dishname LIKE ?', "#{search}"])
+		else
+			find(:all)
+		end
+	end
+
 	# publish all recipes in a global place that is searchable
 
 	def send_to_deleted_user
@@ -59,6 +67,7 @@ class Recipe < ActiveRecord::Base
 	def add_endorsement(endorsement)
 		self.endorsements << endorsement
 	end
+
 
 end
 

@@ -8,13 +8,10 @@ module Api
 			@cookbook = Cookbook.new
 		end
 
-		def create
-			cookbook = Cookbook.new(params[:user_id])
-			cookbook.save
-		end
-
-		def index
-
+		def show
+			@cookbook = current_user.cookbook
+			@recipes = @cookbook.saved_recipes
 		end
 	end
+
 end

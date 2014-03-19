@@ -6,4 +6,8 @@ FactoryGirl.define do
   	password "123456"
   end
 
+  factory :invalid_user, :parent => :user do 
+  	username nil
+  end
+
 end
