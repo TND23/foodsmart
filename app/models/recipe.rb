@@ -1,16 +1,23 @@
 class Recipe < ActiveRecord::Base
-	attr_accessible :ingredients, :utensils, :instructions, :dishname, :ingredients_attributes
+	attr_accessible :utensils, :instructions, :dishname, :ingredients_attributes
 	validates :instructions, :presence => true
 	validates :user_id, :presence => true
 	validates :ingredients, :null => false
 	belongs_to :user
-	has_and_belongs_to_many :ingredients
-	has_and_belongs_to_many :utensils
-	has_and_belongs_to_many :cookbooks
-	accepts_nested_attributes_for :ingredients
+
+	has_many :recipe_ingredients
+	has_many :ingredients, :through => :recipe_ingredients
+
+	has_many :recipe_utensils
+	has_many :utensils, :through => :recipe_utensils
+
+	has_many :cookbook_recipes
+	has_many :cookbooks, :through => :cookbook_recipes
 
 	has_many :endorsements
-	accepts_nested_attributes_for :endorsements
+	# has_and_belongs_to_many :utensils
+	# has_and_belongs_to_many :cookbooks
+
 
 	def calculate_rating
 		endorsements = self.endorsements
@@ -18,17 +25,35 @@ class Recipe < ActiveRecord::Base
 		self.rating = Endorsement.weigh_averages(endorsements)
 	end
 
-	def add_ingredients(ingredient)
-		self.ingredients << ingredient
+	def add_ingredients(*ingredients)
+		ingredients.each do |ingredient|
+			if Ingredient.find_by_id(ingredient.id).nil?
+				puts "No such ingredient exists"
+			elsif
+				self.ingredients.include?(ingredient)
+				puts "That's already in the recipe"
+			else
+				self.ingredients << ingredient
+			end
+		end
 	end
 
 	def add_ingredient_by_name(name)
-		if name == ''
-			return nil
-		end
 		ingredient = Ingredient.find_by_name(name)
 		add_ingredients(ingredient)
 	end
+
+	# 	def add_ingredients(ingredient)
+	# 	self.ingredients << ingredient
+	# end
+
+	# def add_ingredient_by_name(name)
+	# 	if name == ''
+	# 		return nil
+	# 	end
+	# 	ingredient = Ingredient.find_by_name(name)
+	# 	add_ingredients(ingredient)
+	# end
 
 	def remove_ingredients(*ingredients)
 		ingredients.each do |ingredient|

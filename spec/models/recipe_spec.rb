@@ -15,9 +15,9 @@ describe Recipe do
 	end
 
 	describe "associations" do
-		it { should have_and_belong_to_many(:ingredients) }
-		it { should have_and_belong_to_many(:utensils) }
-		it { should have_and_belong_to_many(:cookbooks) }
+		it { should have_many(:ingredients) }
+		it { should have_many(:utensils) }
+		it { should have_many(:cookbooks) }
 		it { should have_many(:endorsements) }
 		it { should belong_to(:user)}
 

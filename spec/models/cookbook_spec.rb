@@ -3,7 +3,6 @@ require 'spec_helper'
 describe Cookbook do 
 	describe "assignment" do
 		it { should allow_mass_assignment_of(:notes) }
-		it { should allow_mass_assignment_of(:notes) }
 	end
 
 	describe "validations" do
@@ -11,7 +10,7 @@ describe Cookbook do
 	end
 
 	describe "associations" do
-		it { should have_and_belong_to_many(:recipes) }
+		it { should have_many(:recipes) }
 		it { should belong_to(:user) }
 	end
 

@@ -20,7 +20,6 @@ module Api
 			names_hash = flatten_hash(recipe_params, "name")
 			names = find_hash_vals(names_hash, "name")
 			@recipe.user_id = current_user.id
-			@recipe.add_ingredients(Ingredient.find(1))
 			@recipe.cookbook_id = current_user.cookbook.id
 			if @recipe.save
 				current_user.cookbook.add_recipe(@recipe.id)
@@ -51,10 +50,8 @@ module Api
 
 		def recipe_params
 			params.require(:recipe).permit(
-				:user_id, 
 				:instructions, 
 				:dishname, 
-				:ingredients => [:name, :_destroy],
 				:ingredients_attributes => [:id, :name, :description])
 		end
 

@@ -17,7 +17,9 @@ class User < ActiveRecord::Base
   before_create :ensure_cookbook
 	after_initialize :ensure_session_token
   has_many :endorsements, :dependent => :destroy
-  has_and_belongs_to_many :ingredients
+
+  has_many :ingredients, :through => :user_ingredients
+  
   has_one :cookbook, :dependent => :destroy
   has_many :recipes
 

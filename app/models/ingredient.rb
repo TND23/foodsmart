@@ -1,8 +1,10 @@
 class Ingredient < ActiveRecord::Base
 	attr_accessible :name, :description
 	validates :description, :presence => true
-	has_and_belongs_to_many :recipes
-	has_and_belongs_to_many :users
+	has_many :recipe_ingredients
+	has_many :recipes, :through => :recipe_ingredients
+	has_many :user_ingredients
+	has_many :users, :through => :user_ingredients
 
 
 	#look into naming for html forms and input
