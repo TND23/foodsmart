@@ -1,0 +1,21 @@
+<%= form_for :ingredient, :url => api_ingredients_url, :html => {:method => :post} do |f| %>
+	
+	<%= f.label :name %>
+	<%= f.text_field :name %>
+	<%= f.label :description %>
+	<%= f.text_field :description %>
+	<%= f.submit %> 
+<% end %>
+
+<% if @ingredients.nil? %>
+
+	<%= "GO" %>
+
+<% else %>
+
+	<% @ingredients.each do |ingredient| %>
+	<li>
+		<%= ingredient.name %> : <%= ingredient.description %>
+	</li>
+	<% end %>
+<% end %>

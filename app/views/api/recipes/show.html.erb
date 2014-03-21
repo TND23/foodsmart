@@ -1,5 +1,20 @@
 <div> dishname	<%= @recipe.dishname %></div>
 <div> instructions	<%= @recipe.instructions %></div>
+<div> <% if @recipe.ingredients %>
+		<%= @recipe.ingredients.each do |ingredient| %>
+		<%= ingredient %>
+		<%end%>
+	<% end %>
+</div>
+
+<div> <% if @recipe.utensils %>
+	<%= @recipe.utensils.each do |utensil| %>
+		<%= utensil %>
+		<%end%>
+	<% end %>
+</div>
+
+
 <div> rating	<%= @recipe.rating %></div>
 <div> rated	<%= @recipe.rated %></div>
 <div> cookbook id	<%= @recipe.cookbook_id %></div>

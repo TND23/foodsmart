@@ -8,25 +8,16 @@ Create a Recipe
 	<% end %>
 <% end %>
 
-<%= form_for :recipes, :url => api_recipes_url, :html => {:method => :post} do |f| %>
-	<%= f.label :instructions %>
-	<%= f.text_field :instructions %>
-	<%= f.label :dishname %>
-	<%= f.text_field :dishname %>
-	<%= f.submit %>
-	<%= f.text_area(size:"100x100")%>
 
-<% end %> 
 
-<!-- 
-  create_table "recipes", force: true do |t|
-    t.text     "instructions",                  null: false
-    t.integer  "cookbook_id"
-    t.integer  "user_id",                       null: false
-    t.integer  "ingredient_id"
-    t.integer  "utensil_id"
-    t.string   "dishname",                      null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.float    "rating"
-    t.boolean  "rated",         default: false -->
+<li> Manage Fridge
+	<p>	<%= link_to "Ingredients", api_ingredients_url, :method => :get %></p>
+</li>
+<li> Help </li>
+<li> Settings </li>
+<li> Manage Recipes 
+</li>
+<li> Search 
+	<p>	<%= link_to "Recipes", api_recipes_url, :method => :get %></p>
+</li>
+<li> Notifications  </li>

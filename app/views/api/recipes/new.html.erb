@@ -1,0 +1,17 @@
+
+
+<%= form_for @recipe, :url => api_recipes_url do |f| %>
+	<fieldset>
+		<%= f.label :instructions %>
+		<%= f.text_area(:instructions, size:"10x10")%>
+		<%= f.label :dishname %>
+		<%= f.text_field :dishname %>
+	</fieldset>
+	<fieldset>
+		<%= f.fields_for :ingredients do |ingredient| %>
+			<%= render 'ingredient_fields', :f => ingredient %>
+			<%= link_to_add_association 'add ingredient', f, :ingredients %>
+		<% end %>
+	</fieldset>
+	<%= f.submit %>
+<% end %> 

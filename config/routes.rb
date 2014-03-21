@@ -13,7 +13,7 @@ GroceryApp::Application.routes.draw do
     end
 
     resource :session, :only => [:create, :new, :destroy]
-    resources :ingredients, :only => [:create, :new, :edit, :show]
+    resources :ingredients, :only => [:create, :new, :edit, :show, :index]
     resources :utensils, :only => [:create, :show, :update]
   end
 end
