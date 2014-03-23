@@ -19,11 +19,22 @@ module Api
 			@recipe = Recipe.new(recipe_params)
 			names_hash = flatten_hash(recipe_params, "name")
 			names = find_hash_vals(names_hash, "name")
+			real_ingredients = []
+			
+			names.each do |possible_name|
+				ing = Ingredient.find_by_name(possible_name)
+				real_ingredients << ing
+			end
+
+			real_ingredients.each do |ing|
+				@recipe.ingredients << ing if ing!= nil
+			end
+
 			@recipe.user_id = current_user.id
 			@recipe.cookbook_id = current_user.cookbook.id
 			if @recipe.save
 				current_user.cookbook.add_recipe(@recipe.id)
-				render :json => "#{recipe_params}" + "#{names}"  + "success"
+				render :json => "params: " + "#{recipe_params}" + " name: " + "#{names}" + " ingredients: " "#{@recipe.ingredients}" 
 			else
 				render :json => "#{recipe_params}" + "#{names}"  + "One or more fields were not filled out"
 			end
@@ -52,8 +63,14 @@ module Api
 			params.require(:recipe).permit(
 				:instructions, 
 				:dishname, 
-				:ingredients_attributes => [:id, :name, :description])
-		end
+				:description,
+				:recipe_ingredient_attributes => [
+					:quantity,
+					:optional,
+					:ingredient_attributes => [:name]
+				]
+			)
+	end
 
 		def flatten_hash(hash, el)
 			#recursively take away from the hash until it is composed only of items where 'el' maps to a value
@@ -66,7 +83,9 @@ module Api
 			# return an array of the specified value
 			arr = []
 			hash.each do |k,v|
-				arr += v.values_at(val)
+				if v[val]
+					arr += v.values_at(val)
+				end
 			end
 			arr
 		end

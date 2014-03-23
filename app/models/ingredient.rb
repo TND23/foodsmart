@@ -6,6 +6,14 @@ class Ingredient < ActiveRecord::Base
 	has_many :user_ingredients
 	has_many :users, :through => :user_ingredients
 
+	# def self.find_by_name(name)
+	# 	ingredient = Ingredient.find_by_name(name)
+	# 	if ingredient.nil?
+	# 		return nil
+	# 	else
+	# 		return ingredient
+	# 	end
+	# end
 
-	#look into naming for html forms and input
+	
 end

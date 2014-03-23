@@ -1,7 +1,7 @@
 class Cookbook < ActiveRecord::Base
 	attr_accessible :notes, :user_id
-	has_many :cookbooks_recipes
-	has_many :recipes, :through => :cookbooks_recipes
+	has_many :cookbook_recipes
+	has_many :recipes, :through => :cookbook_recipes
 	belongs_to :user
 	validates :user_id, :presence => true
 

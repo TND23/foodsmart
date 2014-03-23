@@ -23,7 +23,5 @@ class Endorsement < ActiveRecord::Base
 		end
 		false
 	end
-
-
-
+	
 end

@@ -29,19 +29,6 @@ feature "basic user experience" do
 	it "can add recipes to cookbook"
 	it "can add notes to recipes in cookbook" 
 
-	feature "basic user" do
-		context "without permission" do
-			it "can not give permission"
-
-			it "can not edit a recipe"
-		end
-
-		context "with permission" do
-			it "can not give permission"
-
-			it "can edit a recipe"
-		end
-	end
 
 	feature "cannot create an invalid recipe" do
 	# do

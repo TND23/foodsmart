@@ -1,8 +1,11 @@
 class Recipe < ActiveRecord::Base
-	attr_accessible :utensils, :instructions, :dishname, :ingredients_attributes
+	attr_accessible :dishname, :description, :ingredients, :instructions, :recipe_ingredients
+	attr_accessor :cookbook_id
+
 	validates :instructions, :presence => true
 	validates :user_id, :presence => true
 	validates :ingredients, :null => false
+	
 	belongs_to :user
 
 	has_many :recipe_ingredients
@@ -15,9 +18,8 @@ class Recipe < ActiveRecord::Base
 	has_many :cookbooks, :through => :cookbook_recipes
 
 	has_many :endorsements
-	# has_and_belongs_to_many :utensils
-	# has_and_belongs_to_many :cookbooks
 
+	accepts_nested_attributes_for :recipe_ingredients, :reject_if => :all_blank, :allow_destroy => true
 
 	def calculate_rating
 		endorsements = self.endorsements
@@ -25,23 +27,23 @@ class Recipe < ActiveRecord::Base
 		self.rating = Endorsement.weigh_averages(endorsements)
 	end
 
-	def add_ingredients(*ingredients)
-		ingredients.each do |ingredient|
-			if Ingredient.find_by_id(ingredient.id).nil?
-				puts "No such ingredient exists"
-			elsif
-				self.ingredients.include?(ingredient)
-				puts "That's already in the recipe"
-			else
-				self.ingredients << ingredient
-			end
-		end
-	end
+	# def add_ingredients(*ingredients)
+	# 	ingredients.each do |ingredient|
+	# 		if Ingredient.find_by_id(ingredient.id).nil?
+	# 			puts "No such ingredient exists"
+	# 		elsif
+	# 			self.ingredients.include?(ingredient)
+	# 			puts "That's already in the recipe"
+	# 		else
+	# 			self.ingredients << ingredient
+	# 		end
+	# 	end
+	# end
 
-	def add_ingredient_by_name(name)
-		ingredient = Ingredient.find_by_name(name)
-		add_ingredients(ingredient)
-	end
+	# def add_ingredient_by_name(name)
+	# 	ingredient = Ingredient.find_by_name(name)
+	# 	add_ingredients(ingredient)
+	# end
 
 	# 	def add_ingredients(ingredient)
 	# 	self.ingredients << ingredient
@@ -87,13 +89,14 @@ class Recipe < ActiveRecord::Base
 		#if user deletes self, the recipe is sent to "deleted_user"
 	end
 
-	def author
-
-	end
-
 	def add_endorsement(endorsement)
 		self.endorsements << endorsement
 	end
 
+	private
+
+	def send_to_owners_cookbook
+		self.cookbook_id = current_user.cookbook.id if current_user
+	end
 
 end

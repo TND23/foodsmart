@@ -2,14 +2,34 @@
 	<fieldset>
 		<%= f.label :instructions %>
 		<%= f.text_area(:instructions, size:"10x10")%>
+		<%= f.label :description %>
+		<%= f.text_area(:description, size:"10x10")%>
 		<%= f.label :dishname %>
 		<%= f.text_field :dishname %>
-	</fieldset>
+	</fieldset>recipe_ingredients
 	<fieldset>
-		<%= f.fields_for :ingredients do |ingredient| %>
-			<%= render 'ingredient_fields', :f => ingredient %>
-			<%= link_to_add_association 'add ingredient', f, :ingredients %>
+		<%= f.fields_for :recipe_ingredient_attributes do |ri| %>
+			<p class="control-group nested-fields">
+			  <%= ri.label :quantity %><br />
+			  <%= ri.text_field :quantity%><br />
+			  <%= ri.label :optional %>
+			  <%= ri.check_box :optional %>
+			  <%= ri.check_box :_destroy %>
+			  <%= ri.label :_destroy, "Remove Ingredient" %>
+			  <%= ri.fields_for :ingredient_attributes do |i| %>
+				 	<p class="control-group nested-fields">
+					  <%= i.label :name %><br />
+					  <%= i.text_field :name%><br />
+					</p>
+			 <% end %>
+			</p>
 		<% end %>
+
 	</fieldset>
 	<%= f.submit %>
 <% end %> 
+
+
+
+
+

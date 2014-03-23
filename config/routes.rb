@@ -12,6 +12,7 @@ GroceryApp::Application.routes.draw do
     	resources :endorsements, :only => [:create, :show, :destroy, :update]
     end
 
+    resources :cookbook_recipes
     resource :session, :only => [:create, :new, :destroy]
     resources :ingredients, :only => [:create, :new, :edit, :show, :index]
     resources :utensils, :only => [:create, :show, :update]
