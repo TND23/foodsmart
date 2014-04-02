@@ -1,23 +1,20 @@
-Create a Recipe
 
 <% if @cookbook.recipes.nil? %>
 <p>	No Recipes In Your Cookbook Just Yet </p>
 <% else %>
-	<%= @cookbook.recipes.each do |recipe| %>
-		<li><%= recipe %></li>
+	<% for i in 0..@cookbook.recipes.length - 1 %>
+		<li><%= @cookbook.recipes[i] %></li>
 	<% end %>
 <% end %>
 
 
 
-<li> Manage Fridge
-	<p>	<%= link_to "Ingredients", api_ingredients_url, :method => :get %></p>
+<li> 
+	<p>	<%= link_to "Manage Fridge", api_user_user_ingredients_url, :method => :get %></p>
 </li>
 <li> Help </li>
 <li> Settings </li>
-<li> Manage Recipes 
-</li>
-<li> Search 
-	<p>	<%= link_to "Recipes", api_recipes_url, :method => :get %></p>
-</li>
+<li> <%= link_to "Create a Recipe", new_api_recipe_url, :method => :get %></li>
+<li> <%= link_to "Manage Recipes", api_recipes_url, :method => :get %>
+<li> Search <p>	<%= link_to "Search Recipes", api_recipes_url, :method => :get %></p></li>
 <li> Notifications  </li>

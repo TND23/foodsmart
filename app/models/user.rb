@@ -18,6 +18,7 @@ class User < ActiveRecord::Base
 	after_initialize :ensure_session_token
   has_many :endorsements, :dependent => :destroy
 
+  has_many :user_ingredients
   has_many :ingredients, :through => :user_ingredients
   
   has_one :cookbook, :dependent => :destroy

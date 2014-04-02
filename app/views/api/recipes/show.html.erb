@@ -19,3 +19,42 @@
 <div> rated	<%= @recipe.rated %></div>
 <div> cookbook id	<%= @recipe.cookbook_id %></div>
 <div> user id	<%= @recipe.user_id %></div>
+
+<% if @recipe.user_id != current_user.id %>
+
+	<h4> Would you like to endorse this recipe? </h4>
+
+	<%= form_for :endorsement, :url => api_recipe_endorsements_url(@recipe), :html => { :method => :create } do |f| %>
+		<fieldset id="text_area">
+		<%= f.label :comments %>
+		<%= f.text_area :comments %>
+		</fieldset>
+		<%= f.label :stars %>
+		<%= f.text_field :stars %>
+		<%= f.hidden_field :recipe_id, :value => @recipe.id %>
+
+		<%= f.submit %>
+	<% end %>
+<% end %>
+
+<h3> Endorsements </h3>
+
+<% if @recipe.endorsements.empty? %>
+	<p> Nobody has endorsed this recipe yet. Be the first! </p>
+<% else %>
+
+	<table style="width:300px">
+		<td> Comment </td>
+		<td> Rating </td>
+		<td> User </td>
+	<% if @recipe.endorsements %>
+	<table style="width:300px">
+		<% @recipe.endorsements.each do |endorsement| %>
+			<td><%= endorsement.comments %></td>
+			<td><%= endorsement.stars %></td>
+			<% user = User.find(endorsement.user.id) %>
+			<td><%= user.username %></td>
+		<% end %>
+	</table>
+	<% end %>
+<% end %>

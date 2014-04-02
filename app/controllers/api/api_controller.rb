@@ -9,7 +9,8 @@ module Api
 			end
 		end
 
-
-
+		def require_admin
+			
+		end
 	end
 end

@@ -10,17 +10,16 @@
 	<% if current_user %>
 	<p>	<%= link_to "Recipes", api_recipes_url, :method => :get %></p>
 	<p><%= link_to "Cookbook", api_user_cookbook_url(current_user.id, current_user.cookbook.id), :method => :get %></p>
-	<p>	<%= link_to "Ingredients", api_ingredients_url, :method => :get %></p>
+	<p>	<%= link_to "Ingredients", api_user_user_ingredients_url, :method => :get %></p>
 
 	<% else %>
 		<a href="api/users/new"> Log in page </a>
+
+		<script> 
+			$(function(){
+				RecipeSwap.initialize();
+			});
+		</script>
 	<% end %>
 
-	<script> 
-		$(function(){
-			RecipeSwap.initialize();
-		};
-	</script>
-
 </html>
-

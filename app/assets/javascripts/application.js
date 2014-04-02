@@ -14,7 +14,8 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require cocoon
-//= require backbone
 //= require underscore
+//= require backbone
 //= require recipeswap.js
-//= require_tree .
+//= require_tree ./models
+//= require_tree ./collections

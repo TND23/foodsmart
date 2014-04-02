@@ -3,6 +3,7 @@ window.RecipeSwap = {
 	Collections: {},
 	Routers: {},
 	Views: {},
+	
 	initialize: function(){
 		
 	}

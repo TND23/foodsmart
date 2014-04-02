@@ -1,4 +1,14 @@
 <p class="control-group nested-fields">
-  <%= f.label :name %><br />
-  <%= f.text_field :name%><br />
+  <%= f.label :quantity %><br />
+  <%= f.text_field :quantity%><br />
+  <%= f.label :optional %>
+  <%= f.check_box :optional %>
+  <%= f.check_box :_destroy %>
+  <%= f.label :_destroy, "Remove Ingredient" %>
+  <%= f.fields_for :ingredient_attributes do |i| %>
+  	
+
+  	<%= render 'recipe_ingredient_fields', :f => f %>
+  	
+  <% end %>
 </p>
