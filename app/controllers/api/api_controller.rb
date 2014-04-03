@@ -10,7 +10,7 @@ module Api
 		end
 
 		def require_admin
-			
+			redirect_to :root unless current_user.admin == true
 		end
 	end
 end

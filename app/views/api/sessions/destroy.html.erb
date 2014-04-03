@@ -1,0 +1,12 @@
+<%= link_to "delete", api_user_url, method: :delete,
+                                  data: { confirm: "You sure?" } %>
+<%= form_for :user, :url => api_user_url, :html => {:method => :delete} do |f| %>
+	<%= f.label :username %>
+	<%= f.text_field :username %>
+	<%= f.label :password %>
+	<%= f.password_field :password %>
+
+	<%= f.submit %>
+<% end %>
+
+<%= link_to "Cookbook", controller: "cookbooks", action: "show", user_id: current_user.id, id: current_user.cookbook.id %>

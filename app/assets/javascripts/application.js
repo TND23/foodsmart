@@ -16,7 +16,7 @@
 //= require cocoon
 //= require underscore
 //= require backbone
-//= require recipeswap.js
+//= require app.js
 //= require_tree ./models
 //= require_tree ./collections
 //= require_tree ../templates

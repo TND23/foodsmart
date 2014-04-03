@@ -1,11 +1,12 @@
-RecipeSwap.Collections.UserIngredients = Backbone.Collection.extend({
-	model: RecipeSwap.Models.UserIngredient,
-
-	url: function(){
-		return "api/users/" + this.user.get("id") + "/user_ingredients"; 
-	},
+App.Collections.UserIngredients = Backbone.Collection.extend({
+	model: App.Models.UserIngredient,
 
 	initialize: function(options){
 		this.userIngredient = options.userIngredient;
+	},
+
+	url: function(){
+		return "api/users/" + App.current_user.id  + "/user_ingredients"; 
 	}
+
 });

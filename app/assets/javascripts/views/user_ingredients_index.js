@@ -1,4 +1,4 @@
-RecipeSwap.Views.UserIngredientsIndex = Backbone.View.extend({
+App.Views.UserIngredientsIndex = Backbone.View.extend({
 	
 	template: JST["user_ingredients/index"],
 

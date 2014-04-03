@@ -1,10 +1,10 @@
-window.RecipeSwap = {
+window.App = {
 	Models: {},
 	Collections: {},
 	Routers: {},
 	Views: {},
-
 	initialize: function(){
+		Backbone.history.start();
 		// var view = new RecipeSwap.Views.IngredientsIndex({
 		// 	ingredients: RecipeSwap.Collections.Ingredients
 		// });

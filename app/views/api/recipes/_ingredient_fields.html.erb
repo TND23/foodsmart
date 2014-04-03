@@ -6,9 +6,6 @@
   <%= f.check_box :_destroy %>
   <%= f.label :_destroy, "Remove Ingredient" %>
   <%= f.fields_for :ingredient_attributes do |i| %>
-  	
-
   	<%= render 'recipe_ingredient_fields', :f => f %>
-  	
   <% end %>
 </p>

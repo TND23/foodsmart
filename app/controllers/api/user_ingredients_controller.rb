@@ -4,7 +4,6 @@ module Api
 
 		def index
 			@user_ingredients = current_user.user_ingredients.all
-		
 			render :json => @user_ingredients
 		end
 
@@ -28,18 +27,3 @@ module Api
 		end
 	end
 end
-
-
-	# def index
-	# 		@user_ingredients = current_user.user_ingredients
-	# 		b = []
-	# 		@user_ingredients.each do |ingredient|
-	# 			b << ingredient
-	# 		end
-
-	# 		if @user_ingredients == nil
-	# 			render :json => "CRUD"
-	# 		else
-	# 			render :json => b
-	# 		end
-	# 	end
