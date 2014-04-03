@@ -2,24 +2,27 @@
 
 	<h1>Welcome to Grocerapp</h1>
 
-	<p>Is windows: <%= is_a_windows? %></p>
+<!-- 	<p>Is windows: <%= is_a_windows? %></p>
 	<p>Browser: <%= put_request_env %></p>
-	<p>Is mobile device: <%= mobile_device? %></p>
-
+	<p>Is mobile device: <%= mobile_device? %></p> -->
 
 	<% if current_user %>
 	<p>	<%= link_to "Recipes", api_recipes_url, :method => :get %></p>
 	<p><%= link_to "Cookbook", api_user_cookbook_url(current_user.id, current_user.cookbook.id), :method => :get %></p>
-	<p>	<%= link_to "Ingredients", api_user_user_ingredients_url, :method => :get %></p>
+	<p>	<%= link_to "Ingredients", api_user_user_ingredients_url(current_user.id), :method => :get %></p>
 
-	<% else %>
-		<a href="api/users/new"> Log in page </a>
-
-		<script> 
+		<script>
 			$(function(){
 				RecipeSwap.initialize();
 			});
-		</script>
+
+  		RecipeSwap.Models.current_user = new RecipeSwap.Models.Current_user({
+    		id: <%= current_user.id %>
+		  });
+	  </script>
+
+	<% else %>
+		<%= render "login" %>
 	<% end %>
 
 </html>

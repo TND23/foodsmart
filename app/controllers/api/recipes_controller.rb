@@ -7,7 +7,7 @@ module Api
 
 		def index
 			@recipes = Recipe.search(params[:search])
-		
+
 		end
 
 		def new
@@ -34,7 +34,7 @@ module Api
 			@recipe.cookbook_id = current_user.cookbook.id
 			if @recipe.save
 				current_user.cookbook.add_recipe(@recipe.id)
-				render :json => @recipe 
+			#	render :json => @recipe 
 			else
 				render :json => "#{recipe_params}" + "#{names}"  + "One or more fields were not filled out"
 			end

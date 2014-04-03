@@ -9,7 +9,7 @@ module Api
 				session[:session_token] = user.session_token
 				id = current_user.id
 				cookbook_id = current_user.cookbook.id
-				redirect_to api_user_cookbook_url(id, cookbook_id)
+				redirect_to :root
 			end
 		end
 

@@ -3,13 +3,15 @@ module Api
 		before_filter :require_user
 
 		def index
-			@user_ingredients = current_user.user_ingredients
+			@user_ingredients = current_user.user_ingredients.all
+		
+			render :json => @user_ingredients
 		end
 
 		def create
 			@user_ingredient = UserIngredient.new(params[:user_ingredient])
 			ingredient = Ingredient.find_by_name(@user_ingredient.name)
-			if ingredient != nil
+			if ingredient != nil && @user_ingredient.quantity != nil && @user_ingredient.units != nil
 				@user_ingredient.ingredient_id = ingredient.id
 				@user_ingredient.user_id = current_user.id
 				@user_ingredient.save
@@ -26,3 +28,18 @@ module Api
 		end
 	end
 end
+
+
+	# def index
+	# 		@user_ingredients = current_user.user_ingredients
+	# 		b = []
+	# 		@user_ingredients.each do |ingredient|
+	# 			b << ingredient
+	# 		end
+
+	# 		if @user_ingredients == nil
+	# 			render :json => "CRUD"
+	# 		else
+	# 			render :json => b
+	# 		end
+	# 	end
