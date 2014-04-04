@@ -15,13 +15,10 @@ module Api
 
 		def destroy
 			session[:session_token] = nil
-			#current_user.reset_session_token  why doesn't this work?
-
 			redirect_to :root
 		end
 
 		def new
-
 		end
 	end
 end

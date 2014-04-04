@@ -5,7 +5,7 @@ class Cookbook < ActiveRecord::Base
 	belongs_to :user
 	validates :user_id, :presence => true
 
-	
+	#backbone-ify all this	
 	def maintain
 		#if a user deletes self, their referenced recipes are not deleted
 	end

@@ -5,7 +5,7 @@ GroceryApp::Application.routes.draw do
     
     resources :users, :except => [:update, :index] do
       resources :cookbooks, :only => [:new, :show]
-      resources :user_ingredients, :only => [:index, :create, :destroy]
+      resources :user_ingredients, :only => [:index, :create, :destroy, :new]
     end
 
     #redo embedding

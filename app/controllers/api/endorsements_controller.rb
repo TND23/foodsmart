@@ -11,7 +11,7 @@ module Api
 			duplication = Endorsement.is_duplicate?(current_user, recipe)
 			if !duplication
 				if @endorsement.save
-					render :json => "Success"
+					render :json => @endorsement
 				else
 					render :json => @endorsement.errors
 				end
@@ -21,22 +21,18 @@ module Api
 		end
 
 		def show
-
 		end
 
 		def update
-			
 		end
 
 		def destroy
-
 		end
 
 		private
-
 		def endorsement_params
 			params.require(:endorsement).permit(:comments, :rating, :recipe_id)
 		end
-
 	end
+	
 end

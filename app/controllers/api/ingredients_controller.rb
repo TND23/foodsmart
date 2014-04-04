@@ -2,13 +2,16 @@ module Api
 
 	class IngredientsController < ApiController
 		before_filter :require_user
+		#uncomment for production
+		#before_filter :require_admin, :only => :create, :update
 
 		def index
 			@ingredients = Ingredient.all
+			render :json => @ingredients
 		end
 
-		def new
-			
+		def new	
+			@ingredients = Ingredient.all
 		end
 
 		def create

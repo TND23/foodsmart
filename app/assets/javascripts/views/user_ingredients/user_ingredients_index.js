@@ -1,9 +1,13 @@
 App.Views.UserIngredientsIndex = Backbone.View.extend({
 	
 	template: JST["user_ingredients/index"],
+	events: {
+
+	},
 
 	initialize: function(options){
-		this.user_ingredients = options.user_ingredients;
+		this.collection = options.collection;
+		this.listenTo(this.collection, "sync", this.refresh);
 	},
 
 	render: function(){

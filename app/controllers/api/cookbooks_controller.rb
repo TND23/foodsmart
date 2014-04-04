@@ -1,7 +1,6 @@
 module Api
 
 	class CookbooksController < ApiController
-
 		before_filter :require_user
 
 		def new
@@ -11,6 +10,7 @@ module Api
 		def show
 			@cookbook = current_user.cookbook
 			@recipes = @cookbook.saved_recipes
+		#	render :json => @recipes
 		end
 	end
 

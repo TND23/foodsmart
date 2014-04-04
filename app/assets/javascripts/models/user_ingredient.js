@@ -5,5 +5,8 @@ App.Models.UserIngredient = Backbone.Model.extend({
 
 	},
 
-	urlRoot: "/api/users/" 
+	urlRoot: function(){
+		return "/api/users/" + Api.current_user + "/user_ingredients" 
+	}  
+	
 });

@@ -24,9 +24,7 @@ module Api
 
 		def show
 			@user = User.find(params[:id])
-			render :json => @user
-			#implement show(bool)
-			#if bool = true the user is new
+			render :json => @user, :include => [:ingredients]
 		end
 
 		private

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140401210045) do
+ActiveRecord::Schema.define(version: 20140404212525) do
 
   create_table "cookbook_recipes", force: true do |t|
     t.integer "cookbook_id"
@@ -71,7 +71,7 @@ ActiveRecord::Schema.define(version: 20140401210045) do
     t.text     "description"
   end
 
-  create_table "user_ingredients", id: false, force: true do |t|
+  create_table "user_ingredients", force: true do |t|
     t.integer "user_id"
     t.integer "ingredient_id"
     t.float   "quantity"
@@ -80,12 +80,12 @@ ActiveRecord::Schema.define(version: 20140401210045) do
   end
 
   create_table "users", force: true do |t|
-    t.string   "username",        limit: 15, null: false
-    t.string   "password_digest",            null: false
+    t.string   "username",        limit: 15,                 null: false
+    t.string   "password_digest",                            null: false
     t.string   "session_token"
-    t.integer  "cookbook_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "admin",                      default: false
   end
 
   add_index "users", ["session_token"], name: "index_users_on_session_token", unique: true

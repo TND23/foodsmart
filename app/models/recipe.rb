@@ -98,5 +98,4 @@ class Recipe < ActiveRecord::Base
 	def send_to_owners_cookbook
 		self.cookbook_id = current_user.cookbook.id if current_user
 	end
-
 end

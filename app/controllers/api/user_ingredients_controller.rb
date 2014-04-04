@@ -3,7 +3,11 @@ module Api
 		before_filter :require_user
 
 		def index
-			@user_ingredients = current_user.user_ingredients.all
+			hash_list = []
+			@user_ingredients = current_user.user_ingredients
+			@user_ingredients.where({ingredient_id: 1, quantity: "?", units: "?"})
+			@user_ingredients = @user_ingredients.where_values_hash
+	
 			render :json => @user_ingredients
 		end
 
@@ -13,7 +17,9 @@ module Api
 			if ingredient != nil && @user_ingredient.quantity != nil && @user_ingredient.units != nil
 				@user_ingredient.ingredient_id = ingredient.id
 				@user_ingredient.user_id = current_user.id
-				@user_ingredient.save
+				if @user_ingredient.save
+					render :new
+				end
 			elsif ingredient == nil
 				@user_ingredient.errors = "You can't have a blank name"
 				render :json => {:errors => @user_ingredient.errors.full_messages }
@@ -23,6 +29,11 @@ module Api
 		end
 
 		def destroy
+
+		end
+
+		def new
+			@user_ingredients = current_user.user_ingredients.all
 
 		end
 	end
