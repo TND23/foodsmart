@@ -1,7 +1,9 @@
 GroceryApp::Application.routes.draw do
   root to: "static_pages#root"
 
-  namespace :api do
+
+#:defaults => {:format => :json}
+  namespace :api, :defaults => {:format => :json} do
     
     resources :users, :except => [:update, :index] do
       resources :cookbooks, :only => [:new, :show]
@@ -10,7 +12,7 @@ GroceryApp::Application.routes.draw do
 
     #redo embedding
     resources :recipes do
-    	resources :endorsements, :only => [:create, :show, :destroy, :update]
+    	resources :endorsements, :only => [:index, :create, :show, :destroy, :update]
     end
 
     resource :session, :only => [:create, :new, :destroy]

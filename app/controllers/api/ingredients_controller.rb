@@ -7,7 +7,7 @@ module Api
 
 		def index
 			@ingredients = Ingredient.all
-			render :json => @ingredients
+			render "api/ingredients/index"
 		end
 
 		def new	
@@ -29,7 +29,8 @@ module Api
 		end
 
 		def show
-			
+			@ingredient = Ingredient.find(params[:id])
+			render "api/ingredients/show"
 		end
 
 		private 

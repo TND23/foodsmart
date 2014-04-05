@@ -1,0 +1,1 @@
+json.(recipe, :instructions, :user_id, :dishname, :rating, :rated, :created_at, :updated_at, :description) 

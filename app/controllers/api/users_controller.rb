@@ -23,8 +23,14 @@ module Api
 		end
 
 		def show
+
 			@user = User.find(params[:id])
-			render :json => @user, :include => [:ingredients]
+			#render :json => @user, :include => [:ingredients]
+			if current_user.id == @user.id || current_user.admin
+				render "api/users/show"
+			else
+				render :html => "NOJON"
+			end
 		end
 
 		private

@@ -6,8 +6,9 @@ module Api
 
 
 		def index
-			@recipes = Recipe.search(params[:search])
-
+			# @recipes = Recipe.search(params[:search])
+			@recipes = Recipe.all
+			render "api/recipes/index"
 		end
 
 		def new
@@ -53,7 +54,8 @@ module Api
 		end
 
 		def show
-			@recipe = Recipe.find(params[:id])
+			@recipe = Recipe.find(params[:id])	
+			render "api/recipes/show"
 		end
 
 

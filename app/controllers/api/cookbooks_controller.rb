@@ -10,7 +10,7 @@ module Api
 		def show
 			@cookbook = current_user.cookbook
 			@recipes = @cookbook.saved_recipes
-		#	render :json => @recipes
+			render "api/cookbooks/show"
 		end
 	end
 

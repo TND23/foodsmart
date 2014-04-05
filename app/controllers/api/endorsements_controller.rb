@@ -20,6 +20,11 @@ module Api
 			end
 		end
 
+		def index
+			@recipe = Recipe.find(params[:recipe_id])
+			@endorsements = Endorsement.where(:recipe_id => @recipe.id)
+		end
+
 		def show
 		end
 
