@@ -1,25 +1,5 @@
-<!-- This is our "global" ingredients page -->
-
-<%= form_for :ingredient, :url => api_ingredients_url, :html => {:method => :post} do |f| %>
-	<%= f.label :name %>
-	<%= f.text_field :name %>
-	<%= f.label :description %>
-	<%= f.text_field :description %>
-	<%= f.submit %> 
-<% end %>
-
-<% if @ingredients.empty? %>
-	<!-- This should never happen -->
-	<%= "Something has gone terribly wrong!" %>
-<% else %>
-<!-- Have a limit of X ingredients displayed per page -->
-	<% @ingredients.each do |ingredient| %>
-		<li>
-			<%= ingredient.name %> : <%= ingredient.description %>
-		</li>
-	<% end %>
-<% end %>
-
-
-<!-- fix this -->
-
+<form> 
+	<input type="name" name="ingredient[name]" id="ingredient_name">
+	<input type="quantity" name="ingredient[quantity]">
+	<input type="description" name="ingredient[description]">
+</form>

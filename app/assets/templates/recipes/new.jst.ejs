@@ -1,26 +1,17 @@
-<!-- fix this -->
-<%= form_for @recipe, :url => api_recipes_url do |f| %>
-	<fieldset>
-		<%= f.label :instructions %>
-		<%= f.text_area(:instructions, size:"10x10")%>
-		<%= f.label :description %>
-		<%= f.text_area(:description, size:"10x10")%>
-		<%= f.label :dishname %>
-		<%= f.text_field :dishname %>
-	</fieldset>recipe_ingredients
-	<fieldset>
-		<%= f.fields_for :recipe_ingredient_attributes do |ri| %>
-			<%= render 'ingredient_fields', :f => ri %>
-				
-		<% end %>
-	</fieldset>
-	<%= f.submit %>
-<% end %> 
+<html>
+<form action="/api/recipes" method="post">
+<label>Dish Name</label>
+<input name='recipe[dishname]'>
+<span data-msg='dishname'></span>
+<br>
+<label>Instructions</label>
+<textarea name='recipe[instructions]'></textarea>
+<span data-msg='instructions'></span>
 
+<label>Description</label>
+<textarea name='recipe[description]'></textarea>
+<span data-msg='description'></span>
+<input type="submit">
+</form>
 
-
-<!-- # link_to_add_association 'add ingredient', f, :ingredients 
- -->	<p>	<%= link_to "Ingredients", api_ingredients_url, :method => :get %></p>
-	<p>	<%= link_to "Home", api_users_url, :method => :get %></p>
-	<p>	<%= link_to "Recipes", api_recipes_url, :method => :get %></p>
-<%= link_to "Cookbook", controller: "cookbooks", action: "show", user_id: current_user.id, id: current_user.cookbook.id %>
+</html>

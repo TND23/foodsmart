@@ -1,1 +1,1 @@
-json.(ingredient, :name, :description, :created_at, :updated_at)
+json.(ingredient, :name, :id, :description, :created_at, :updated_at)

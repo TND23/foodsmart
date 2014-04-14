@@ -1,6 +1,6 @@
 FactoryGirl.define do
 	factory :utensil do |f|
-		f.name "KJDFKJDSL"
-		f.description "KDJFLKDSJFLKSJFD"
+		f.name "spoon"
+		f.description "Useful for various things"
 	end
 end

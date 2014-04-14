@@ -29,10 +29,6 @@ describe Api::UsersController do
     	}.to_not change{User.count}
     end
 
-    it "renders the correct template" do
-    	response.should redirect_to api_user_url
-    end
-
     context "with invalid attributes" do
       it "does not save the user" do
         expect{

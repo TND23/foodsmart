@@ -6,10 +6,10 @@ module Api
 		end
 
 		def create
-			#redirect to show on success
 			@user = User.new(user_params)
   		if @user.save
   			login_user(@user)
+				#redirect to show on success
   			redirect_to api_user_url(@user)
  			else
   			render :json => @user.errors.full_messages
@@ -23,18 +23,16 @@ module Api
 		end
 
 		def show
-
 			@user = User.find(params[:id])
-			#render :json => @user, :include => [:ingredients]
 			if current_user.id == @user.id || current_user.admin
 				render "api/users/show"
 			else
-				render :html => "NOJON"
+				#TODO : make sure only admins and self can view own info
+				render :json => "NO JOY"
 			end
 		end
 
 		private
-
 		def user_params
 			params.require(:user).permit(:username, :password)
 		end

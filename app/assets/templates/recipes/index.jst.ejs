@@ -1,16 +1,8 @@
-<!-- fix this -->
-<h> Recipes </h>
-<form action="<%= api_recipes_url %>" method="get">
-	<p>
-		<%= text_field_tag :search, params[:search] %>
-		<%= submit_tag "Search", :name => nil %>
+<% collection.models.forEach(function(model){ %>
+	<h3> Dish: </h3>
+	<%= model.attributes.dishname %>
+	<p> Description: 
+	<%= model.attributes.description %>
 	</p>
-</form>
-<%= @recipes.each do |recipe| %>
-
-<li><div> Dish name:	<%= recipe.dishname %>, url: <%= link_to "#{recipe.dishname}", api_recipe_url(recipe.id), :method => :get %></div></li>
-<!-- <div> Description:	<%= recipe.instructions %> </div>
- <div> User id:	<%= recipe.user_id %> </div>
- -->
- 	<%= recipe.ingredients.to_a %>
-<% end %>
+	<%= model.attributes.rating %>
+<% }); %>

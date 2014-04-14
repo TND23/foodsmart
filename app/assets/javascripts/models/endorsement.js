@@ -1,8 +1,14 @@
 App.Models.Endorsement = Backbone.Model.extend({
-	urlRoot: "api/ingredients/" + recipe.get("id") + "/endorsements",
 
-	initialize: function(){
+	urlRoot: function(models, options){
+		return "/api/recipe" + options.recipe_id + "/endorsements"
+	},
+
+	checkDuplication: function(){
 		
-	}
+	},
 
+	weighAverages: function(){
+		
+	},
 });

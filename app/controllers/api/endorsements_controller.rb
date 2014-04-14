@@ -1,5 +1,4 @@
 module Api
-
 	class EndorsementsController < ApiController
 		before_filter :require_user
 
@@ -23,11 +22,14 @@ module Api
 		def index
 			@recipe = Recipe.find(params[:recipe_id])
 			@endorsements = Endorsement.where(:recipe_id => @recipe.id)
+			render "api/endorsements/index"
 		end
 
 		def show
+			@endorsement = Endorsement.find(params[:id])
 		end
 
+		# TODO
 		def update
 		end
 
@@ -39,5 +41,4 @@ module Api
 			params.require(:endorsement).permit(:comments, :rating, :recipe_id)
 		end
 	end
-	
 end

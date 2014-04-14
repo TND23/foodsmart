@@ -1,46 +1,54 @@
 module Api
-
 	class RecipesController < ApiController
-
 		before_filter :require_user
-
-
+		skip_before_filter :verify_authenticity_token, :only => :create
 		def index
 			# @recipes = Recipe.search(params[:search])
 			@recipes = Recipe.all
+			@recipes.each do |recipe|
+				recipe.recipe_ingredients.each do |ri|
+					if !ri.name
+						ri.name = ri.ingredient.name
+					end
+					if !ri.description
+						ri.description = ri.ingredient.description
+					end
+				end
+			end
 			render "api/recipes/index"
 		end
 
 		def new
 			@recipe = Recipe.new
+			render "api/recipes/new.html.erb"
 			3.times{ @recipe.ingredients.build }
 		end
 
 		def create
 			@recipe = Recipe.new(recipe_params)
-			names_hash = flatten_hash(recipe_params, "name")
-			names = find_hash_vals(names_hash, "name")
-			real_ingredients = []
-			
-			names.each do |possible_name|
-				ing = Ingredient.find_by_name(possible_name)
-				real_ingredients << ing
-			end
-
-			real_ingredients.each do |ing|
-				@recipe.ingredients << ing if ing!= nil
-			end
-
 			@recipe.user_id = current_user.id
-			@recipe.cookbook_id = current_user.cookbook.id
+
+			# names_hash = flatten_hash(recipe_params, "name")
+			# names = find_hash_vals(names_hash, "name")
+			# real_ingredients = []
+			
+			# names.each do |possible_name|
+			# 	ing = Ingredient.find_by_name(possible_name)
+			# 	real_ingredients << ing
+			# end
+
+			# real_ingredients.each do |ing|
+			# 	@recipe.ingredients << ing if ing!= nil
+			# end
+
+			# @recipe.user_id = current_user.id
 			if @recipe.save
-				current_user.cookbook.add_recipe(@recipe.id)
+				_render(@recipe)
 			#	render :json => @recipe 
-			else
-				render :json => "#{recipe_params}" + "#{names}"  + "One or more fields were not filled out"
 			end
 		end
 
+		# TODO
 		def update
 			if @recipe.save
 				render :show
@@ -50,19 +58,19 @@ module Api
 		end
 
 		def destroy
-
 		end
 
 		def show
-			@recipe = Recipe.find(params[:id])	
+			@recipe = Recipe.find(params[:id])
+
+
 			render "api/recipes/show"
 		end
 
-
 		private
-
 		def recipe_params
-			params.require(:recipe).permit(
+			#if recipe is defined we fetch it, otherwise set default value to {}
+			params.fetch(:recipe, {}).permit(
 				:instructions, 
 				:dishname, 
 				:description,
@@ -72,7 +80,7 @@ module Api
 					:ingredient_attributes => [:name]
 				]
 			)
-	end
+		end
 
 		def flatten_hash(hash, el)
 			#recursively take away from the hash until it is composed only of items where 'el' maps to a value
@@ -92,5 +100,10 @@ module Api
 			arr
 		end
 
+		def _render(models)
+			render :json => models
+		end
+		
 	end
 end
+

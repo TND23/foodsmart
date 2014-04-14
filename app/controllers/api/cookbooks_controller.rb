@@ -1,5 +1,4 @@
 module Api
-
 	class CookbooksController < ApiController
 		before_filter :require_user
 
@@ -13,5 +12,4 @@ module Api
 			render "api/cookbooks/show"
 		end
 	end
-
 end

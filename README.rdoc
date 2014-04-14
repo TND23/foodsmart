@@ -29,8 +29,7 @@ User
 Utensil
 
 Controllers -- tier 1:
-
-Application
+Application 
 Cookbook
 Endorsement
 Ingredient
@@ -54,7 +53,6 @@ Collections:
 Recipes
 Ingredients
 
-
 ======================================
 Database:
 ======================================
@@ -74,4 +72,6 @@ CSS -- tier 4
 
 ======================================
 Tests -- tier 1
+Rails: RSpec TDD
+Backbone: Jasmine BDD
 ======================================

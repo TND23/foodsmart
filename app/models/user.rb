@@ -24,7 +24,6 @@ class User < ActiveRecord::Base
   has_one :cookbook, :dependent => :destroy
   has_many :recipes
 
-#   ---------- session and authenticity ------------
   def self.find_by_credentials(username, password)
   	user = User.find_by_username username
   	if user && user.password_digest == BCrypt::Password.new(user.password_digest)
@@ -39,12 +38,8 @@ class User < ActiveRecord::Base
   	self.password_digest = BCrypt::Password.create(password)
   end
 
-#--------- recipe logic ---------------
-
-  # this should be in the controller
   def edit_recipe(recipe)
     return false unless self.has_permission?(recipe)
-
       # if self.has_permission
       #check if user has permission
   end
@@ -73,7 +68,7 @@ class User < ActiveRecord::Base
   end
 
   def favorite_recipe(recipe)
-    favorited_recipes = self.cookbook.saved_recipes
+    favorited_recipes ||= self.cookbook.saved_recipes
     if favorited_recipes.nil?
       favorited_recipes = {}
     elsif
@@ -84,12 +79,6 @@ class User < ActiveRecord::Base
     end
   end
 
-  def give_permission(user, recipe)
-
-  end
-
-#------- management logic -------------
-
   def remove_ingredients(ingredient)
     if self.ingredients.find(ingredient.id).nil? 
       puts "You don't have #{ingredient}"
@@ -98,7 +87,7 @@ class User < ActiveRecord::Base
     end
   end
 
-  def add_ingredient_to_stock(ingredient)
+  def add_ingredient_to_stock(ingredient, quantity, units)
     ingredient = Ingredient.find(ingredient.id)
     if ingredient.nil?
       puts "No such ingredient exists"
@@ -109,9 +98,8 @@ class User < ActiveRecord::Base
     end
   end
 
-  def convert_ingredients(from, to)
-    #for instance, berries + sugar + lemon juice goes in the from, berry puree goes into the to
-    
+  def add_user_ingredient(ingredient, quantity, units)
+
   end
 
   def reset_session_token
@@ -119,10 +107,8 @@ class User < ActiveRecord::Base
     self.save!
   end
 
-
   private
-#--------- private logic ---------------
-  
+
   def ensure_session_token
   	self.session_token ||= self.session_token = SecureRandom::urlsafe_base64(16)
   end

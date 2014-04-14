@@ -6,14 +6,10 @@ App.Views.IngredientsIndex = Backbone.View.extend({
 		this.collection = options.collection;
 	},
 
-	events: {
-
-	},
 
 	render: function(){
-		App.Collections.ingredients.fetch();
+		this.collection.fetch();		
 		var content = this.template({collection: this.collection})
 		$("body").html(content);
 	}
-
 });

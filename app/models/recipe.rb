@@ -1,5 +1,5 @@
 class Recipe < ActiveRecord::Base
-	attr_accessible :dishname, :description, :ingredients, :instructions, :recipe_ingredients
+	attr_accessible :dishname, :description, :ingredients, :instructions, :recipe_ingredients, :utensils
 	attr_accessor :cookbook_id
 
 	validates :instructions, :presence => true

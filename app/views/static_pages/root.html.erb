@@ -8,12 +8,13 @@
 
 	<% if current_user %>
 	<p>	<%= link_to "Recipes", api_recipes_url, :method => :get %></p>
-	<p><a href="#/recipes">Rescipes </a></p>
-	<p><a href="#/ingredients">BBIngredient </a></p>
-	<p><a href="#/fridge">Fridge </a></p>
+	<p><a href="/#/recipes">Rescipes </a></p>
+	<p><a href="/#/ingredients">BBIngredient </a></p>
+	<p><a href="/#/fridge">Fridge </a></p>
 	<p><%= link_to "Cookbook", api_user_cookbook_url(current_user.id, current_user.cookbook.id), :method => :get %></p>
 	<p>	<%= link_to "Ingredients", api_user_user_ingredients_url(current_user.id), :method => :get %></p>
-
+	<p>	<%= link_to "Ingredients Backbone", "/#/ingredients", :method => :get %></p>
+	<p> <%= link_to "Create Recipe", "/#/recipesCreate"%> </p>
 		<script>
 			$(function(){
 				App.initialize();
@@ -24,8 +25,8 @@
 		  });
 
 		  App.current_user.fetch({
-		  	success: function(response){console.log(response)},
-		  	error: function(response){console.log(response)} 
+		  	success: function(response){console.log("success")},
+		  	error: function(response){console.log("error")} 
 		  });
 	  </script>
 

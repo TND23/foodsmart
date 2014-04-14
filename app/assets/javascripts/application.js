@@ -16,6 +16,8 @@
 //= require cocoon
 //= require underscore
 //= require backbone
+//= require sinon
+//= require backbone-forms.min.js
 //= require app.js
 //= require_tree ./models
 //= require_tree ./collections

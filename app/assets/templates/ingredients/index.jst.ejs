@@ -1,2 +1,7 @@
-<%= collection %>
-<% App.ing = collection %>
+<% collection.models.forEach(function(model){ %>
+	<li><%= model.attributes.name %> </li>
+	</li><%= model.attributes.description %> </li> 
+<% }); %>
+
+<% var form = new App.Views.IngredientsNew(); %>
+
