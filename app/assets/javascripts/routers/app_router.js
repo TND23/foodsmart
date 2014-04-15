@@ -49,9 +49,4 @@ App.Routers.AppRouter = Backbone.Router.extend({
 		})
 	},
 
-	alarm: function(){
-		alert('hefhfl');
-	}
-
-
 });

@@ -32,7 +32,7 @@ App.Models.Recipe = Backbone.Model.extend({
 		recipe_ingredients: []
 	},
 
-	// change to options
+	// change to options hash
 	addIngredient: function(ingredient_name, quantity, units){
 		// if the recipe does not have an ingredient of the passed in name
 		var recipe_ingredients = this.attributes.recipe_ingredients;
@@ -59,8 +59,8 @@ App.Models.Recipe = Backbone.Model.extend({
 		if(endorsements.length < 1){
 			return null;
 		} else {
-			if (!this.rated){
-				this.rated = true;
+			if (!this.attributes.rated){
+				this.attributes.rated = true;
 			}
 			endorsements.forEach(function(endorsement){
 				sum += endorsement.stars;

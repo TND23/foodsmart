@@ -1,4 +1,16 @@
 App.Models.Cookbook = Backbone.Model.extend({
 	urlRoot: "/api/cookbooks",
-	initialize: function(){}
+	initialize: function(){},
+
+	addRecipe: function(){
+
+	},
+
+	removeRecipe: function(){
+
+	},
+
+	annotateRecipe: function(){
+		
+	}
 });

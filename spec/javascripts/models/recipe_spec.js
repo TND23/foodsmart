@@ -9,9 +9,7 @@ describe('App.Models.Recipe', function(){
 			recipe.set("dishname", "pea soup");
 			recipe.set("description", "it smells like pea soup");
 			recipe.set("recipe_ingredients", ["cheese, bread, tomato sauce"]);
-			recipe.set("endorsements", [{"id":1,"comments":"This is certainly a recipe.","stars":3,"recipe_id":1,"user_id":2},
-											{"id":2,"comments":"This is certainly a recipe.","stars":2,"recipe_id":1,"user_id":3}]);
-			// recipe.set("rated", false);
+			recipe.set("rated", false);
 			// recipe.set("rating", null);
 			// recipe.set("ingredients", []);
 			// recipe.addIngredient = function(ingredient_name){
@@ -46,6 +44,10 @@ describe('App.Models.Recipe', function(){
 	});
 
 	it ('has a working calculate rating function', function(){
+			recipe.set("endorsements", [{"id":1,"comments":"This is certainly a recipe.","stars":3,"recipe_id":1,"user_id":2},
+											{"id":2,"comments":"This is certainly a recipe.","stars":2,"recipe_id":1,"user_id":3}]);
+
+
 		expect(recipe.calculateRating).toBeDefined();
 		expect(recipe.calculateRating()).toEqual(2.5);
 		recipe.set("endorsements", []);
@@ -69,11 +71,15 @@ describe('App.Models.Recipe', function(){
 	// 	expect(recipe.attributes.rated).toEqual(false);
 	// });
 
-	// it ('correctly updates fields after ratings happen', function(){
-	// 	recipe.addRating(3.0);
-	// 	expect(recipe.attributes.rated).toEqual(true);
-	// 	expect(recipe.attributes.rating).toEqual(3.0);
-	// });
+	it ('correctly updates fields after ratings happen', function(){
+
+		expect(recipe.attributes.rated).toEqual(false);
+		recipe.set("endorsements", [{"id":1,"comments":"This is certainly a recipe.","stars":3,"recipe_id":1,"user_id":2},
+											{"id":2,"comments":"This is certainly a recipe.","stars":2,"recipe_id":1,"user_id":3}]);
+		//should sync
+		recipe.calculateRating();
+		expect(recipe.attributes.rated).toEqual(true);
+	});
 
 	it ('correctly updates ingredients after changes', function(){
 		recipe.attributes.recipe_ingredients = [];
