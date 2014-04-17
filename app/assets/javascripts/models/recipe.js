@@ -10,6 +10,7 @@ App.Models.Recipe = Backbone.Model.extend({
 		dishname: 'Text',
 		description: 'Text',
 		instructions: 'Text',
+		ingredients: { type: 'List', itemType: 'Text' }
 	},
 
 	parse: function(res){
@@ -29,22 +30,25 @@ App.Models.Recipe = Backbone.Model.extend({
 		instructions: "Write me!",
 		description: "Write me!",
 		dishname: "Write me!",
+		// This must be a collection of user-ingredients.
 		recipe_ingredients: []
 	},
 
-	// change to options hash
+	// Change this to an options hash.
 	addIngredient: function(ingredient_name, quantity, units){
-		// if the recipe does not have an ingredient of the passed in name
+		// If the recipe does not have an ingredient of the passed in name.
+		var that = this;
 		var recipe_ingredients = this.attributes.recipe_ingredients;
 		if (recipe_ingredients.length > 1){
 			recipe_ingredients.forEach(function(ri){
 				if (ingredient_name === ri.name){
-					//prompt editing
+					// If the ingredient is already in here,  edit the ingredient.
 				} else {
+					// This will get slow quickly.
 					var parent_ingredient = App.Collections.ingredients.where({"name": ingredient_name});
 					if(parent_ingredient === undefined){
-						// wing it
-					} else{
+						
+					} else {
 						recipeIngredify(ingredient_name, quantity, units);
 					}
 					
@@ -96,7 +100,7 @@ App.Models.Recipe = Backbone.Model.extend({
 	},
 
 	recipeIngredify: function(ingredient){
-
+		
 	}
 
 });

@@ -25,7 +25,6 @@ module Api
 		end
 
 		def edit
-			
 		end
 
 		def show
@@ -34,7 +33,6 @@ module Api
 		end
 
 		private 
-
 		def ingredient_params
 			params.require(:ingredient).permit(:name, :description)
 		end

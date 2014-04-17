@@ -27,36 +27,6 @@ class Recipe < ActiveRecord::Base
 		self.rating = Endorsement.weigh_averages(endorsements)
 	end
 
-	# def add_ingredients(*ingredients)
-	# 	ingredients.each do |ingredient|
-	# 		if Ingredient.find_by_id(ingredient.id).nil?
-	# 			puts "No such ingredient exists"
-	# 		elsif
-	# 			self.ingredients.include?(ingredient)
-	# 			puts "That's already in the recipe"
-	# 		else
-	# 			self.ingredients << ingredient
-	# 		end
-	# 	end
-	# end
-
-	# def add_ingredient_by_name(name)
-	# 	ingredient = Ingredient.find_by_name(name)
-	# 	add_ingredients(ingredient)
-	# end
-
-	# 	def add_ingredients(ingredient)
-	# 	self.ingredients << ingredient
-	# end
-
-	# def add_ingredient_by_name(name)
-	# 	if name == ''
-	# 		return nil
-	# 	end
-	# 	ingredient = Ingredient.find_by_name(name)
-	# 	add_ingredients(ingredient)
-	# end
-
 	def remove_ingredients(*ingredients)
 		ingredients.each do |ingredient|
 			if Ingredient.find_by_id(ingredient.id).nil?

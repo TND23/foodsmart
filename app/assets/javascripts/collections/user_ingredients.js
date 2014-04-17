@@ -9,8 +9,8 @@ App.Collections.UserIngredients = Backbone.Collection.extend({
 		return "api/users/" + App.current_user.id  + "/user_ingredients"; 
 	},
 
-	addIngredient: function(){
-
+	addIngredient: function(name){
+		
 	},
 
 });

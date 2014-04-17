@@ -10,15 +10,6 @@ describe('App.Models.Recipe', function(){
 			recipe.set("description", "it smells like pea soup");
 			recipe.set("recipe_ingredients", ["cheese, bread, tomato sauce"]);
 			recipe.set("rated", false);
-			// recipe.set("rating", null);
-			// recipe.set("ingredients", []);
-			// recipe.addIngredient = function(ingredient_name){
-			// 	this.attributes.ingredients.push(ingredient_name);
-			// };
-
-			// recipe.addRating = function(rating){
-			// 	this.attributes.rating.push(rating.to_f);
-			// };
 	})
 
 	it('should be defined', function() {
@@ -29,6 +20,10 @@ describe('App.Models.Recipe', function(){
 		expect(recipe.recipeIngredients).toBeDefined();
 		expect(recipe.attributes.recipe_ingredients).toBeDefined();
 	}); 
+
+	xit('belongs to only one cookbook', function(){
+
+	});
 
 	it ('should have a description', function(){
 		expect(recipe).toBeDefined();
@@ -44,10 +39,10 @@ describe('App.Models.Recipe', function(){
 	});
 
 	it ('has a working calculate rating function', function(){
-			recipe.set("endorsements", [{"id":1,"comments":"This is certainly a recipe.","stars":3,"recipe_id":1,"user_id":2},
-											{"id":2,"comments":"This is certainly a recipe.","stars":2,"recipe_id":1,"user_id":3}]);
-
-
+			recipe.set("endorsements", 
+				[{"id":1,"comments":"This is certainly a recipe.","stars":3,"recipe_id":1,"user_id":2},
+				{"id":2,"comments":"This is certainly a recipe.","stars":2,"recipe_id":1,"user_id":3}]
+			);
 		expect(recipe.calculateRating).toBeDefined();
 		expect(recipe.calculateRating()).toEqual(2.5);
 		recipe.set("endorsements", []);
@@ -72,7 +67,6 @@ describe('App.Models.Recipe', function(){
 	// });
 
 	it ('correctly updates fields after ratings happen', function(){
-
 		expect(recipe.attributes.rated).toEqual(false);
 		recipe.set("endorsements", [{"id":1,"comments":"This is certainly a recipe.","stars":3,"recipe_id":1,"user_id":2},
 											{"id":2,"comments":"This is certainly a recipe.","stars":2,"recipe_id":1,"user_id":3}]);
@@ -81,13 +75,22 @@ describe('App.Models.Recipe', function(){
 		expect(recipe.attributes.rated).toEqual(true);
 	});
 
-	it ('correctly updates ingredients after changes', function(){
+	xit ('correctly updates ingredients after changes', function(){
 		recipe.attributes.recipe_ingredients = [];
 		recipe.addIngredient("toast");
 		// expect(recipe.attributes.ingredients).toBeDefined();
 		// expect(recipe.attributes.ingredients).toEqual("toast");
-	})
+	});
 
+	//what is this?
+	xit('Should be able to add multiple ingredients', function(){
 
+	});
+	xit('Should be able to remove ingredients', function(){
 
+	});
+
+	xit('Should be only modifiable by the owner', function(){
+		
+	});
 });

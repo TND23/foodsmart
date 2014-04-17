@@ -12,6 +12,14 @@ describe('App.Models.Cookbook', function() {
       expect(cookbook).not.toBeNull();
   });
 
+  xit('can belong to one user', function(){
+
+  });
+
+  xit('can have references to many recipes', function(){
+
+  });
+
   it ('should have add recipe function', function(){
   	expect(cookbook.addRecipe).toBeDefined();
   });
@@ -24,5 +32,16 @@ describe('App.Models.Cookbook', function() {
   	expect(cookbook.annotateRecipe).toBeDefined();
   });
 
-  
+  xit ('should not allow for script injection with annotations', function(){
+
+  });
+
+  xit('should allow for custom organization of favorited recipes', function(){
+
+  });
+
+  xit('should allow for seperation of authors recipes and favorited recipes', function(){
+
+  });
+
 });

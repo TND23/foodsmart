@@ -62,8 +62,6 @@ module Api
 
 		def show
 			@recipe = Recipe.find(params[:id])
-
-
 			render "api/recipes/show"
 		end
 

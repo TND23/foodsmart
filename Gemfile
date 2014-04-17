@@ -1,29 +1,29 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.0.0'
-gem 'cocoon'
-gem 'sass-rails', '~> 4.0.0'
-gem 'sqlite3'
-gem 'pg'
-gem 'figaro'
-gem 'ejs'
-gem 'database_cleaner'
-gem 'uglifier', '>= 1.3.0'
-gem 'coffee-rails', '~> 4.0.0'
-gem 'protected_attributes'
-gem 'jquery-rails'
-gem 'turbolinks'
-gem 'jbuilder', '~> 1.2'
-gem 'shoulda'
 gem 'bcrypt-ruby', :require => 'bcrypt'
+gem 'cocoon'
+gem 'coffee-rails', '~> 4.0.0'
+gem 'database_cleaner'
+gem 'ejs'
+gem 'figaro'
+gem 'jbuilder', '~> 1.2'
+gem 'jquery-rails'
+gem 'pg'
+gem 'protected_attributes'
+gem 'rails', '4.0.0'
+gem 'sass-rails', '~> 4.0.0'
+gem 'shoulda'
+gem 'sqlite3'
+gem 'turbolinks'
+gem 'uglifier', '>= 1.3.0'
 
 group :development, :test do
-	gem 'rspec-rails'
-	gem 'factory_girl_rails'
-	gem 'jasmine'
 	gem 'capybara' 
-	gem 'guard-jasmine'
+	gem 'factory_girl_rails'
 	gem 'guard'
+	gem 'guard-jasmine'
+	gem 'jasmine'
+	gem 'rspec-rails'
 end
 
 group :test do
@@ -36,3 +36,4 @@ end
 group :doc do
   gem 'sdoc', require: false
 end
+

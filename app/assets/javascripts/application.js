@@ -18,6 +18,7 @@
 //= require backbone
 //= require sinon
 //= require backbone-forms.min.js
+//= require list.js
 //= require app.js
 //= require_tree ./models
 //= require_tree ./collections
