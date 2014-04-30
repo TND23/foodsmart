@@ -3,7 +3,7 @@ window.App = {
 	Collections: {},
 	Routers: {},
 	Views: {},
-
+	Forms: {},
 	
 	initialize: function(){
 		new App.Routers.AppRouter();

@@ -34,11 +34,10 @@ App.Routers.AppRouter = Backbone.Router.extend({
 	},
 
 	recipeNew: function(){
-		var newView = new App.Views.RecipeNew();
 		var recipe = new App.Models.Recipe();
 		// $("body").html(newView.render().el);
 		var newView = new App.Views.RecipeNew();
-		var form = new Backbone.Form({model: recipe}).render();
+		var form = new App.Forms.RecipeForm({model: recipe}).render();
 		$("body").html(form.el);
 	},
 

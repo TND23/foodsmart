@@ -1,5 +1,5 @@
 <html>
-<form action="/api/recipes" method="post">
+<form action="/api/recipes" method="post" id="recipe-create-form">
 <label>Dish Name</label>
 <input name='recipe[dishname]'>
 <span data-msg='dishname'></span>
@@ -20,6 +20,21 @@
 <input name='recipe[recipe_ingredients]' id=''>
 <input type="submit">
 <span data-msg='ingredients'></span>
+
 </form>
 
 </html>
+
+
+<!--
+<script id="recipeNew" type="text/html">
+// 	<form>
+
+// 		  <div data-editors="dishname"></div>
+//       <div data-editors="instructions"></div>
+// 			<div data-editors="description"></div>
+//       <div data-editors="ingredients"></div>
+//       <input type="submit" value="submit" name="submit">
+// 	</form>
+// </script>
+-->

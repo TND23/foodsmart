@@ -2,16 +2,7 @@ App.Models.Recipe = Backbone.Model.extend({
 
 	urlRoot: "/api/recipes",
 	
-	model: {
-		endorsement: App.Models.Endorsement
-	},
-
-	schema: {
-		dishname: 'Text',
-		description: 'Text',
-		instructions: 'Text',
-		ingredients: { type: 'List', itemType: 'Text' }
-	},
+	model: { endorsement: App.Models.Endorsement },
 
 	parse: function(res){
 		for (var key in this.model){
@@ -22,39 +13,35 @@ App.Models.Recipe = Backbone.Model.extend({
 		return res;
 	},
 
-	initialize: function(models, options){
-
+	initialize: function(models, options){ 
+		var that = this;
+		this.on('save', function(){
+			that.recipeIngredients();
+		});
 	},
 
-	defaults:{
+	defaults: {
 		instructions: "Write me!",
 		description: "Write me!",
 		dishname: "Write me!",
-		// This must be a collection of user-ingredients.
 		recipe_ingredients: []
 	},
 
-	// Change this to an options hash.
-	addIngredient: function(ingredient_name, quantity, units){
-		// If the recipe does not have an ingredient of the passed in name.
-		var that = this;
-		var recipe_ingredients = this.attributes.recipe_ingredients;
-		if (recipe_ingredients.length > 1){
-			recipe_ingredients.forEach(function(ri){
-				if (ingredient_name === ri.name){
-					// If the ingredient is already in here,  edit the ingredient.
-				} else {
-					// This will get slow quickly.
-					var parent_ingredient = App.Collections.ingredients.where({"name": ingredient_name});
-					if(parent_ingredient === undefined){
-						
-					} else {
-						recipeIngredify(ingredient_name, quantity, units);
-					}
-					
-				}
-			});
+	addIngredient: function(ingredient){
+		// if the ingredients list is non-empty, look for duplicates
+		if (this.recipe_ingredients.length > 0 && this.hasIngredient(ingredient.name) === false){
+			recipe_ingredients.push(ingredient); 
 		}
+		else { return false; } 
+	},
+
+	addIngredients: function(ingredientList){
+		var that = this;
+		_.each(ingredientList, function(ingredient){
+			that.addIngredient(ingredient);
+		})
+		this.save();
+		return this.attributes.recipe_ingredients;
 	},
 
 	calculateRating: function(){
@@ -80,7 +67,6 @@ App.Models.Recipe = Backbone.Model.extend({
 	},
 
 	filterByName: function(ingredient_name){
-		// find ingredients in our recipe
 		this.ingredients.filter(function(model){
 			if (model.name == ingredient_name){
 				return model;
@@ -92,6 +78,17 @@ App.Models.Recipe = Backbone.Model.extend({
 		return this.get('name');
 	},
 
+	hasIngredient: function(name){
+		if (this._ingredients.length > 0){
+			_.each(this._ingredients, function(recipe_ingredient){
+				if (_.has(_.values(recipe_ingredient), name) === true){ 
+					return true;
+				}		
+			});
+		}
+		return false;
+	},
+
 	recipeIngredients: function(){
 		if (typeof(this._ingredients) === undefined){
 			this._ingredients = this.attributes.recipe_ingredients;
@@ -99,8 +96,12 @@ App.Models.Recipe = Backbone.Model.extend({
 		return this._ingredients;
 	},
 
-	recipeIngredify: function(ingredient){
-		
+	removeIngredients: function(ingredientList){
+		var that = this;
+		_.each(ingredientList, function(ingredient){
+			if (that.getName(ingredient)){
+				that.remove(ingredient);
+			}
+		});
 	}
-
 });

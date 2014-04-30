@@ -4,6 +4,14 @@ describe('App.Collections.Recipes', function(){
 
 	});
 
+	xit('should have a validation function', function(){
+
+	});
+
+	xit('validation should be called on save', function(){
+
+	});
+
 	xit('should have many ingredient models', function(){
 
 	});

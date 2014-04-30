@@ -8,22 +8,23 @@ describe('App.Models.Recipe', function(){
 			recipe.set("user_id", "1");
 			recipe.set("dishname", "pea soup");
 			recipe.set("description", "it smells like pea soup");
-			recipe.set("recipe_ingredients", ["cheese, bread, tomato sauce"]);
+			recipe.set("recipe_ingredients", []);
+			recipe._ingredient = recipe.attributes.recipe_ingredients;
 			recipe.set("rated", false);
 	})
 
 	it('should be defined', function() {
-      expect(App.Models.Cookbook).toBeDefined();
+      expect(App.Models.Recipe).toBeDefined();
+  });
+
+  it ('should know what _ingredient is', function(){
+		expect(recipe._ingredient).toBeDefined();  	
   });
 
 	it('has an ingredients relationship', function(){
 		expect(recipe.recipeIngredients).toBeDefined();
 		expect(recipe.attributes.recipe_ingredients).toBeDefined();
 	}); 
-
-	xit('belongs to only one cookbook', function(){
-
-	});
 
 	it ('should have a description', function(){
 		expect(recipe).toBeDefined();
@@ -59,12 +60,9 @@ describe('App.Models.Recipe', function(){
 	});
 	
 	it ('has an add ingredients function', function(){
+		expect(recipe.addIngredients).toBeDefined();
 		expect(recipe.addIngredient).toBeDefined();
 	});
-
-	// it ('has a default false rated attribute', function(){
-	// 	expect(recipe.attributes.rated).toEqual(false);
-	// });
 
 	it ('correctly updates fields after ratings happen', function(){
 		expect(recipe.attributes.rated).toEqual(false);
@@ -75,22 +73,29 @@ describe('App.Models.Recipe', function(){
 		expect(recipe.attributes.rated).toEqual(true);
 	});
 
-	xit ('correctly updates ingredients after changes', function(){
-		recipe.attributes.recipe_ingredients = [];
-		recipe.addIngredient("toast");
-		// expect(recipe.attributes.ingredients).toBeDefined();
-		// expect(recipe.attributes.ingredients).toEqual("toast");
+
+	it('Should be able to add multiple ingredients', function(){
+		var callback = recipe.addIngredient;
+		recipe.addIngredients([
+			{"name":'prosciutto',"description":"Quite salty and good","units": 'slices',"quantity":2.0},
+		  {"name": 'tomato',"description":"Red and flavorful.","units": 'pounds',"quantity":1.0}
+		]);
+
+		expect(recipe.attributes.recipe_ingredients).toEqual([ { name : 'prosciutto', description : 'Quite salty and good', units : 'slices', quantity : 2 }, { name : 'tomato', description : 'Red and flavorful.', units : 'pounds', quantity : 1 } ]);
+		expect(callback.calledTwice);
 	});
+	
 
-	//what is this?
-	xit('Should be able to add multiple ingredients', function(){
+	it('Should be able to remove ingredients', function(){
+		expect(recipe.removeIngredients).toBeDefined();
+		recipe.save();
+		recipe.addIngredients([
+			{"name":'prosciutto',"description":"Quite salty and good","units": 'slices',"quantity":2.0},
+		  {"name": 'tomato',"description":"Red and flavorful.","units": 'pounds',"quantity":1.0}
+		]);
 
-	});
-	xit('Should be able to remove ingredients', function(){
+		recipe.removeIngredients(["tomato", "prosciutto"]);
+		expect(recipe.attributes.recipe_ingredients).toEqual([]);
 
-	});
-
-	xit('Should be only modifiable by the owner', function(){
-		
 	});
 });

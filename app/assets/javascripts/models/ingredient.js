@@ -7,6 +7,7 @@ App.Models.Ingredient = Backbone.Model.extend({
 		}
 		return this._user_ingredients;
 	},
+	
 	initialize: function(models, options){
 		
 	},

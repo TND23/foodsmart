@@ -3,6 +3,10 @@ describe('App.Collections.Ingredients', function(){
 
 	});
 
+	xit('validation should be defined', function(){
+
+	});
+
 	xit('should have many ingredient models', function(){
 
 	});

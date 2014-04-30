@@ -1,0 +1,1 @@
+json.partial!("api/cookbook_recipes/cookbook_recipe", :cookbook_recipe => @cookbook_recipe)

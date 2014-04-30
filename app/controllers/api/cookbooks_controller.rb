@@ -11,5 +11,9 @@ module Api
 			@recipes = @cookbook.saved_recipes
 			render "api/cookbooks/show"
 		end
+
+		def index
+			@cookbooks = Cookbook.all
+		end
 	end
 end
