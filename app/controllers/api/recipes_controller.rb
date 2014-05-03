@@ -2,7 +2,7 @@ module Api
 	class RecipesController < ApiController
 		before_filter :require_user
 		skip_before_filter :verify_authenticity_token, :only => :create
-
+		
 		def index
 			# @recipes = Recipe.search(params[:search])
 			@recipes = Recipe.all
@@ -16,13 +16,11 @@ module Api
 					end
 				end
 			end
-			render "api/recipes/index"
 		end
 
 		def new
 			@recipe = Recipe.new
-			render "api/recipes/new.html.erb"
-			
+			# render "api/recipes/new.html.erb"
 		end
 
 		def create

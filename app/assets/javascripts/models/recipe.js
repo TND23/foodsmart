@@ -29,8 +29,8 @@ App.Models.Recipe = Backbone.Model.extend({
 
 	addIngredient: function(ingredient){
 		// if the ingredients list is non-empty, look for duplicates
-		if (this.recipe_ingredients.length > 0 && this.hasIngredient(ingredient.name) === false){
-			recipe_ingredients.push(ingredient); 
+		if (this.hasIngredient(ingredient.name) === false){
+			this.attributes.recipe_ingredients.push(ingredient); 
 		}
 		else { return false; } 
 	},
@@ -74,13 +74,9 @@ App.Models.Recipe = Backbone.Model.extend({
 		})	
 	},
 
-	getName: function(){
-		return this.get('name');
-	},
-
 	hasIngredient: function(name){
-		if (this._ingredients.length > 0){
-			_.each(this._ingredients, function(recipe_ingredient){
+		if (this.attributes.recipe_ingredients.length > 0){
+			_.each(this.attributes.recipe_ingredients, function(recipe_ingredient){
 				if (_.has(_.values(recipe_ingredient), name) === true){ 
 					return true;
 				}		
@@ -88,6 +84,7 @@ App.Models.Recipe = Backbone.Model.extend({
 		}
 		return false;
 	},
+	//refactor such that we attributes.recipe_ingredients = _ingredients
 
 	recipeIngredients: function(){
 		if (typeof(this._ingredients) === undefined){
@@ -96,12 +93,23 @@ App.Models.Recipe = Backbone.Model.extend({
 		return this._ingredients;
 	},
 
+	removeIngredient: function(ingredient){
+		var new_recipe_ingredients = [];
+		_.each(this.attributes.recipe_ingredients, function(ri){
+			if (_.values(ri)[0] != ingredient){
+				new_recipe_ingredients.push(ri);
+			}
+		})
+		this.attributes.recipe_ingredients = new_recipe_ingredients;
+	},
+
 	removeIngredients: function(ingredientList){
 		var that = this;
+		// make this better than m*n
+		// if the list does contain the elemnt,
+		// remove it.
 		_.each(ingredientList, function(ingredient){
-			if (that.getName(ingredient)){
-				that.remove(ingredient);
-			}
+			that.removeIngredient(ingredient);
 		});
 	}
 });

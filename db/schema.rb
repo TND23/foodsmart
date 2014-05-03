@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20140414022925) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "cookbook_recipes", force: true do |t|
     t.integer "cookbook_id"
     t.integer "recipe_id"
@@ -29,7 +32,7 @@ ActiveRecord::Schema.define(version: 20140414022925) do
 
   create_table "endorsements", force: true do |t|
     t.text     "comments",             null: false
-    t.integer  "stars",      limit: 1, null: false
+    t.integer  "stars",      limit: 2, null: false
     t.integer  "recipe_id"
     t.integer  "user_id"
     t.datetime "created_at"
@@ -43,7 +46,7 @@ ActiveRecord::Schema.define(version: 20140414022925) do
     t.datetime "updated_at"
   end
 
-  add_index "ingredients", ["name"], name: "index_ingredients_on_name", unique: true
+  add_index "ingredients", ["name"], name: "index_ingredients_on_name", unique: true, using: :btree
 
   create_table "recipe_ingredients", force: true do |t|
     t.integer  "recipe_id"
@@ -90,8 +93,8 @@ ActiveRecord::Schema.define(version: 20140414022925) do
     t.boolean  "admin",                      default: false
   end
 
-  add_index "users", ["session_token"], name: "index_users_on_session_token", unique: true
-  add_index "users", ["username"], name: "index_users_on_username", unique: true
+  add_index "users", ["session_token"], name: "index_users_on_session_token", unique: true, using: :btree
+  add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
   create_table "utensils", force: true do |t|
     t.string   "name",        limit: 20, null: false
@@ -100,6 +103,6 @@ ActiveRecord::Schema.define(version: 20140414022925) do
     t.datetime "updated_at"
   end
 
-  add_index "utensils", ["name"], name: "index_utensils_on_name", unique: true
+  add_index "utensils", ["name"], name: "index_utensils_on_name", unique: true, using: :btree
 
 end

@@ -20,12 +20,14 @@ describe Recipe do
 		it { should have_many(:cookbooks) }
 		it { should have_many(:endorsements) }
 		it { should belong_to(:user)}
+	end
+
+	context "when recipe is invalid" do
 
 	end
 
-	describe "methods" do
-			
-		it "should average endorsements" do
+	context "when recipe is valid and has endorsements" do
+		it "should average endorsements correctly" do
 			recipe = Recipe.new(
 				:user_id => 1, 
 				:dishname => "Pumpkin Pie",
@@ -39,7 +41,20 @@ describe Recipe do
 			recipe.add_endorsement(e3)
 			expect(recipe.calculate_rating).to eq(3.0)
 		end
+	end
 
+	context "when recipe is valid and has no endorsements" do
+			let(:recipe_two) do
+				stub_model Recipe, :id => 42, :instructions => "Lorem lorem ipsum etc.",
+			 	:user_id => 10, :dishname => "Computer on chips", :instructions => "Get a tandy & place in oven",
+			 	:description => "Not very edible", :user_id => 2
+			end
+		it "should return null when calculating rating" do
+			expect(recipe_two.endorsements.length).to eq(0)
+		end
+		it "should return null when calculating rating" do
+			expect(recipe_two.calculate_rating).to eq(0)
+		end
 	end
 
 end

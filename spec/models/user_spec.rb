@@ -8,6 +8,10 @@ describe User do
 		expect(build(:user, :username => "$%%")).not_to be_valid
 	end
 
+	it "admin works" do
+      create(:admin).should be_valid
+  end
+
 	it "cannot have a sneaky username" do
 		expect(build(:user, :username => "<script>")).not_to be_valid
 	end

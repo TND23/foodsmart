@@ -81,6 +81,8 @@ describe('App.Models.Recipe', function(){
 		  {"name": 'tomato',"description":"Red and flavorful.","units": 'pounds',"quantity":1.0}
 		]);
 
+		console.log(recipe);
+
 		expect(recipe.attributes.recipe_ingredients).toEqual([ { name : 'prosciutto', description : 'Quite salty and good', units : 'slices', quantity : 2 }, { name : 'tomato', description : 'Red and flavorful.', units : 'pounds', quantity : 1 } ]);
 		expect(callback.calledTwice);
 	});

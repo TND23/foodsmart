@@ -46,13 +46,5 @@ describe Cookbook do
 			}.to change{@cookbook.recipes.count}.by(1)
 		end
 
-		it "should be able to add notes to recipes" 
-		# do
-		# 				recipe = create(:recipe)
-		# 	expect{
-		# 		@cookbook.annotate(recipe.id)
-		# 	}.to change{@cookbook.recipes.count}.by(1)
-		# end
-
 	end
 end

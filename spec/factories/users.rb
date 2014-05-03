@@ -8,6 +8,20 @@ FactoryGirl.define do
 
   factory :invalid_user, :parent => :user do 
   	username nil
+  	password "dontwork"
+  	admin false
+  end
+
+  factory :admin, :class => User do
+  	username "admin"
+  	password "123456"
+  	admin true
+  end
+
+  factory :peasant, :class => User do
+  	username "peasant"
+  	password "123456"
+  	admin false
   end
 
 end
