@@ -2,7 +2,7 @@ App.Models.Recipe = Backbone.Model.extend({
 
 	urlRoot: "/api/recipes",
 	
-	model: { endorsement: App.Models.Endorsement },
+	collection: { endorsement: App.Models.Endorsement },
 
 	parse: function(res){
 		for (var key in this.model){
@@ -60,6 +60,12 @@ App.Models.Recipe = Backbone.Model.extend({
 		}
 	},
 
+	dishname: function(){
+		if (!this._dishname){
+			this._dishname = this.attributes.dishname;
+		}
+	},
+
 	endorsements: function(){
 		if (!this._endorsements){
 			this._endorsements = new App.Collections.Endorsements([], {recipe: this})
@@ -105,11 +111,12 @@ App.Models.Recipe = Backbone.Model.extend({
 
 	removeIngredients: function(ingredientList){
 		var that = this;
-		// make this better than m*n
-		// if the list does contain the elemnt,
-		// remove it.
 		_.each(ingredientList, function(ingredient){
 			that.removeIngredient(ingredient);
 		});
+	},
+
+	updateName: function(new_name){
+		this.set("dishname", new_name);
 	}
 });

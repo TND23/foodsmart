@@ -10,14 +10,6 @@ describe('App.Models.Ingredients', function(){
 		expect(ingredient.attributes.quantity).toEqual(undefined);
 	});
 	
-
-	xit('should be destructible only by administrators and creator', function(){
-
-	});
-
-	xit('should be creatable by anyone', function(){
-
-	});
-
+	//not a lot to test :)
 
 });

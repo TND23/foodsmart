@@ -1,40 +1,40 @@
 <html>
 <form action="/api/recipes" method="post" id="recipe-create-form">
-<label>Dish Name</label>
-<input name='recipe[dishname]'>
-<span data-msg='dishname'></span>
+	<label>Dish Name</label>
+	<input name='recipe[dishname]'>
+	<span data-msg='dishname'></span>
 
-<br>
-<label>Instructions</label>
-<textarea name='recipe[instructions]'></textarea>
-<span data-msg='instructions'></span>
-<br>
+	<br>
+	<label>Instructions</label>
+	<textarea name='recipe[instructions]'></textarea>
+	<span data-msg='instructions'></span>
+	<br>
 
-<label>Description</label>
-<textarea name='recipe[description]'></textarea>
-<span data-msg='description'></span>
+	<label>Description</label>
+	<textarea name='recipe[description]'></textarea>
+	<span data-msg='description'></span>
 
 
-<br>
-<label>Ingredients</label>
-<input name='recipe[recipe_ingredients]' id=''>
-<input type="submit">
-<span data-msg='ingredients'></span>
+	<br>
+	<label>Ingredients</label>
+	<button name='buttonator' class='add-ingredient'>+</button>
 
+	</br>
+	<li>
+		<label>Name</label>
+		<input name='recipe_ingredients[1][name]'>
+		<label>Amount</label>
+		<input name='recipe_ingredients[1][quantity]'>
+		<label>Units</label>
+		<input name='recipe_ingredients[1][units]'>
+		<label>Optional?</label>
+		<input type="checkbox" name='recipe_ingredients[1][optional]'>
+	</li>
+	<div id='last-ingredient'></div>
+
+	</br>
+	<input type="submit">
+	<span data-msg='ingredients'></span>
+		
 </form>
-
 </html>
-
-
-<!--
-<script id="recipeNew" type="text/html">
-// 	<form>
-
-// 		  <div data-editors="dishname"></div>
-//       <div data-editors="instructions"></div>
-// 			<div data-editors="description"></div>
-//       <div data-editors="ingredients"></div>
-//       <input type="submit" value="submit" name="submit">
-// 	</form>
-// </script>
--->

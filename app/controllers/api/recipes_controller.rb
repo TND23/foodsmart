@@ -25,16 +25,19 @@ module Api
 
 		def create
 			@recipe = Recipe.new(recipe_params)
+			@recipe.recipe_ingredients.new(recipe_ingredient_params)
 			@recipe.user_id = current_user.id
 			if @recipe.save
-				current_user.cookbook.cookbook_recipes << @recipe
-				render :show
+				current_user.cookbook.recipes << @recipe
+				render :json => @recipe
 			else
-				render :json => "Could not create recipe: controller failure"
+				flash.now[:errors] = @user.errors.full_messages
+				render :new
 			end
 		end
 
 		def update
+			@recipe = Recipe.find(params[:id])
 			if @recipe.save
 				render :show
 			else
@@ -52,17 +55,14 @@ module Api
 
 		private
 		def recipe_params
-			#if recipe is defined we fetch it, otherwise set default value to {}
-			params.fetch(:recipe, {}).permit(
-				:instructions, 
-				:dishname, 
-				:description,
-				:recipe_ingredient_attributes => [
-					:quantity,
-					:optional,
-					:ingredient_attributes => [:name]
-				]
-			)
+			params.require(:recipe).permit(:instructions, :dishname, :description)
+		end
+
+		def recipe_ingredient_params
+			params.permit(:recipe_ingredients => [:quantity,:units, :optional, :name])
+			.require(:recipe_ingredients)
+			.values
+			.reject{|data| data.values.any?(&:blank?)}
 		end
 
 		def _render(models)

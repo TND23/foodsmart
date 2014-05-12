@@ -1,0 +1,21 @@
+.left-column{
+	width: 33%;
+	height: 100%;
+	float: left;
+	margin: 0;
+}
+
+.right-column{
+	margin-left: 60%;
+	margin-right: 0;
+
+}
+
+#login-table{
+
+}
+
+#menu-navigator{
+
+}
+

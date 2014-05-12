@@ -6,9 +6,12 @@ window.App = {
 	Forms: {},
 	
 	initialize: function(){
-		new App.Routers.AppRouter();
-		App.token = $('meta[name="csrf-token"]').attr('content');
 
-		Backbone.history.start();
+		ENTER_KEY = 13;
+		if (!Backbone.History.started){
+			new App.Routers.AppRouter();
+			App.token = $('meta[name="csrf-token"]').attr('content');
+			Backbone.history.start();
+		}
 	}
 };

@@ -1,8 +1,19 @@
+<form>
+	<input type="text" id="formInput"></input>
+	<input type="button" id="search" value="search"> by </input>
+	<select name='searchable-params'>
+		<option value='rating'>Rating</option>
+		<option value='author'>Author</option>
+		<option value='name'>Name</option>
+	</select>
+</form>
+
 <% collection.models.forEach(function(model){ %>
-	<h3> Dish: </h3>
-	<%= model.attributes.dishname %>
-	<p> Description: 
-	<%= model.attributes.description %>
-	</p>
-	<%= model.attributes.rating %>
+	<section id= <%= model.attributes.dishname %> > 
+		<h3> Dish: <%= model.attributes.dishname %> </h3>
+		<p> Description: 
+		<%= model.attributes.description %>
+		</p>
+		<%= model.attributes.rating %>
+	</section>
 <% }); %>

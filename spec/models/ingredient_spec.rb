@@ -10,4 +10,15 @@ describe Ingredient do
 
 	it {should allow_mass_assignment_of(:description) }
 
+	context "user is admin" do
+	#it('should be destructible only by administrators and creator', function(){
+		#shouldn't this be in the ruby specs?
+	#});
+	end
+	
+	context "user is not admin" do
+	# it('should be creatable by anyone', function(){
+	# // shouldn't this be in the ruby specs?		
+	# });
+	end
 end

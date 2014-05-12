@@ -9,11 +9,26 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-	<% if current_user %>
-	<%= current_user.username %>
-	<%= button_to "Log out", api_session_url, :method => :delete %>
-	<% end %>
-<%= yield %>
 
+  <% if current_user %>
+    <%= current_user.username %>
+    <%= button_to "Log out", api_session_url, :method => :delete %>
+    <div id='pc-content-wrapper'>
+      <div id='pc-content'>
+        <%= yield %>
+      </div>
+    </div>
+    <footer class='footer'> </footer>
+  <% end %>
+
+  <% if !current_user %>
+    <div id='sign-up-wrapper'>
+      <%= yield %>
+    </div>
+  <% end %>
+
+  <% if !mobile_device? %>  
+  <% end %>
+  
 </body>
 </html>

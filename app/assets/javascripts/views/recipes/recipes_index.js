@@ -2,7 +2,7 @@ App.Views.RecipesIndex = Backbone.View.extend({
 	template: JST["recipes/index"],
 	
 	events: {
-
+		"click input#search" : "searchRecipes"
 	},
 
 	initialize: function(options){
@@ -12,18 +12,15 @@ App.Views.RecipesIndex = Backbone.View.extend({
 
 	render: function(){
 
-		// var content = this.template({
-		// 	collection: this.collection
-		// });
-		// this.$el.html(content);
-		// return this;
 		this.collection.fetch();		
 		var content = this.template({collection: this.collection})
-		$("body").html(content);
+		$(this.el).html(content);
+		return this;
 	},
 
-	refresh: function(){
-		console.log('refresh');
+	searchRecipes: function(){
+		var dishname = $("#formInput").val();
+		document.getElementById(dishname);
 	}
 
 });

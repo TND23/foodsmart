@@ -8,11 +8,15 @@ describe('App.Models.Endorsement', function(){
 			expect(endorsement.checkDuplication).toBeDefined();
 		});
 
-		xit ("should not be able to belong to the recipes owner", function(){
-			
+		it ("should not be able to belong to the recipes owner", function(){
+				
 		});
 
 		xit ("should have comments", function(){
+
+		});
+
+		xit("should only allow for one endorsement per person per recipe", function(){
 
 		});
 

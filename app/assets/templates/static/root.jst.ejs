@@ -1,0 +1,24 @@
+<html>
+	<%= App.current_user.username %>
+	<div id = 'header'>
+		<form action="" method="delete">
+			<input type = "hidden" name="authenticity_token" value="form_authenticity_token" >
+			<input type="submit" value="Log out">
+		</form>
+	</div>
+	<div id='pc-content-wrapper'>
+		<div id='pc-content'>
+			<% if(App.current_user){ %>
+				<div id='bookmarks'> </div>
+				<p><a href="/#/recipes">Recipes </a></p>
+				<p><a href="/#/ingredients">BBIngredient </a></p>
+				<p><a href="/#/fridge">Fridge </a></p>
+				<p><a href="/#/recipesCreate">Make a Recipe </a> </p>
+				<p><a href="/#/recipeNew">Start a Recipe </a> </p>
+
+				<p><a href="api/recipes/new"> Regular Recipe Maker</a></p>
+			<% } %>
+		</div>
+	</div>
+	<footer class='footer'> </footer>
+</html>

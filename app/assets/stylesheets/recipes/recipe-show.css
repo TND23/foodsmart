@@ -1,0 +1,22 @@
+.recipe-row{
+	border-width: 0;
+	background-color: rgb(242, 242, 242);
+}
+
+.editable{
+	border-width: 2px;
+	background-color: white;
+}
+
+.edit{
+	cursor: pointer;
+	border-width: 1px;
+	border-radius: 3px;
+	border-style: solid;
+	padding: 1px;
+	background-color: rgb(237, 242, 237);
+}
+
+.edit:hover{
+	background-color: rgb(152, 152, 242);
+}

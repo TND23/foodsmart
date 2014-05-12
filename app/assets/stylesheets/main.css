@@ -1,0 +1,39 @@
+#pc-content-wrapper{
+	width: 750px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 30px;
+	height: 800px;
+	background-color: rgb(237, 237, 205);
+}
+
+#cookbook-title{
+	font-family: georgia, sans-serif;
+	font-weight: 800;
+	font-style: italic;
+	text-align: center;
+	letter-spacing: 2px;
+}
+
+#bookmarks{
+	float: right;
+	height: 600px;
+	width: 40px;
+	background-color: red;
+}
+
+.footer{
+	height: 200px;
+	width: 100%;
+	background-color: rgba(213, 213, 213, 0.47);
+}
+
+.navigator{
+	width: 100%;
+	height: 70px;
+	background-color: blue;
+}
+
+body{
+	margin: 0;
+}

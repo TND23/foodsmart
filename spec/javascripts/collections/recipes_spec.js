@@ -1,37 +1,37 @@
 describe('App.Collections.Recipes', function(){
 	var recipes;
+
 	beforeEach(function(){
+		this.server = sinon.fakeServer.create();
+		this.recipes = new App.Collections.Recipes();
+	});
+
+	afterEach(function(){
+		this.server.restore();
+	});
+
+	it('should make a valid request', function(){
+		this.recipes.fetch();
+		expect(this.server.requests.length).toEqual(1);
+	});
+
+	it('should have many recipe models', function(){
+		expect(this.recipes.models.length).toBeGreaterThan(0);
+	});
+
+	it('should not have any two with the same name', function(){
+		
+	});
+
+	it('should have a search function', function(){
 
 	});
 
-	xit('should have a validation function', function(){
+	it('should default to searching by name', function(){
 
 	});
 
-	xit('validation should be called on save', function(){
-
-	});
-
-	xit('should have many ingredient models', function(){
-
-	});
-
-	xit('should not have any two models with the same name', function(){
-
-	});
-
-	xit('should have a search function', function(){
-
-	});
-
-	xit('should prevent injection within the search', function(){
-
-	});
-
-	xit('should default to searching by name', function(){
-
-	});
-
+	// more advanced logic for later
 	xit('should gracefully degrade if no similar name exists', function(){
 
 	});

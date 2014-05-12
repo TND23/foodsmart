@@ -1,21 +1,45 @@
-Register
+<div id='menu-navigator' class='navigator'>
+	<div class='right-column'>
+		<table id='login-table'>
+			<tbody>
+				<tr> 
+					<td class-'td-normal'>User Name </td> 
+					<td class='td-normal'> Password </td> 
+				</tr>
+				<tr> 			
+					<form action="<%= api_session_url %>" method="post">
+						<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+						<td class='td-normal'>
+							<input type="text" name="user[username]">
+						</td>
+						<td class='td-normal'>
+							<input type="password" name="user[password]">
+						</td>
+						<td class='td-normal'>
+							<div><input type="submit" value="Log In"></div>
+						</td>
+				</tr>
+				
+			</form>
+			</tbody>
+		</table>
+</div>
+<div id='login-wrapper'>
 
-<form action="<%= api_users_url %>" method="post">
-<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-<div>User Name<input type="text" name="user[username]"></div>
-<div> Your password<input type="password" name="user[password]"
-></div>
-<!-- <div>Confirm Password<input type="password" name="user[password_confirmation]"> </div> -->
-<div><input type="submit" value="Join"></div>
+	</div>
 
-</form>
 
-</br>
-Log In
+	<div class='left-column'>
+		Register
+		<form action="<%= api_users_url %>" method="post">
+		<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+		<div>User Name<input type="text" name="user[username]"></div>
+		<div> Your password<input type="password" name="user[password]"
+		></div>
+		<!-- <div>Confirm Password<input type="password" name="user[password_confirmation]"> </div> -->
+		<div><input type="submit" value="Join"></div>
+		</form>
+	</div>
 
-<form action="<%= api_session_url %>" method="post">
-	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-	<div>User Name<input type="text" name="user[username]"></div>
-	<div>Password<input type="password" name="user[password]"></div>
-	<div><input type="submit" value="Log In"></div>
-</form>
+
+</div>
