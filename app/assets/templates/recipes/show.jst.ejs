@@ -1,39 +1,57 @@
 <table>
   <tbody>
+	  <tr>
+	    <td class= 'medium-td'> <p> <strong>Dish name</strong> </p> </td>
+	    <td class= 'medium-td'>
+	    	<input id= dishname class='recipe-row' value=<%= recipe.attributes.dishname %>>
+	   </td>
+	    <td class= 'small-td'>
+	    	<p id= edit-name class="edit"> Edit dishname</p>
+	    </td>
+	  </tr>
 
-        <tr>
-	        <td> <p> <strong>Dish name</strong> </p> </td>
-          <td>
-          	<input id= dishname class='recipe-row' value=<%= recipe.attributes.dishname %>>
-         </td>
-          <td>
-          	<p id= edit-name class="edit"> Edit dishname</p>
-          </td>
-        </tr>
+	  <tr>
+	    <td class= 'medium-td'> <p> <strong>Description</strong> </p> </td>
+	    <td class= 'medium-td'>
+	    	<textarea id= description class='recipe-row'><%= recipe.attributes.description.trim()%></textarea>
+	   </td>
+	    <td class= 'msmalldium-td'>
+	    	<p id= edit-description class="edit"> Edit description</p>
+	    </td>
+	  </tr>
 
-        <tr>
-	        <td> <p> <strong>Description</strong> </p> </td>
-          <td>
-          	<textarea id= description class='recipe-row'><%= recipe.attributes.description.trim()%></textarea>
-         </td>
-          <td>
-          	<p id= edit-description class="edit"> Edit description</p>
-          </td>
-        </tr>
+	  <tr>
+	    <td class= 'medium-td'> <p> <strong>Instructions</strong> </p> </td>
+	    <td class= 'medium-td'>
+	    	<textarea id= instructions class='recipe-row'><%= recipe.attributes.instructions %></textarea>
+	   </td>
+	   <button name='buttonator' class='add-ingredient'>+</button>
+	    <td class= 'small-td'>
+	    	<p id= edit-instructions class="edit"> Edit instructions</p>
+	    </td>
+	  </tr>
+	  </br>
+  </tbody>
+</table>
 
-        <tr>
-	        <td> <p> <strong>Instructions</strong> </p> </td>
-          <td>
-          	<textarea id= instructions class='recipe-row'><%= recipe.attributes.instructions %></textarea>
-         </td>
-          <td>
-          	<p id= edit-instructions class="edit"> Edit instructions</p>
-          </td>
-        </tr>
+<table>
+  <tbody>
+	  <tr>
+	  	<td class= 'medium-td'> <p> <strong> Name </strong> </p> </td>
+			<td class= 'small-td'> <p class='fill'> <strong> Quantity </strong> </p>
+			<td class= 'small-td'> <p class='fill'> <strong> Units </strong> </p> </td>
+			<td class= 'medium-td'> <p> <strong> Optional </strong> </p> </td>
+			<td class= 'medium-td'> <p> <strong> Description </strong> </p> </td>
+		</tr>
+	  <tr>
+			<%= JST['recipes/ingredients']({recipe: recipe}) %>
+ 	 	</tr>      
 
   </tbody>
 </table>
-<% console.log(recipe)%>
-<% console.log(recipe.attributes)%>
 
-<!-- JST['recipes/recipe_ingredients'] -->
+<table>
+	<tbody>
+	  <div id="last-ingredient"></li>
+	</tbody>
+</table>

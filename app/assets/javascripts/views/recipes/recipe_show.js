@@ -1,11 +1,21 @@
 App.Views.RecipesShow = Backbone.View.extend({
 	template: JST["recipes/show"],
-	
+
 	events: {
 		'click #edit-name' : 'updateName',
 		'click .recipe-row' : 'addStyle',
 		'keypress .recipe-row' : 'updateOnEnter',
-		'blur .recipe-row' : 'removeStyle'	
+		'blur .recipe-row' : 'removeStyle',
+		'click .add-ingredient': 'addIngredientField',
+		'click #edit-description': 'editDescription'
+	},
+
+	addIngredientField: function(e){
+		e.preventDefault();
+		this.i += 1;
+		var new_template = JST["recipes/_recipe_ingredient"];
+		var content = new_template({i: this.i});
+		$(content).insertBefore($("#last-ingredient"));
 	},
 
 	addStyle: function(e){
@@ -23,6 +33,10 @@ App.Views.RecipesShow = Backbone.View.extend({
 		model.save();
 	},
 
+	editDescription: function(){
+		
+	},
+
 	getDiv: function(e){
 		var target = e.target;
 		var domIdVal = e.target.id;
@@ -34,15 +48,12 @@ App.Views.RecipesShow = Backbone.View.extend({
 
 	initialize: function(options){
 		this.model = options.model[0];
-		_.extend(this.model, Backbone.Events);
-		this.listenTo(this.model, "all", alert("JDKFS"));
 	},	
 
 	removeStyle: function(e){
 		var el = e.currentTarget;
 		$(el).removeClass("editable");
 	},
-
 
 	render: function(){		
 		var content = this.template({recipe: this.model})

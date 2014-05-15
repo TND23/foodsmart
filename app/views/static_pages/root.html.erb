@@ -2,21 +2,10 @@
 	<% if current_user %>
 	<div id='bookmarks'>
 	</div>
-		<!-- <p>	<%= link_to "Recipes", api_recipes_url, :method => :get %></p> -->
 		<p><a href="/#/recipes">Recipes </a></p>
 		<p><a href="/#/ingredients">BBIngredient </a></p>
 		<p><a href="/#/fridge">Fridge </a></p>
-		<p><a href="api/recipes/new"> Regular Recipe Maker</a></p>
-		<!--
-			<p><%= link_to "Cookbook", api_cookbook_url(current_user.cookbook.id), :method => :get %></p>
-		-->
-		<!-- 
-			<p>	<%= link_to "Ingredients", api_user_user_ingredients_url(current_user.id), :method => :get %></p> 
-		-->
-		<!-- 
-			<p>	<%= link_to "Ingredients Backbone", "/#/ingredients", :method => :get %></p>
-		-->
-		<p> <%= link_to "Create Recipe", "/#/recipesCreate"%> </p>
+		<p> <%= link_to "Create Recipe", "/#/recipeNew"%> </p>
 		<script>
 			$(function(){
 				App.initialize();

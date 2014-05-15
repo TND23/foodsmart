@@ -3,7 +3,7 @@ App.Collections.Recipes = Backbone.Collection.extend({
 
 	model: App.Models.Recipe,
 	initialize: function(models, options){
-
+		
 	},
 
 	getOrFetch: function(id){
@@ -16,22 +16,8 @@ App.Collections.Recipes = Backbone.Collection.extend({
 			model.fetch();
 			return model;
 		}
-	},
-
-	comparator: function(dishname){
-		// compare by dishname
-	},
-
-	selectSearchOptions: function(options, attribute){
-		
-		if (options === "alphabetical"){
-			this.sortAlphabetical();
-		}
-		if (options === "name"){
-			this.searchByName(attribute)
-		}
-	},
-
+	}
 });
 
 App.Collections.recipes = new App.Collections.Recipes();
+App.Collections.recipes.fetch();

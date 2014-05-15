@@ -1,6 +1,10 @@
 module Api
 	class UsersController < ApiController
-
+		
+		def index
+			@users = User.all
+		end
+		
 		def new
 			@user = User.new
 		end
@@ -8,9 +12,9 @@ module Api
 		def create
 			@user = User.new(user_params)
   		if @user.save
+  			create_related_cookbook(@user.id)
   			login_user(@user)
-				#redirect to show on success
-  			redirect_to api_user_url(@user)
+  			redirect_to ""
  			else
   			render :json => @user.errors.full_messages
   		end
@@ -35,6 +39,12 @@ module Api
 		private
 		def user_params
 			params.require(:user).permit(:username, :password)
+		end
+
+		def create_related_cookbook(id)
+				@cookbook = Cookbook.new({:user_id => id})
+  			@cookbook.user = @user
+  			@cookbook.save!
 		end
 	end
 end

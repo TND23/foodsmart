@@ -20,7 +20,7 @@ GroceryApp::Application.routes.draw do
     resources :ingredients, :except => [:destroy, :update]
     resources :utensils, :only => [:create, :show, :update]
 
-    resources :users, :except => [:update, :index] do
+    resources :users, :except => [:update] do
       resources :cookbooks, :only => [:new]
       resources :user_ingredients, :only => [:index, :create, :destroy, :new]
     end

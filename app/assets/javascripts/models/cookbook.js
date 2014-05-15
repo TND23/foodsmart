@@ -1,9 +1,5 @@
 App.Models.Cookbook = Backbone.Model.extend({
-	
-	urlRoot: function(arguments){
-		return "/api/cookbooks"; 
-	},
-	
+
 	initialize: function(){
 		this.attributes.saved_recipes = {};
 		this.saved_recipes();
@@ -23,18 +19,6 @@ App.Models.Cookbook = Backbone.Model.extend({
 		else{
 
 		}
-	},
-
-	annotateRecipe: function(){
-		
-	},
-
-	organizeRecipes: function(){
-
-	},
-
-	removeRecipe: function(){
-
 	},
 
 	saved_recipes: function(){

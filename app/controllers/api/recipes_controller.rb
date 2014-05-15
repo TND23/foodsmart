@@ -6,16 +6,16 @@ module Api
 		def index
 			# @recipes = Recipe.search(params[:search])
 			@recipes = Recipe.all
-			@recipes.each do |recipe|
-				recipe.recipe_ingredients.each do |ri|
-					if !ri.name
-						ri.name = ri.ingredient.name
-					end
-					if !ri.description
-						ri.description = ri.ingredient.description
-					end
-				end
-			end
+			# @recipes.each do |recipe|
+			# 	recipe.recipe_ingredients.each do |ri|
+			# 		if !ri.name
+			# 			ri.name = ri.ingredient.name
+			# 		end
+			# 		if !ri.description
+			# 			ri.description = ri.ingredient.description
+			# 		end
+			# 	end
+			# end
 		end
 
 		def new

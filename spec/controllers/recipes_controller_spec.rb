@@ -29,7 +29,6 @@ describe Api::RecipesController do
 
 
   describe "GET #new" do
-    it "renders the :new template"
   end
 
   describe "GET #show" do

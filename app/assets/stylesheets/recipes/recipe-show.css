@@ -9,6 +9,7 @@
 }
 
 .edit{
+	width: 75px;
 	cursor: pointer;
 	border-width: 1px;
 	border-radius: 3px;
@@ -19,4 +20,26 @@
 
 .edit:hover{
 	background-color: rgb(152, 152, 242);
+}
+
+.ingredient-row{
+	background-color: rgb(242, 242, 242);
+
+}
+
+.small-td{
+	width: 90px;
+}
+
+.medium-td{
+	width: 192px;
+}
+
+.long-td{
+	width: 423px;
+}
+
+p.fill{
+	width: 90px;
+	margin-right: 0;
 }

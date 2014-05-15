@@ -1,11 +1,10 @@
 class User < ActiveRecord::Base
-	#convert to omniauth ?
 
 	attr_accessible :username, :password
 	attr_reader :password
 	validates :password_digest, :presence => { :message => "Password can't be blank" }
-  # validates_confirmation_of :password
-	# validates :password_confirmation, :presence => true
+  before_validation :ensure_session_token
+
 	# validate username has only letters and numbers
 	validates :username, format: {without: /\s|\$|[<>,@!&:;{}()"+=#%\?\.\^\*\|]/, on: :create}
 	validates :username, :length => {:maximum => 15}
@@ -13,8 +12,8 @@ class User < ActiveRecord::Base
 	validates :username, :presence => true
 	validates :username, :uniqueness => true
   validates :password, :length => { :minimum => 6}
+  validates_confirmation_of :password
 
-  before_create :ensure_cookbook
 	after_initialize :ensure_session_token
   has_many :endorsements, :dependent => :destroy
 
@@ -111,10 +110,6 @@ class User < ActiveRecord::Base
 
   def ensure_session_token
   	self.session_token ||= self.session_token = SecureRandom::urlsafe_base64(16)
-  end
-
-  def ensure_cookbook
-    self.cookbook ||= self.cookbook = Cookbook.new
   end
 
 end

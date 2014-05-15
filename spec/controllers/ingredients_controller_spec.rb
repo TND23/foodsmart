@@ -18,16 +18,16 @@ describe Api::IngredientsController do
 
   end
 
+  describe "GET #index" do
+    it "shows the :json representation"
+  end
+
   describe "GET #new" do
-    it "renders the :new template"
-    it "adds an ingredient to the users ingredients"
+
   end
 
   describe "GET #show" do
-    it "renders the :show template"
-    it "shows the current users ingredients"
-    it "responds to addition of ingredients"
-    it "responds to removal of ingredients"
+    it "shows the :json representation"
   end
 
 end
