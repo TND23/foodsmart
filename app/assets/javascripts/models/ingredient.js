@@ -9,6 +9,6 @@ App.Models.Ingredient = Backbone.Model.extend({
 	},
 	
 	initialize: function(models, options){
-		
+				
 	},
 });

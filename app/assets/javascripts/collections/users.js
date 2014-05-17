@@ -1,6 +1,6 @@
 App.Collections.Users = Backbone.Collection.extend({
 	url: "/api/users",
-	initialize: function(){
+	initialize: function(options){
 
 	},
 

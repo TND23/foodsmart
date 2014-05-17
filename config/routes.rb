@@ -3,7 +3,7 @@ GroceryApp::Application.routes.draw do
 
   namespace :api, :defaults => {:format => :json} do
 
-    resources :cookbooks, :only => [:show, :index] do
+    resources :cookbooks, :only => [:show, :index, :new] do
       resources :cookbook_recipes, :only => [:index]
     end
  
@@ -21,7 +21,6 @@ GroceryApp::Application.routes.draw do
     resources :utensils, :only => [:create, :show, :update]
 
     resources :users, :except => [:update] do
-      resources :cookbooks, :only => [:new]
       resources :user_ingredients, :only => [:index, :create, :destroy, :new]
     end
 

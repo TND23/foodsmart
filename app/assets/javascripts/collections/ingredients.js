@@ -1,7 +1,7 @@
 App.Collections.Ingredients = Backbone.Collection.extend({
 	url: "api/ingredients",
 	
-	initialize: function(models, options){
+	initialize: function(){
 		// distinguish between an options user and recipe
 		//this.recipe = options.recipe;
 	},
@@ -21,11 +21,6 @@ App.Collections.Ingredients = Backbone.Collection.extend({
 			return model;
 		}
 	},
-
-	search: function(options){
-
-	},
-
 });
 
 App.Collections.ingredients = new App.Collections.Ingredients();

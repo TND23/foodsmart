@@ -69,6 +69,7 @@ App.Routers.AppRouter = Backbone.Router.extend({
 
 	recipeShow: function(identification){
 		var that = this;
+		
 		var identification = parseInt(identification); // since the identification is passed in as a string
 		if (App.Collections.recipes.models.length === 0){ // if the recipeCollection hasn't been stored, store it
 			App.Collections.recipes.fetch({

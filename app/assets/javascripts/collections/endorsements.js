@@ -1,12 +1,12 @@
 App.Collections.Endorsements = Backbone.Collection.extend({
 
-	model: App.Models.Endorsemet,
+	model: App.Models.Endorsement,
 	
-	url: function(recipe_id){
-		return "api/recipes/" + this.recipe.get("id") + "/endorsements"
+	url: function(recipe){
+		return "api/recipes/" + this.get("recipe_id") + "/endorsements"
 	},
 
-	initialize: function(models, options){
-		this.attributes.recipe_id = options.recipe.get("id");
+	initialize: function(options){
+		this.set("recipe_id", options.recipe_id);
 	}
 });

@@ -4,7 +4,7 @@ module Api
 		def index
 			@users = User.all
 		end
-		
+
 		def new
 			@user = User.new
 		end
@@ -31,7 +31,6 @@ module Api
 			if current_user.id == @user.id || current_user.admin
 				render "api/users/show"
 			else
-				#TODO : make sure only admins and self can view own info
 				render :json => "NO JOY"
 			end
 		end

@@ -2,24 +2,22 @@ class User < ActiveRecord::Base
 
 	attr_accessible :username, :password
 	attr_reader :password
-	validates :password_digest, :presence => { :message => "Password can't be blank" }
+  
+  after_initialize :ensure_session_token
   before_validation :ensure_session_token
-
-	# validate username has only letters and numbers
+  validates :session_token, :presence => true
+  # validate username has only letters and numbers
 	validates :username, format: {without: /\s|\$|[<>,@!&:;{}()"+=#%\?\.\^\*\|]/, on: :create}
 	validates :username, :length => {:maximum => 15}
-  validates :session_token, :presence => true
 	validates :username, :presence => true
 	validates :username, :uniqueness => true
   validates :password, :length => { :minimum => 6}
+  validates :password_digest, :presence => { :message => "Password can't be blank" }
   validates_confirmation_of :password
 
-	after_initialize :ensure_session_token
   has_many :endorsements, :dependent => :destroy
-
   has_many :user_ingredients
   has_many :ingredients, :through => :user_ingredients
-  
   has_one :cookbook, :dependent => :destroy
   has_many :recipes
 
@@ -97,17 +95,12 @@ class User < ActiveRecord::Base
     end
   end
 
-  def add_user_ingredient(ingredient, quantity, units)
-
-  end
-
   def reset_session_token
     self.session_token = SecureRandom::urlsafe_base64(16)
     self.save!
   end
 
   private
-
   def ensure_session_token
   	self.session_token ||= self.session_token = SecureRandom::urlsafe_base64(16)
   end
