@@ -1,5 +1,9 @@
-<form> 
-	<input type="name" name="ingredient[name]" id="ingredient_name">
-	<input type="quantity" name="ingredient[quantity]">
-	<input type="description" name="ingredient[description]">
+<form action="/api/ingredients" method="post" id="recipe-create-form">
+	<label>Ingredient Name</label>
+	<input type="text" name="ingredient[name]" id="ingredient_name">
+	<label>Ingredient Description</label>
+	<textarea name="ingredient[description]"> </textarea>
+	<input type="hidden" name="authenticity_token" value=<%=App.token%>>
+	<input type="submit">
 </form>
+

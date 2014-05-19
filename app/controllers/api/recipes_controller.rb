@@ -4,28 +4,16 @@ module Api
 		skip_before_filter :verify_authenticity_token, :only => :create
 		
 		def index
-			# @recipes = Recipe.search(params[:search])
 			@recipes = Recipe.all
-			# @recipes.each do |recipe|
-			# 	recipe.recipe_ingredients.each do |ri|
-			# 		if !ri.name
-			# 			ri.name = ri.ingredient.name
-			# 		end
-			# 		if !ri.description
-			# 			ri.description = ri.ingredient.description
-			# 		end
-			# 	end
-			# end
 		end
 
 		def new
 			@recipe = Recipe.new
-			# render "api/recipes/new.html.erb"
 		end
 
 		def create
 			@recipe = Recipe.new(recipe_params)
-			@recipe.recipe_ingredients.new(recipe_ingredient_params)
+			@recipe.recipe_ingredients.new(recipe_ingredient_params)	
 			@recipe.user_id = current_user.id
 			if @recipe.save
 				current_user.cookbook.recipes << @recipe

@@ -1,6 +1,8 @@
 module Api
 	class SessionsController < ApplicationController
 
+		before_filter :default_format_html
+
 		def create
 			user = User.find_by_credentials(params[:user][:username], params[:user][:password])
 			if user.nil?
@@ -8,7 +10,7 @@ module Api
 			else
 				session[:session_token] = user.session_token
 				id = current_user.id
-				redirect_to :root
+				redirect_to root_url
 			end
 		end
 
@@ -18,6 +20,17 @@ module Api
 		end
 
 		def new
+			if current_user
+				redirect_to root_url
+			else
+				render :new
+			end
+		end
+
+		private
+
+		def default_format_html
+			request.format = "html"
 		end
 	end
 end

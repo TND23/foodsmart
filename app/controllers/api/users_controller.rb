@@ -14,7 +14,7 @@ module Api
   		if @user.save
   			create_related_cookbook(@user.id)
   			login_user(@user)
-  			redirect_to ""
+  			render :root
  			else
   			render :json => @user.errors.full_messages
   		end
@@ -33,6 +33,7 @@ module Api
 			else
 				render :json => "NO JOY"
 			end
+			
 		end
 
 		private

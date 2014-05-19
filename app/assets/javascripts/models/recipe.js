@@ -1,6 +1,6 @@
 App.Models.Recipe = Backbone.Model.extend({
 
-	urlRoot: "/api/recipes",
+	url: "/api/recipes",
 	
 	defaults: {
 		instructions: "Default recipe instructions",

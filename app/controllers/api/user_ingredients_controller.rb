@@ -4,23 +4,15 @@ module Api
 
 		def index
 			@user_ingredients = current_user.user_ingredients.all	
-			render "api/user_ingredients/index"
 		end
 
 		def create
-			@user_ingredient = UserIngredient.new(params[:user_ingredient])
-			ingredient = Ingredient.find_by_name(@user_ingredient.name)
-			
-			if ingredient == nil || @user_ingredient.quantity.class != Float || @user_ingredient.units.class == nil
-				render :json => {:errors => @user_ingredient.errors.full_messages }
+			@user_ingredient = UserIngredient.new(user_ingredient_params)
+			@user_ingredient.user_id = current_user.id
+			if @user_ingredient.save
+				render :json => @user_ingredient
 			else
-				@user_ingredient.ingredient_id = ingredient.id
-				@user_ingredient.user_id = current_user.id
-				if @user_ingredient.save
-					render :new
-				else
-					render :json => "Mystery error"
-				end
+				render :json => { :errors => @user_ingredient.errors.full_messages }
 			end
 		end
 
@@ -31,5 +23,11 @@ module Api
 		def new
 			@user_ingredients = current_user.user_ingredients.all
 		end
+
+		private
+		def user_ingredient_params
+			params.require(:user_ingredient).permit(:name, :quantity, :units)
+		end
+
 	end
 end

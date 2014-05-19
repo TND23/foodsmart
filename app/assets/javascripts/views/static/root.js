@@ -5,10 +5,8 @@ App.Views.Root = Backbone.View.extend({
 	initialize: function(options){},
 
 	render: function(){
-		var content = this.template;
-		$(this.el).html(content);
+		var content = this.template();
+		this.$el.html(content);
 		return this;
 	}
-
-
 });

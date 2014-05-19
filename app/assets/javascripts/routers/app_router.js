@@ -1,14 +1,8 @@
 App.Routers.AppRouter = Backbone.Router.extend({
 
-	initialize: function(){
-		this.cached = {
-			view: undefined,
-			recipeCollection: undefined
-		}
-	},
-
 	routes: {
 		"" : "root",
+		"home" : "showHome",
 		"fridge" : "userIngredientIndex",
 		"ingredients" : "ingredientIndex",
 		"ingredientNew" : "ingredientNew",
@@ -19,10 +13,12 @@ App.Routers.AppRouter = Backbone.Router.extend({
 	},
 
 	root: function(e){
-		var newView = new App.Views.Root();
-		var newContent = newView.render();
-		$('body').html(newContent.el);
-		Backbone.history.navigate("#");
+		Backbone.history.navigate("#/home", {trigger: true});
+	},
+
+	showHome: function(){
+		var newView = new App.Views.Error({err: "Nothing"});
+		this._swapView(newView);
 	},
 
 	ingredientIndex: function(e){
@@ -38,33 +34,35 @@ App.Routers.AppRouter = Backbone.Router.extend({
 	},
 
 	ingredientNew: function(){
-		var newView = new App.Views.IngredientNew();
+		// later on only admins can add ingredients, (since they are global resources)
+		// if (App.current_user.get("admin") == true){
+			var newView = new App.Views.IngredientNew();
+			var newContent = newView.render();
+			$("#content").html(newContent.el);			
+		// }
+		// else{
+		// 	var newView = new App.Views.Error({err: "notAdmin"});
+		// 	var err = newView.err;
+		// 	var newContent = newView.render(err);
+		// 	$("#content").html(newContent.el);			
+		// }
 	},
 
 	recipeIndex: function(){
+		var collection = App.Collections.recipes;
 		var that = this;
-		if (this.cached.view === undefined){
-			var collection = App.Collections.recipes;
-			var newView;
-			collection.fetch({
-				success: function(){ 
-				// new instance of recipe_index.js
-				that.cached.view = newView = new App.Views.RecipesIndex({ collection: App.Collections.recipes }).render();				
-				$("body").html(newView.el);
-				that.cached.recipeCollection = collection;
+		collection.fetch({
+			success: function(){ 
+				var newView = new App.Views.RecipesIndex({ collection: App.Collections.recipes }).render();				
+				that._swapView(newView);
 			}
 		})			
-		} else {
-			$("body").html(that.cached.view.el);
-		}
-
-		Backbone.history.navigate("/recipes");
 	},
 
 	recipeNew: function(){
 		var newView = new App.Views.RecipeNew();
 		var newContent = newView.render();
-		$("body").html(newContent.el);
+		$("#content").html(newContent.el);
 	},
 
 	recipeShow: function(identification){
@@ -84,20 +82,30 @@ App.Routers.AppRouter = Backbone.Router.extend({
 		}
 	},
 
-	recipeCreate: function(){
-
-	},
-
 	renderShow: function(recipe){
 		var newView = new App.Views.RecipesShow({model: recipe});
 		var newContent = newView.render();
-		$("body").html(newContent.el);	
+		$("#content").html(newContent.el);	
 	},
 
 	userIngredientIndex: function(){
+		if (App.Collections.user_ingredients === undefined){
+			App.Collections.user_ingredients = new App.Collections.UserIngredients();
+			App.Collections.user_ingredients.fetch();	
+		}
 		var newView = new App.Views.UserIngredientsIndex({
-			collection: App.Collections.UserIngredients
+			collection: App.Collections.user_ingredients
 		})
-	}
+		var newContent = newView.render();
+		$("#content").html(newContent.el);	
+	},
+
+	_swapView: function (newView) {
+	  if (this._prevView) {
+	    this._prevView.remove();
+	  }
+	  this._prevView = newView;
+	  $("#content").html(newView.render().$el);
+  }
 
 });

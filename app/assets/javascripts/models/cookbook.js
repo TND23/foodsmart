@@ -1,8 +1,9 @@
 App.Models.Cookbook = Backbone.Model.extend({
 
-	initialize: function(){
-		this.attributes.saved_recipes = {};
-		this.saved_recipes();
+	initialize: function(models, options){
+		this.user_id = options.user.id
+		//this.saved_recipes = new App.Collections.Recipes([], {cookbook: this});
+
 	},
 
 	addRecipe: function(recipe_id){

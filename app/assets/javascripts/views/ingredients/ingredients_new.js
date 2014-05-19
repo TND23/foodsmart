@@ -1,7 +1,15 @@
-App.Views.IngredientsNew = Backbone.View.extend({
+App.Views.IngredientNew = Backbone.View.extend({
 
 	template: JST["ingredients/new"],
-	initialize: function(){},
-	render: function(){ $("body").append(this.template); }
+	
+	initialize: function(){
+
+	},
+	
+	render: function(){ 
+		var content = this.template();
+		$(this.el).html(content);
+		return this;
+	}
 
 });

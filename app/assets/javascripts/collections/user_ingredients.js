@@ -1,7 +1,7 @@
 App.Collections.UserIngredients = Backbone.Collection.extend({
 	model: App.Models.UserIngredient,
 
-	initialize: function(options){
+	initialize: function(models, options){
 
 	},
 

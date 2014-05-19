@@ -1,0 +1,10 @@
+<form action="api/users/<%=App.current_user.id%>/user_ingredients" method="POST">
+	<label>Name</label>
+	<input class="user_ingredient_name" name='user_ingredient[name]'>
+	<label>Amount</label>
+	<input name='user_ingredient[quantity]'>
+	<label>Units</label>
+	<input name='user_ingredient[units]'>
+	<input type="hidden" name="authenticity_token" value=<%=App.token%>>
+	<input type="submit">
+</form>

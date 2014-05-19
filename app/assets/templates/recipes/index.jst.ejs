@@ -9,11 +9,17 @@
 </form>
 
 <% collection.models.forEach(function(model){ %>
-	<section id= <%= model.attributes.dishname %> > 
-		<h3> Dish: <%= model.attributes.dishname %> </h3>
+	<section id= <%= model.escape("dishname") %> > 
+		<h3> Dish: <%= model.escape("dishname") %> </h3>
 		<p> Description: 
-		<%= model.attributes.description %>
+		<%= model.escape("description") %>
 		</p>
-		<%= model.attributes.rating %>
+		<%= model.escape("rating") %>
 	</section>
 <% }); %>
+				<p><a href="/#/">Home </a></p>
+
+				<p><a href="/#/recipes">Recipes </a></p>
+				<p><a href="/#/ingredientNew">BBIngredient </a></p>
+				<p><a href="/#/fridge">Fridge </a></p>
+				<p><a href="/#/recipeNew">Start a Recipe </a> </p>

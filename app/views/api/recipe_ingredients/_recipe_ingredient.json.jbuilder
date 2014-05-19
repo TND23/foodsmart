@@ -1,0 +1,1 @@
+json.(recipe_ingredient, :recipe_id, :ingredient_id, :name, :description, :quantity, :units, :optional)

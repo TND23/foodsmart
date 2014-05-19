@@ -1,28 +1,20 @@
-<html>
-	<% if current_user %>
-	<div id='bookmarks'>
-	</div>
-		<p><a href="/#/recipes">Recipes </a></p>
-		<p><a href="/#/ingredients">BBIngredient </a></p>
-		<p><a href="/#/fridge">Fridge </a></p>
-		<p> <%= link_to "Create Recipe", "/#/recipeNew"%> </p>
-		<script>
-			$(function(){
-				App.initialize();
-			});
+<%= render "shared/navigation" %>
+<div class="container">
+  <div id="content"> </div>
+</div>
+<script>
+	App.current_user = new App.Models.Current_user({
+		id: <%= current_user.id %>
+  });
 
-  		App.current_user = new App.Models.Current_user({
-    		id: <%= current_user.id %>
-		  });
+  App.current_user.fetch({
+  	success: function(response){console.log("success")},
+  	error: function(response){console.log("error")} 
+  });
+</script>
 
-		  App.current_user.fetch({
-		  	success: function(response){console.log("success")},
-		  	error: function(response){console.log("error")} 
-		  });
-	  </script>
-
-	<% else %>
-		<%= render "login" %>
-	<% end %>
-
-</html>
+<script>
+	$(function(){
+		App.initialize();
+	});
+</script>

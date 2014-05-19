@@ -1,0 +1,1 @@
+json.(user_ingredient, :user_id, :ingredient_id, :name, :description, :quantity, :units)

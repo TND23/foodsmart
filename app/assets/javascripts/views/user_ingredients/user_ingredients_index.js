@@ -13,7 +13,7 @@ App.Views.UserIngredientsIndex = Backbone.View.extend({
 	render: function(){
 
 		var content = this.template({
-			user_ingredients: this.user_ingredients
+			user_ingredients: App.Collections.user_ingredients
 		});
 
 		this.$el.html(content);

@@ -3,7 +3,7 @@ App.Collections.Recipes = Backbone.Collection.extend({
 
 	model: App.Models.Recipe,
 	initialize: function(models, options){
-		
+
 	},
 
 	getOrFetch: function(id){
