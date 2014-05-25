@@ -6,36 +6,14 @@ describe ('App.Views.RecipesIndex', function(){
 		this.view = new App.Views.RecipesIndex();
 	});
 
-	// it('should have a search function', function(){
-
-	// });
-
-	// it ('has a working calculate rating function', function(){
-	// 		recipe.set("endorsements", 
-	// 			[{"id":1,"comments":"This is certainly a recipe.","stars":3,"recipe_id":1,"user_id":2},
-	// 			{"id":2,"comments":"This is certainly a recipe.","stars":2,"recipe_id":1,"user_id":3}]
-	// 		);
-	// 	expect(recipe.calculateRating).toBeDefined();
-	// 	expect(recipe.calculateRating()).toEqual(2.5);
-	// 	recipe.set("endorsements", []);
-	// 	expect(recipe.calculateRating()).toEqual(null);
-	// });
-
-	// it ('has an ingredients filter', function(){
-	// 	var stub = sinon.stub(this.rating);
-	// 	expect(recipe.filterByName).toBeDefined();
-	// });
-
-
-
-	// it ('has recipe ingredients', function(){
-	// 	expect(recipe.recipeIngredients).toBeDefined();
-	// });
+	it ('has recipe ingredients', function(){
+		expect(recipe.recipeIngredients).toBeDefined();
+	});
 	
-	// it ('has an add ingredients function', function(){
-	// 	expect(recipe.addIngredients).toBeDefined();
-	// 	expect(recipe.addIngredient).toBeDefined();
-	// });
+	it ('has an add ingredients function', function(){
+		expect(recipe.addIngredients).toBeDefined();
+		expect(recipe.addIngredient).toBeDefined();
+	});
 
 	// it ('correctly updates fields after ratings happen', function(){
 	// 	expect(recipe.attributes.rated).toEqual(false);
@@ -70,10 +48,10 @@ describe ('App.Views.RecipesIndex', function(){
 	// 	expect(recipe.attributes.recipe_ingredients).toEqual([]);
 
 	// });
-	//
-	// it('should default to searching by name', function(){
+	
+	it('should default to searching by name', function(){
 
-	// });
+	});
 
 	xit('should gracefully degrade if no similar name exists', function(){
 

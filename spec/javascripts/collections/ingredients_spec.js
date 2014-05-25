@@ -1,13 +1,15 @@
 describe('App.Collections.Ingredients', function(){
-	beforeEach(function(){
-		this.ingredients = App.Collections.ingredients;
-	});
+
 
 	it('should be defined', function(){
-		expect(this.ingredients).not.toBeUndefined();
+		expect(App.Collections.ingredients).not.toBeUndefined();
 	});
 
 	it('should have many ingredient models', function(){
-		expect(this.ingredients.models).toBeDefined();
+		expect(App.Collections.ingredients.models).toBeDefined();
+	});
+
+	it('should have many ingredient models', function(){
+		expect(App.Collections.ingredients.models.length).toEqual(2);
 	});
 });

@@ -27,8 +27,8 @@ describe('App.Models.Endorsement', function(){
 		expect(endorsement.get("stars")).toEqual(5);			
 	});
 
-	it ("should not be able to belong to the recipes owner", function(){
+	// it ("should not be able to belong to the recipes owner", function(){
 			
-	});
+	// });
 
 });

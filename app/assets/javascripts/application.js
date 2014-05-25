@@ -15,6 +15,7 @@
 //= require cocoon
 //= require underscore
 //= require backbone
+//= require backbone-pageable
 //= require sinon
 //= require app.js
 //= require_tree ./models

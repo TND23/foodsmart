@@ -1,0 +1,18 @@
+<header>
+	<p class='pretty-text'> Favorited Recipes </p>
+</header>
+<div class='pre-recipe'></div>
+
+<div id='recipe-list'>
+
+	<% collection.models.forEach(function(model){ %>
+		<div class='row'>
+			<div class="col-md-4">	
+				<%= model %>
+			</div>
+		</div>
+
+		<div class='post-recipe'></div>
+
+	<% }); %>
+</div>

@@ -8,3 +8,14 @@
 	<input type="hidden" name="authenticity_token" value=<%=App.token%>>
 	<input type="submit">
 </form>
+
+<div id='user-ingredient-container'>
+	<% App.current_user.user_ingredients.forEach(function(ingredient){ %>
+		<label class='ingredient-label'>Name</label>
+		<%= ingredient.escape("name") %>
+		<label class='ingredient-label'>Quantity</label>
+		<%= ingredient.escape("quantity") %>
+		<label class='ingredient-label'>Units</label>
+		<%= ingredient.escape("units") %>
+	<% }); %>
+</div>

@@ -5,6 +5,6 @@ App.Collections.RecipeIngredients = Backbone.Model.extend({
 	},
 
 	url: function(recipe){
-		"/api/recipes/"	+ recipe.get("id") + "/recipe_ingredients"
+		"api/recipes/"	+ recipe.get("id") + "/recipe_ingredients"
 	}
 });

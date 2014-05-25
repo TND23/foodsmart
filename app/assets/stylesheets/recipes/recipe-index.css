@@ -1,0 +1,35 @@
+#recipe-list{
+  text-align: center;
+  overflow: hidden;
+}
+
+.dishname{
+
+}
+.description{
+
+}
+
+.no-rating{
+
+}
+
+.post-recipe{
+  border-bottom: 2px dashed #56a8de;
+
+}
+
+.pre-recipe{
+  border-bottom: 2px solid #56a8de;
+
+}
+
+.rating{
+
+}
+
+.pretty-text{
+	font-size: 40px;
+
+	font-family: 'Pacifico';
+}

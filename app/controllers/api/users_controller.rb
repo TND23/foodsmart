@@ -14,9 +14,10 @@ module Api
   		if @user.save
   			create_related_cookbook(@user.id)
   			login_user(@user)
-  			render :root
+  			redirect_to ""
  			else
-  			render :json => @user.errors.full_messages
+ 				flash[:error] = "That username may have already been taken."
+ 				redirect_to ""
   		end
 		end
 

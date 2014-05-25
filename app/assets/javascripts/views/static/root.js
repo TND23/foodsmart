@@ -1,7 +1,8 @@
 App.Views.Root = Backbone.View.extend({
 	
 	template: JST["static/root"],
-
+	events:{
+	},
 	initialize: function(options){},
 
 	render: function(){

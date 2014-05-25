@@ -6,6 +6,7 @@ module Api
 		def create
 			user = User.find_by_credentials(params[:user][:username], params[:user][:password])
 			if user.nil?
+				flash[:error] = "Username or password"
 				redirect_to :root
 			else
 				session[:session_token] = user.session_token

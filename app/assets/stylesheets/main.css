@@ -1,10 +1,8 @@
 #pc-content-wrapper{
-	width: 750px;
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 30px;
 	height: 800px;
-	background-color: rgb(237, 237, 205);
 }
 
 #cookbook-title{
@@ -13,13 +11,29 @@
 	font-style: italic;
 	text-align: center;
 	letter-spacing: 2px;
+	width: 100px;
 }
 
 #bookmarks{
 	float: right;
-	height: 600px;
+	height: 100%;
 	width: 40px;
 	background-color: red;
+}
+
+#book{
+	width: 750px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 30px;
+	height: 800px;
+  background-color:rgb(237, 237, 205);
+}
+
+.bookmark:hover{
+	width: 150px;
+	color: black;
+	text-underline-style: none;
 }
 
 .footer{
@@ -28,12 +42,81 @@
 	background-color: rgba(213, 213, 213, 0.47);
 }
 
+.immutable-mid-textarea{
+	min-height: 100px;
+	min-width: 300px;
+	max-height: 100px;
+	max-width: 300px;
+}
+
+.mid-size-textarea{
+	max-width: 300px;
+	max-height: 100px;
+}
+
 .navigator{
 	width: 100%;
 	height: 70px;
 	background-color: blue;
 }
 
+#no-float .row{
+	margin-left: 0px;
+	margin-right: 0px;
+}
+
 body{
-	margin: 0;
+	/* thanks to
+	http://mudcu.be/bg/
+	*/
+  margin: 0;
+	background: ##fed65f;
+	background-image: url("ZenBG-1.png"), url("ZenBG-2.png");
+	background-repeat: repeat-x, repeat;
+}
+
+.bookmark{
+	/*
+	Idea modified from Boblarka design Flags at codepen.io:
+	http://codepen.io/thistlelittle/pen/dbykI
+ */
+ 	color: black;
+	display:inline-block;
+  vertical-align:top;
+  width:100px;
+  height:0px;
+  border-right:35px solid transparent;
+  -webkit-transition: width 0.5s;
+}
+#bookmark-recipes{
+  border-top:50px solid rgb(231, 76, 60);
+  border-bottom:50px solid rgb(231, 76, 60);
+	cursor: pointer;
+}
+#bookmark-ingredients{
+  border-top:50px solid rgb(57, 206, 64);
+  border-bottom:50px solid rgb(57, 206, 64);
+  margin-top: 10px;
+	cursor: pointer;
+
+}
+#bookmark-fridge{
+  border-top:50px solid rgb(60, 216, 231);
+  border-bottom:50px solid rgb(60, 216, 231);
+  margin-top: 10px;
+	cursor: pointer;
+
+}
+#bookmark-recipe-maker{
+	border-top:50px solid rgb(243, 236, 21);
+  border-bottom:50px solid rgb(243, 236, 21);
+  margin-top: 10px;
+	cursor: pointer;
+}
+
+#saved-recipes{
+	border-top:50px solid rgb(160, 39, 164);
+  border-bottom:50px solid rgb(160, 39, 164);
+  margin-top: 10px;
+	cursor: pointer;
 }

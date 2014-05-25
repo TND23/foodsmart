@@ -1,3 +1,5 @@
+// describe('App.Views.EndorsementsIndex', function(){
+
 
 	// it ("should have a duplication checking function", function(){
 	// 	expect(endorsement.checkDuplication).toBeDefined();
@@ -19,3 +21,4 @@
 	// xit('should be removable by the owner', function(){
 
 	// });
+// });

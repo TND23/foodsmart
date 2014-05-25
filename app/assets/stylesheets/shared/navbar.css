@@ -1,0 +1,67 @@
+.nav-li{
+	float: left;
+	list-style-type: none;
+	margin-left: 5px;
+}
+
+.logout-button{
+	float: right;
+	margin-right: 10px;
+	list-style-type: none;
+}
+
+.navbar{
+	background-color: rgb(237, 237, 205);
+	margin-bottom: 10px;
+	height: 30px;
+
+}
+
+.home-li{
+	float: right;
+	list-style-type: none;
+	margin-right: 10px;
+
+}
+
+
+.btn-primary {
+  color: #ffffff;
+  background-color: #C7703D;
+  border-color: #357ebd;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active,
+.open .dropdown-toggle.btn-primary {
+  color: #ffffff;
+  background-color: #E4864F;
+  border-color: #285e8e;
+}
+
+.btn-primary:active,
+.btn-primary.active,
+.open .dropdown-toggle.btn-primary {
+  background-image: none;
+}
+
+.btn-primary.disabled,
+.btn-primary[disabled],
+fieldset[disabled] .btn-primary,
+.btn-primary.disabled:hover,
+.btn-primary[disabled]:hover,
+fieldset[disabled] .btn-primary:hover,
+.btn-primary.disabled:focus,
+.btn-primary[disabled]:focus,
+fieldset[disabled] .btn-primary:focus,
+.btn-primary.disabled:active,
+.btn-primary[disabled]:active,
+fieldset[disabled] .btn-primary:active,
+.btn-primary.disabled.active,
+.btn-primary[disabled].active,
+fieldset[disabled] .btn-primary.active {
+  background-color: #428bca;
+  border-color: #357ebd;
+}

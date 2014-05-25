@@ -3,12 +3,16 @@ class UserIngredient < ActiveRecord::Base
 	
 	belongs_to :user
 	belongs_to :ingredient
-	before_validation :set_ingredient_id
+	before_validation :set_attrs
 	private
 
-	def	set_ingredient_id
+	def set_attrs
 		name = self["name"]
 		@ingredient = Ingredient.find_by_name(name)
-		@ingredient ? self["ingredient_id"] = @ingredient.id :	self["ingredient_id"] = 0
+		if @ingredient 
+			self["ingredient_id"] = @ingredient.id
+		else
+			self["ingredient_id"] = 0
+		end
 	end
 end

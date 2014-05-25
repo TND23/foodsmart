@@ -1,13 +1,27 @@
 App.Views.RecipesShow = Backbone.View.extend({
 	template: JST["recipes/show"],
 
+// pagination strategy
+// record no of items total, page length, current index, and the items
 	events: {
 		'click #edit-name' : 'updateName',
 		'click .recipe-row' : 'addStyle',
+		'click #endorse' : 'endorse',
+		'click .save-recipe' : 'saveRecipe',
 		'keypress .recipe-row' : 'updateOnEnter',
 		'blur .recipe-row' : 'removeStyle',
 		'click .add-ingredient': 'addIngredientField',
-		'click #edit-description': 'editDescription'
+		'click .remove-ingredient': 'removeIngredientField',
+		'click #edit-description': 'editDescription',
+		'mouseover .fa-star' : 'highlightUpTo',
+		'click .fa-star' : 'setStars',
+		'mouseout #all-stars' : 'unhighlightAll',
+	},
+
+	convertIdToInt: function(e){
+		var div = this.getDiv(e);
+		var num = parseInt(div);
+		return num;
 	},
 
 	addIngredientField: function(e){
@@ -24,31 +38,68 @@ App.Views.RecipesShow = Backbone.View.extend({
 	},
 
 	close: function(e){
-		var options = this.getDiv(e);
-		var value = options.el.value.trim();
-		var model = options.list[0];
+		var attribute = this.getDiv(e);
+		// grab the value from the DOM element 
+		var value = $("#"+attribute).val().trim();
 		var el = e.currentTarget;
 		$(el).removeClass("editable");
-		model.set("dishname", value); 
-		model.save();
+		this.model.set(attribute, value); 
+		this.model.save();
 	},
 
-	editDescription: function(){
-		
+	ensureEndorsements: function(recipe){
+		if(typeof(recipe.endorsements) === "undefined"){ 
+			var new_endorsements =  new App.Collections.Endorsements({recipe: recipe}); 
+			recipe.endorsements = new_endorsements 
+			recipe.save(); 
+ 		} 
+	},
+
+	endorse: function(e){
+		e.preventDefault();
+		var comments = $(".immutable-mid-textarea").val();
+		if(comments === "" || !this.stars){
+			return;
+		} else {
+			var that = this;
+			var endorsement = new App.Models.Endorsement({user_id: App.current_user.id, recipe_id: that.model.id});
+			endorsement.set("stars", that.stars);
+			endorsement.set("comments", comments);
+			endorsement.save(endorsement.attributes, { success: function(){
+				that.model.endorsements.add(endorsement);
+				}
+			});			
+		}
 	},
 
 	getDiv: function(e){
+		// Grab the event targets id. It will correspond with a model attribute
 		var target = e.target;
 		var domIdVal = e.target.id;
-		var list_id = parseInt(domIdVal.match(/\d+/));
-		var curr_list = Lists.where({id: list_id});
-		return {list: curr_list, el: target};
+		return domIdVal;
 	},
 
+	highlightUpTo: function(e){
+		// get all stars from 1 to the selected stars id
+		var num = this.convertIdToInt(e);
+		if(!this.stars){
+			for (var i = 1; i <= num; i++){
+				$("#"+i).addClass('yellow-color');		
+				$("#"+i).removeClass('ninja');
+			}			
+		}
+	},	
 
 	initialize: function(options){
-		this.model = options.model[0];
+		var view = this;
+		var model = this.model = options.model;
+		this.ensureEndorsements(options.model);
+		this.listenTo(model.endorsements, 'add', view.renderEndorsementsPartial)
 	},	
+
+	removeIngredientField: function(e){
+		alert("HEHEHEHEHE");
+	},
 
 	removeStyle: function(e){
 		var el = e.currentTarget;
@@ -61,10 +112,55 @@ App.Views.RecipesShow = Backbone.View.extend({
 		return this;
 	},
 
+	renderPartial: function(view){
+//		$(".container").append(view.$el);
+	},
+
+	renderEndorsementsPartial: function(){
+		var that = this;
+		var newView = new App.Views.EndorsementsShow({model: that.model.endorsements.last()});
+		var content = newView.render();
+		$("#endorsements-row").append(content.$el);
+//		$(".container").append(view.$el);
+	},
+
+	saveRecipe: function(e){
+		e.preventDefault();
+		var that = this;
+		var user_cookbook = App.current_user.cookbook;
+		if (user_cookbook.cookbook_recipes.findWhere({"dishname": that.model.escape("dishname")})){
+			console.log("That dishname already exists in your cookbook!");
+		} else {
+			user_cookbook.cookbook_recipes.add(this.model);
+		}
+	},
+
+	setStars: function(e){
+		this.stars = this.convertIdToInt(e);
+		for (var i = 1; i <= this.stars; i++){
+				$("#"+i).addClass('yellow-color');		
+				$("#"+i).removeClass('ninja');
+			}
+		if(this.stars < 5){
+			for (var i = this.stars+1; i <= 5; i++){
+				$("#"+i).addClass('ninja');		
+				$("#"+i).removeClass('yellow-color');
+			}							
+		}
+	},
+
+	unhighlightAll: function(){
+		if (!this.stars){
+			for (var i = 1; i <= 5; i++){
+				$("#"+i).removeClass('yellow-color');		
+				$("#"+i).addClass('ninja');
+			}	
+		}
+	},	
+
 	updateName: function(){
 		$dishname = $("#dishname").val();
 		this.model.set("dishname", $dishname);
-		console.log(this.model);
 		this.model.save();
 	},
 

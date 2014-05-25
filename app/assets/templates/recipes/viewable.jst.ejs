@@ -1,0 +1,36 @@
+<header class='recipe-title'> 
+	<p> <%= recipe.escape("dishname") %> </p>
+</header>
+
+<div class='row'>
+	<div class='col-md-2'> <p> <strong>Description</strong> </p>
+		<textarea id= description class='recipe-row'>
+			<%= recipe.escape("description").trim()%>
+		</textarea>
+
+ 		<p> <strong>Instructions</strong> </p> 
+			<textarea id= instructions class='recipe-row'>
+				<%= recipe.escape("instructions") %>
+			</textarea>
+	</div>
+	<div id='picture' class='col-md-8'>
+
+	</div>
+	<div class='col-md-2'>
+		<button class='save-recipe'>Save Recipe</button>
+	</div>
+	</br>
+</div>
+
+<div class='row'>
+	<div class='col-md-2'> <p> <strong> Name </strong> </p> </div>
+	<div class='col-md-2'> <p class='fill'> <strong> Quantity </strong> </p></div>
+	<div class='col-md-2'> <p class='fill'> <strong> Units </strong> </p> </div>
+	<div class='col-md-2'> <p> <strong> Optional </strong> </p> </div>
+	<div class='col-md-2'> <p> <strong> Description </strong> </p> </div>
+</div>
+
+<%= JST['recipes/_viewable_ingredients']({recipe: recipe}) %>
+<div class='row spaced-row'>
+	<%= JST['recipes/_endorsement']({recipe: recipe}) %>
+</div>

@@ -1,34 +1,48 @@
 App.Routers.AppRouter = Backbone.Router.extend({
-
+	// re-work paperclip 
 	routes: {
 		"" : "root",
+		"cookbookRecipes": "cookbookRecipesShow",
 		"home" : "showHome",
 		"fridge" : "userIngredientIndex",
 		"ingredients" : "ingredientIndex",
 		"ingredientNew" : "ingredientNew",
-		"recipes" : "recipeIndex",
-		"recipesCreate" : "recipeCreate",
+//		"recipes" : "recipeIndex",
 		"recipeNew" : "recipeNew",
-		"recipes/:id" : "recipeShow"
+		"recipes/:id" : "recipeShow",
+		"recipes/page/:id" : "recipeIndex"
 	},
 
-	root: function(e){
+	root: function(){
+		// set the 'root' of the app at #/home
 		Backbone.history.navigate("#/home", {trigger: true});
 	},
 
 	showHome: function(){
-		var newView = new App.Views.Error({err: "Nothing"});
+		//TODO: fix back button
+		var newView = new App.Views.Root();
 		this._swapView(newView);
 	},
 
+	cookbookRecipesShow: function(){
+		var that = this;
+		var collection = App.current_user.cookbook.cookbook_recipes;
+		collection.fetch({ 
+			success: function(){
+				var newView = new App.Views.CookbookRecipesShow({collection: collection});
+				that._swapView(newView);
+			}
+		});
+	},
+
 	ingredientIndex: function(e){
-		//refactor
+		var that = this;
 		e.preventDefault();
 		var collection = App.Collections.ingredients;		
 		collection.fetch({ 
 			success: function(){
 				var newView = new App.Views.IngredientsIndex( { collection: App.Collections.ingredients } );
-				newView.render();
+				that._swapView(newView);
 			}
 		})
 	},
@@ -37,8 +51,7 @@ App.Routers.AppRouter = Backbone.Router.extend({
 		// later on only admins can add ingredients, (since they are global resources)
 		// if (App.current_user.get("admin") == true){
 			var newView = new App.Views.IngredientNew();
-			var newContent = newView.render();
-			$("#content").html(newContent.el);			
+			this._swapView(newView);
 		// }
 		// else{
 		// 	var newView = new App.Views.Error({err: "notAdmin"});
@@ -53,7 +66,7 @@ App.Routers.AppRouter = Backbone.Router.extend({
 		var that = this;
 		collection.fetch({
 			success: function(){ 
-				var newView = new App.Views.RecipesIndex({ collection: App.Collections.recipes }).render();				
+				var newView = new App.Views.RecipesIndex({ collection: App.Collections.recipes });		
 				that._swapView(newView);
 			}
 		})			
@@ -61,8 +74,7 @@ App.Routers.AppRouter = Backbone.Router.extend({
 
 	recipeNew: function(){
 		var newView = new App.Views.RecipeNew();
-		var newContent = newView.render();
-		$("#content").html(newContent.el);
+		this._swapView(newView);
 	},
 
 	recipeShow: function(identification){
@@ -72,32 +84,32 @@ App.Routers.AppRouter = Backbone.Router.extend({
 		if (App.Collections.recipes.models.length === 0){ // if the recipeCollection hasn't been stored, store it
 			App.Collections.recipes.fetch({
 				success: function(){ 
-					var recipe = App.Collections.recipes.where({id: identification});
+					var recipe = App.Collections.recipes.get(identification);
 					that.renderShow(recipe);
 				}
 			}) 
 		} else {
-			var recipe = App.Collections.recipes.where({id: identification});
+			var recipe = App.Collections.recipes.get(identification);
 			this.renderShow(recipe);
 		}
 	},
 
 	renderShow: function(recipe){
 		var newView = new App.Views.RecipesShow({model: recipe});
-		var newContent = newView.render();
-		$("#content").html(newContent.el);	
+		this._swapView(newView);
+
 	},
 
 	userIngredientIndex: function(){
 		if (App.Collections.user_ingredients === undefined){
-			App.Collections.user_ingredients = new App.Collections.UserIngredients();
+			App.Collections.user_ingredients = new App.Collections.UserIngredients([], {user: App.current_user});
 			App.Collections.user_ingredients.fetch();	
 		}
 		var newView = new App.Views.UserIngredientsIndex({
 			collection: App.Collections.user_ingredients
 		})
-		var newContent = newView.render();
-		$("#content").html(newContent.el);	
+		this._swapView(newView);
+
 	},
 
 	_swapView: function (newView) {
@@ -106,6 +118,7 @@ App.Routers.AppRouter = Backbone.Router.extend({
 	  }
 	  this._prevView = newView;
 	  $("#content").html(newView.render().$el);
+	  //	  $("#book").html(newView.render().$el);
   }
 
 });

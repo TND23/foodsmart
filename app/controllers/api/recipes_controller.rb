@@ -4,7 +4,11 @@ module Api
 		skip_before_filter :verify_authenticity_token, :only => :create
 		
 		def index
-			@recipes = Recipe.all
+			@recipes = Recipe.paginate(:page => params[:page], :per_page => 15)
+			pages = set_recipe_paginator_attrs
+			@recipes.pages = pages["pages"]
+			@recipes.per_page = pages["per_page"]
+			@recipes.total_entries = pages["recipe_count"]
 		end
 
 		def new
@@ -38,7 +42,8 @@ module Api
 
 		def show
 			@recipe = Recipe.find(params[:id])
-			render "api/recipes/show"
+			@recipe_ingredients = @recipe.recipe_ingredients
+#			render "api/recipes/show"
 		end
 
 		private
@@ -51,10 +56,6 @@ module Api
 			.require(:recipe_ingredients)
 			.values
 			.reject{|data| data.values.any?(&:blank?)}
-		end
-
-		def _render(models)
-			render :json => models
 		end
 		
 	end

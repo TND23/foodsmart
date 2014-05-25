@@ -1,50 +1,244 @@
-<div id="container">
-
 <div id='menu-navigator' class='navigator'>
+
 	<div class='right-column'>
 		<table id='login-table'>
 			<tbody>
 				<tr> 
-					<td class-'td-normal'>User Name </td> 
+					<td class='td-normal'>User Name </td> 
 					<td class='td-normal'> Password </td> 
 				</tr>
 				<tr> 			
 					<form action="<%= api_session_url %>" method="post">
 						<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-						<td class='td-normal'>
-							<input type="text" name="user[username]">
-						</td>
-						<td class='td-normal'>
-							<input type="password" name="user[password]">
-						</td>
-						<td class='td-normal'>
-							<div><input type="submit" value="Log In"></div>
-						</td>
+						<div class="row">
+
+							<div class="col-md-2">
+								<td class='td-normal'>
+									<input type="text" name="user[username]">
+								</td>
+							</div>
+							<div class="col-md-2">
+								<td class='td-normal'>
+									<input type="password" name="user[password]">
+								</td>
+							</div>
+							<td class='td-normal'>
+								<div>
+									<input type="submit" value="Log In">
+								</div>
+							</td>
+						</div>
+					</form>
 				</tr>
-				
-			</form>
 			</tbody>
 		</table>
-</div>
-<div id='login-wrapper'>
-
 	</div>
-
-
-
-	<div class='left-column'>
-		Register
-		<form action="<%= api_users_url %>" method="post">
-		<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-		<div>User Name<input type="text" name="user[username]"></div>
-		<div> Your password<input type="password" name="user[password]"
-		></div>
-		<div> Confirm password<input type="password" name="user[password_confirmation]">
+	
+	<% if flash[:error] %>
+		<div class="right-column">
+			<p id='login-error'> Username or password incorrect </p>
 		</div>
-		<div><input type="submit" value="Join"></div>
-		</form>
+	<% end %>
+</div>
+
+<div class="container">
+
+	<div class="row" id="account-row">
+		<div id="about-wrapper" class="col-md-6">
+			<div id="about-container" class="col-md-12">
+				<div class="row">
+					<div>
+					<h2 class="slogan"> Make the best food you can with what you've got. </h2>
+				</div>
+				</div>
+				<div id="icon-container" class="col-md-2">
+
+					<ul class='no-padding'>
+						<div class="row">
+							<li class="no-style spaced-row">	<i class="fa fa-search fa-3x"></i> 
+							</li>
+						</div>
+
+						<div class="row">
+							<li class="no-style spaced-row"> <i class="fa fa-book fa-3x"></i> </li>
+						</div>
+
+						<div class="row">
+							<li class="no-style spaced-row"> <i class="fa fa-cutlery fa-3x"></i></li>
+						</div>
+					</ul>
+				</div>
+				<div id="synopsis-container" class="col-md-10">
+					<ul>
+						<div class="row">
+							<li class="no-style spaced-row"> 
+								<p> Find out what you can make at home by searching through over five recipes. </p>	
+							</li>
+						</div>
+
+						<div class="row">
+							<li class="no-style spaced-row"> 
+								<p> Save your favorite recipes to your cookbook and refer to it any time. </p>	
+							</li>
+						</div>
+
+						<div class="row">
+							<li class="no-style spaced-row"> 
+								<p> Share your own masterpiece recipes with the world, and make Earth a tastier place! </p>	
+							</li>
+						</div>
+					</ul>
+
+					<div id='learn-more' class='btn btn-info'>
+						<p id='learn-button'> Learn More </p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="create-account-wrapper" class="col-md-6 col-lg-6 col-sm-6 col-xs-6">
+			<div id='account-form'>
+				<h1> Sign Up </h1>
+				</br>
+				<form action="<%= api_users_url %>" method="post">
+				<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+				
+				<div class="input-group login-input">
+					<input type="text" id="username-input"  name="user[username]" class="form-control" placeholder="User Name">
+					<span class="input-group-addon">  
+						<i id="username-check" class="fa fa-check green"></i> 
+					</span>
+				</div>
+
+				<p id='no-symbol' class="warning"> User Name cannot include special symbols or spaces</p>
+					<% if flash[:error] ==  "That username may have already been taken." %>
+						<p id='username-taken' class="notice"> Sorry, we couldn't make your account... that username must be taken! </p>
+					<% end %>
+				</br>
+
+				<p id='username-length' class="warning"> User Name must be shorter than fifteen characters </p>
+		
+				<div class="input-group login-input"> 
+					<input type="password" id="password-input"  name="user[password]" class="form-control" placeholder="Password">
+
+
+					<span class="input-group-addon">  
+						<i id="password-check" class="fa fa-check green"></i> 
+					</span>
+				</div>
+
+				<p id='password-length' class="warning"> Password must be at least six characters </p>				
+				</br>
+
+				<div class="input-group login-input"> 
+					<input type="password" id="password-confirmation-input"  name="user[password_confirmation]" class="form-control" placeholder="Retype Password">
+					<span class="input-group-addon">  
+						<i id="password-confirm-check" class="fa fa-check green"></i> 
+					</span>
+				</div>
+
+				<p id='no-match' class="warning"> Passwords don't match </p>
+
+				</br>
+				
+				<div><button id='check-name' class='btn btn-info spaced-row'>Check Name Availibility</button></div>
+				<div><p id='name-taken-status'></p></div>
+				<div><input type="submit" id='join-button' class='btn btn-success spaced-row' value="Sign me up"></div>
+				</form>
+			</div>
+		</div>
 	</div>
 
+</div>
 
-</div>
-</div>
+<script type="text/javascript">
+    document.write("\<script src='//ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js' type='text/javascript'>\<\/script>");
+</script>
+<script type="text/javascript">
+document.write("\<script src='//code.jquery.com/jquery-1.11.0.min.js'>\<\/script>")
+</script>
+
+<script>
+	// if the username has symbols, eliminate checkmark and add warning
+	$('#username-input').change(function(){
+		if($('#username-input').val().match(/\s|\$|[<>,@!&:;{}()"+=#%\?\.\^\*\|]/)){
+			$("#no-symbol").addClass("visible");
+			$("#username-check").removeClass("visible");
+		} else {
+	// otherwise, eliminate warning
+			$("#no-symbol").removeClass("visible");
+			if($('#username-input').val().length <= 15) {
+	// if the username is of proper length, add the checkbox
+				$("#username-check").addClass("visible");
+			}
+		}
+	});
+</script>
+
+<script>
+	$('#username-input').change(function(){
+		if($('#username-input').val().length == 0){
+			$("#username-check").removeClass("visible");
+		}
+	});	
+</script>
+<script>
+	$('#username-input').change(function(){
+	// if the username is too long, remove checkbox add warning
+		if($('#username-input').val().length > 15){
+			$("#username-length").addClass("visible");
+			$("#username-check").removeClass("visible");
+		} else {
+			// otherwise remove the warning
+			$("#username-length").removeClass("visible");
+			if($('#username-input').val().match(/\s|\$|[<>,@!&:;{}()"+=#%\?\.\^\*\|]/)){
+				// if there are special symbols, remove the checkbox
+				$("username-check").removeClass("visible");
+			}
+		}
+	});
+</script>
+
+<script>
+	$('#password-input').change(function(){
+		if($('#password-input').val().length < 6){
+			$("#password-length").addClass("visible");
+			$("#password-check").removeClass("visible");
+		} else {
+			$("#password-length").removeClass("visible");
+			$("#password-check").addClass("visible");
+		}
+	});
+</script>
+
+<script>
+	$('#password-confirmation-input').change(function(){
+			if($('#password-input').val().length >= 6){
+				if($('#password-confirmation-input').val() != $('#password-input').val()){
+					$("#no-match").addClass("visible");
+					$("#password-confirm-check").removeClass("visible");
+				} else {
+					$("#no-match").removeClass("visible");
+					$("#password-confirm-check").addClass("visible");
+				}
+		}
+		
+	});
+</script>
+
+<script>
+	$("#check-name").on('click', function(e){
+		e.preventDefault();
+		$.get("/api/users/", function(data){
+			var data = data;
+			var curr_username = $('#username-input').val();
+			data.forEach(function(datum){
+				if(datum.username === curr_username){
+					$("#name-taken-status").html("Taken");
+				} else {
+					$("#name-taken-status").html("Free");
+				}
+			})
+		})		
+	})
+
+</script>

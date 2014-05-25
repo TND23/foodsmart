@@ -1,6 +1,6 @@
 App.Models.Recipe = Backbone.Model.extend({
 
-	url: "/api/recipes",
+
 	
 	defaults: {
 		instructions: "Default recipe instructions",
@@ -9,9 +9,10 @@ App.Models.Recipe = Backbone.Model.extend({
 	},
 
 	initialize: function(models, options){ 
-		var that = this;
+		// var that = this;
+		this.recipe_ingredients = [];
+		// this.bind("sync", that.setEndorsement, this);
 	//	this.recipe_ingredients = new App.Collections.RecipeIngredients();
-	//  this.endorsements = new App.Collections.Endorsements();
 	},
 
 	parse: function(res){
@@ -28,5 +29,10 @@ App.Models.Recipe = Backbone.Model.extend({
 			this._ingredients = this.attributes.recipe_ingredients;
 		}
 		return this._ingredients;
-	}
+	}//,
+
+	// setEndorsement: function(){
+	// 	var id = this.id;
+	// 	this.endorsements = new App.Collections.Endorsements({recipe_id: this.id});
+	// }
 });

@@ -4,6 +4,7 @@ App.Views.RecipeNew = Backbone.View.extend({
 
 	events: {
 		'click .add-ingredient': 'addIngredientField',
+		'click .remove-ingredient': 'removeIngredientField',
 		'click #check': 'findGivenIngredients'
 	},
 
@@ -17,6 +18,7 @@ App.Views.RecipeNew = Backbone.View.extend({
 
 	findGivenIngredients: function(){
 		// this is going to need major fixing
+
 		var current_names = this.getIngredientNames();
 		var valid_names = [];
 		current_names.forEach( function(name){
@@ -30,7 +32,7 @@ App.Views.RecipeNew = Backbone.View.extend({
 
 	getIngredientNames: function(){	
 		var nameArray = [];
-		_.each($(".recipe_ingredient_name"), function(name){
+		_.each($(".recipe-ingredient-name"), function(name){
 			nameArray.push(name.value);
 		});
 		return nameArray;
@@ -39,6 +41,10 @@ App.Views.RecipeNew = Backbone.View.extend({
 	initialize: function(){
 		this.render();
 		this.i = 1;
+	},
+	removeIngredientField: function(e){
+		e.preventDefault();
+		alert("SHI");
 	},
 
 	render: function(){

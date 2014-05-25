@@ -11,8 +11,6 @@ App.Views.RecipesIndex = Backbone.View.extend({
 	},
 
 	render: function(){
-
-		this.collection.fetch();		
 		var content = this.template({collection: this.collection})
 		$(this.el).html(content);
 		return this;

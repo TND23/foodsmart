@@ -1,0 +1,52 @@
+<h2> Write a review </h2>
+
+<form action="/api/recipes/endorsements" method="post" id="endorsement-create-form">
+	<div class="row">
+
+
+		<div class="col-md-12">
+			<div class='col-md-3'>
+				<div id='all-stars' class="row">
+				<span class="fa-stack fa-md pull-left">
+					<i id='star1' class="fa fa-star-o fa-stack-2x"></i>
+					<i id='1' class="fa fa-star fa-stack-2x ninja"></i>
+				</span>
+				<span class="fa-stack fa-md pull-left">
+					<i id='star2' class="fa fa-star-o fa-stack-2x"></i>
+					<i id='2' class="fa fa-star fa-stack-2x ninja"></i>
+				</span>
+				<span class="fa-stack fa-md pull-left">
+					<i id='star3' class="fa fa-star-o fa-stack-2x"></i>
+					<i id='3' class="fa fa-star fa-stack-2x ninja"></i>
+				</span>
+				<span class="fa-stack fa-md pull-left">
+					<i id='star4' class="fa fa-star-o fa-stack-2x"></i>
+					<i id='4' class="fa fa-star fa-stack-2x ninja"></i>
+				</span>
+				<span class="fa-stack fa-md pull-left">
+					<i id='star5' class="fa fa-star-o fa-stack-2x"></i>
+					<i id='5' class="fa fa-star fa-stack-2x ninja"></i>
+				</span>
+				</div>
+			</div>
+		<div class='col-md-1'>
+			<label>Comments</label>
+		</div>
+		
+		<div class='col-md-5'>
+			<div>
+				<textarea class='immutable-mid-textarea'name='endorsement[comments]'></textarea>
+				<span data-msg='comments'></span>
+			</div>
+		</div>
+			<div class="col-md-2">
+				<button id="endorse">Rate this Recipe</button>
+			</div>
+
+		</div>
+	</div>
+	<div id="endorsements-row" class="row">
+		<%= JST['recipes/_all_endorsements']({recipe: recipe}) %>
+	</div>
+
+</form>

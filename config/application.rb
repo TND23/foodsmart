@@ -24,5 +24,6 @@ module GroceryApp
     end
     config.assets.enabled = true
     config.assets.paths << "app/assets/templates"
+    # config.assets.paths << "app/assets/fonts"
   end
 end

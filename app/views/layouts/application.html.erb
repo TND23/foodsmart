@@ -5,8 +5,12 @@
   <%= favicon_link_tag "/favicon.ico" %>
   <%= stylesheet_link_tag    "application", media: "all"%>
   <%= stylesheet_link_tag "mobile" if mobile_device? %>
-  <%= javascript_include_tag "application"%>
-  <!-- <link rel="shortcut icon" href="/app/assets/images/potlach.ico" > -->
+  
+  <!-- avoid annoying errors at login screen -->
+  <% if current_user %>
+    <%= javascript_include_tag "application"%>
+  <% end %>
+ 
   <%= csrf_meta_tags %>
 
 </head>
@@ -17,7 +21,7 @@
 
   <% end %>
 
-<!--   <% if !current_user %>
+  <% if !current_user %>
     <div id='sign-up-wrapper'>
       <%= yield %>
     </div>
@@ -25,6 +29,6 @@
 
   <% if !mobile_device? %>  
   <% end %>
- -->  
+  
 </body>
 </html>

@@ -1,37 +1,51 @@
 <html>
 <form action="/api/recipes" method="post" id="recipe-create-form">
-	<label>Dish Name</label>
-	<input name='recipe[dishname]'>
-	<span data-msg='dishname'></span>
+	<div class="row">
+		<div class='col-md-2'>
+			<label>Dish Name</label>
+		</div>
+		<input name='recipe[dishname]'>
+		<span data-msg='dishname'></span>
+	</div>
+	<br>
+
+	<div class="row">
+		<div class='col-md-2'>
+			<label>Instructions</label>
+		</div>		<textarea  class='mid-size-textarea'name='recipe[instructions]'></textarea>
+		<span data-msg='instructions'></span>
+	</div>
+	<br>
+
+	<div class="row">
+		<div class='col-md-2'>
+			<label>Description</label>
+		</div>
+		<textarea class='mid-size-textarea' name='recipe[description]'></textarea>
+		<span data-msg='description'></span>
+	</div>
 
 	<br>
-	<label>Instructions</label>
-	<textarea name='recipe[instructions]'></textarea>
-	<span data-msg='instructions'></span>
-	<br>
-
-	<label>Description</label>
-	<textarea name='recipe[description]'></textarea>
-	<span data-msg='description'></span>
-
+	<div class="row">
+		<label>Ingredients</label>
+		<button name='buttonator' class='add-ingredient'>+</button>
+	</div>
 
 	<br>
-	<label>Ingredients</label>
-	<button name='buttonator' class='add-ingredient'>+</button>
-
-	</br>
-	<li>
-		<label>Name</label>
-		<input name='recipe_ingredients[1][name]'>
-		<label>Amount</label>
-		<input name='recipe_ingredients[1][quantity]'>
-		<label>Units</label>
-		<input name='recipe_ingredients[1][units]'>
-		<label>Optional?</label>
-		<input type="checkbox" name='recipe_ingredients[1][optional]'>
-		<input type="hidden" name='recipe_ingredients[1][recipe_id]'>
-		<button name="debuttonator" class='remove-ingredient'>-</button>
-	</li>
+		<div class="row">
+			<li class='no-style'>
+				<label>Name</label>
+				<input class='recipe-ingredient-name' name='recipe_ingredients[1][name]'>
+				<label>Amount</label>
+				<input name='recipe_ingredients[1][quantity]'>
+				<label>Units</label>
+				<input name='recipe_ingredients[1][units]'>
+				<label>Optional?</label>
+				<input type="checkbox" name='recipe_ingredients[1][optional]'>
+<!-- 				<input type="hidden" name='recipe_ingredients[1][recipe_id]'>
+ -->				<button class='remove-ingredient'>-</button>
+			</li>
+		</div>
 	<div id='last-ingredient'></div>
 
 	</br>

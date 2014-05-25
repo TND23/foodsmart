@@ -1,0 +1,12 @@
+<% if( recipe.endorsements.length > 0){ %>
+	<% recipe.endorsements.forEach(function(endorsement){ %>
+		<% var stars = endorsement.get("stars"); %>
+		<% var comments = endorsement.escape("comments"); %>
+		<div class='row'>
+			<p> <%=stars%> </p>
+			<p> <%=comments%></p>
+		</div>
+	<% }); %>
+<% } else { %>
+<!-- Do something -->
+<% } %>

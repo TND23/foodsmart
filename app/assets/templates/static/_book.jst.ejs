@@ -1,0 +1,39 @@
+<div id="spine" class="col-md-2"> </div>
+<div id="cookbook-title" class="col-md-2">
+	<h2> <%= App.current_user.escape("username") %>'s cookbook </h2>
+</div>
+<div id='bookmarks' class="col-md-2"> 
+	<div id="no-float">
+		<div class="row">
+			<a id='bookmark-recipes' class='bookmark' href="/#/recipes">
+				Recipes
+			</a>
+		</div>
+
+		<div class="row">
+			<a id='bookmark-ingredients' class='bookmark' href="/#/ingredientNew">
+				Submit Recipe
+			</a>
+		</div>
+
+		<div class="row">
+			<a href="/#/fridge" id='bookmark-fridge' class='bookmark'>
+				Fridge
+			</a>
+		</div>
+
+		<div class="row">
+			<a href="/#/recipeNew" id='bookmark-recipe-maker' class='bookmark'>
+				Create a recipe
+			</a>
+		</div>
+
+		<div class="row">
+			<a href="/#/cookbookRecipes" id='saved-recipes' class='bookmark'>
+				Cookbook
+			</a>
+		</div>
+
+		</div>
+	</div>
+</div>

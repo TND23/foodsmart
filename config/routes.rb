@@ -4,7 +4,7 @@ GroceryApp::Application.routes.draw do
   namespace :api, :defaults => {:format => :json} do
 
     resources :cookbooks, :only => [:show, :index, :new] do
-      resources :cookbook_recipes, :only => [:index]
+      resources :cookbook_recipes, :only => [:index, :show]
     end
  
     resources :cookbook_recipes, :only => [:create, :update, :destroy, :show]
@@ -26,5 +26,5 @@ GroceryApp::Application.routes.draw do
 
   end
 
-
+  get '/login'  => 'sessions#new', :as => :login
 end

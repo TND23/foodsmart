@@ -1,3 +1,12 @@
-<header class="navbar">
-	<%= button_to "Log out", api_session_url, :method => :delete %>
-</header>
+<nav class="navbar">
+
+	<li class='nav-li '><a class="btn btn-md btn-primary" href="/#/recipes">Recipes </a></li>
+	<li class='nav-li'><a class="btn btn-md btn-primary" href="/#/ingredientNew">BBIngredient </a></li>
+	<li class='nav-li'><a class="btn btn-md btn-primary" href="/#/fridge">Fridge </a></li>
+	<li class='nav-li'><a class="btn btn-md btn-primary" href="/#/recipeNew">Start a Recipe </a> </li>
+
+
+	<li class='logout-button'><%= button_to "Log out", api_session_url, :method => :delete %></li>
+	<li class='home-li'><a class="btn btn-md btn-primary" href="/#/">Home </a></li>
+
+</nav>

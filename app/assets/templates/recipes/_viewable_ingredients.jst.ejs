@@ -1,0 +1,22 @@
+<% recipe.attributes.recipe_ingredients.forEach(function(ingredient){ %>
+	<div class="row" >
+		<div class='col-md-2 fixed-entry first'>
+	  	<textarea id='ingredient-name<%=ingredient.id%>' class='ingredient-row'>
+	  		<%= ingredient.name %>
+	  	</textarea>
+		</div>
+		<div class='col-md-2 fixed-entry'>
+			 	<input type="text" id='ingredient-quantity<%=ingredient.id%>' class='ingredient-row' value=<%= ingredient.quantity %> >
+	 	</div>
+		<div class='col-md-2 fixed-entry'>
+		 	<input type="text" id='ingredient-units<%=ingredient.id%>' class='ingredient-row' value=<%= ingredient.units %> >
+	 	</div>
+		<div class='col-md-2 fixed-entry'>
+		 	<input type="checkbox" id='ingredient-optional<%=ingredient.id%>' class='ingredient-row'><%= ingredient.optional %>
+	 	</div>
+		<div class='col-md-2 fixed-entry last'>
+		 	<textarea id='ingredient-description<%=ingredient.id%>' class='ingredient-row'><%= ingredient.description %></textarea>
+		</div>
+
+	</div>
+<% }) %>  

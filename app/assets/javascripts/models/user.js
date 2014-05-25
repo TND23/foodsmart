@@ -1,13 +1,17 @@
 App.Models.User = Backbone.Model.extend({
 
-	defaults: {
-		favorited_recipes: [],
-		cookbook: [],
-		user_ingredients: []
+	initialize: function(options){
+		
+		this.id = options.id;
+		this.cookbook_id = options.cookbook_id;
+		if (this.isValid()){
+			this.cookbook = new App.Models.Cookbook([], {user: this, id: this.cookbook_id});
+			this.user_ingredients = new App.Collections.UserIngredients([], {user: this});
+			this.user_ingredients.fetch();
+		}
 	},
 
-	initialize: function(){
-		this.cookbook = new App.Models.Cookbook([], {user: this});
-		this.user_ingredients = new App.Models.UserIngredients([], {user: this});
-	}
+	url: function(){
+		return "api/users/" + this.id;
+	} 
 });

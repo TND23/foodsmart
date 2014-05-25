@@ -1,21 +1,120 @@
+#about-container{
+	margin-right: auto;
+	margin-left: auto;
+}
+
+#account-form{
+	float: right;
+	background-color: rgba(169, 237, 169, 0.37);
+	width: 83%;
+	border-bottom-right-radius: 15px;
+	border-bottom-left-radius: 15px;
+	padding-left: 10px;
+	padding-right: 10px;
+	border-style: solid;
+	border-color: rgba(119, 88, 88, 0.44);
+	border-top-width: 0px;
+}
+
+.container{
+	height: 600px;
+}
+
+#create-account-wrapper{
+	float: right;
+}
+
+.green{
+	color: green;
+}
+
+#join-button, #check-name{
+	margin-left: 25%;
+	margin-right: 25%;
+	width: 50%;
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+
+#learn-more{
+	margin-left: 33%;
+	margin-right: 33%;
+}
+
 .left-column{
 	width: 33%;
-	height: 100%;
 	float: left;
+}
+
+#login-error{
+	text-align: center;
+}	
+.login-input{
+	margin-left: auto;
+	margin-right: auto;
+	width: 55%;
+}
+
+#marginless.row, .left-column, #create-account-wrapper, #account-row.row{
 	margin: 0;
+}
+
+#menu-navigator{
+	width: 100%;
+	background-color: black;
+}
+
+#name-taken-status{
+	text-align: center;
+	margin-bottom: 0px;
+}
+
+.no-padding, #icon-container,#create-account-wrapper, #about-container{
+	padding: 0;
 }
 
 .right-column{
 	margin-left: 60%;
 	margin-right: 0;
-
 }
 
-#login-table{
-
+#sign-up-wrapper{
+	background-color: rgba(223, 223, 223,1);
+	border-bottom: rgba(97, 97, 97, 0.62);
+	border-bottom-width: 3px;
+	border-bottom-style: solid;
 }
 
-#menu-navigator{
-
+.spaced-row{
+	margin-top:30px;
+	margin-bottom:30px;
 }
 
+#synopsis-container, .left-column, #create-account-wrapper, #about-wrapper, #account-row.row, #account-form{
+	height: 100%;
+}
+
+.td-normal, #login-error{
+	color: white;
+}
+
+#username-input, #password-input, #password-confirmation-input{
+	height: 50px;
+	line-height: 50px;
+	font-size: 18px;
+}
+
+#username-taken, #no-symbol{
+	position: fixed;
+}
+
+.warning, .fa-check{
+	visibility: hidden;
+}
+.warning{
+	color: red;
+	font-size: 15px;
+}
+.visible{
+	visibility: visible;
+}

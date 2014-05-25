@@ -12,7 +12,23 @@
 	margin-left: 1.8px;
 	cursor: default;
 }
-
+.fixed-entry{
+	height: 50px;
+	border-style: solid;
+	border-color: black;
+	border-right-width: 1px;
+	border-left-width: 1px;
+	border-top-width: 0px;
+	border-bottom-width: 0px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+.first{
+	border-left-width: 3px;
+}
+.last{
+	border-right-width: 3px;
+}
 #check:active{
 	background-color: rgb(233, 233, 233);
 }
@@ -37,11 +53,22 @@
 	background-color: rgb(237, 242, 237);
 }
 
+.recipe-title{
+	text-align: center;
+	font-size: 30px;
+	border-bottom: antiquewhite;
+	border-bottom-width: 2px;
+	border-bottom-style: solid;
+}
+
 .edit:hover{
 	background-color: rgb(152, 152, 242);
 }
 
 .ingredient-row{
+	/* 
+	TODO: set to transparent with no border
+	*/
 	background-color: rgb(242, 242, 242);
 
 }
@@ -61,4 +88,11 @@
 p.fill{
 	width: 90px;
 	margin-right: 0;
+}
+
+
+.no-style{
+	float: left;
+	list-style-type: none;
+	margin-left: 5px;
 }
