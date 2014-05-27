@@ -6,7 +6,3 @@ App.Collections.Users = Backbone.Collection.extend({
 	}
 
 });
-
-// speed it up by a factor of N
-// App.Collections.users = new App.Collections.Users();
-// App.Collections.users.fetch();

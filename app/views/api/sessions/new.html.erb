@@ -181,6 +181,7 @@ document.write("\<script src='//code.jquery.com/jquery-1.11.0.min.js'>\<\/script
 		}
 	});	
 </script>
+
 <script>
 	$('#username-input').change(function(){
 	// if the username is too long, remove checkbox add warning
@@ -221,7 +222,6 @@ document.write("\<script src='//code.jquery.com/jquery-1.11.0.min.js'>\<\/script
 					$("#password-confirm-check").addClass("visible");
 				}
 		}
-		
 	});
 </script>
 
@@ -229,16 +229,13 @@ document.write("\<script src='//code.jquery.com/jquery-1.11.0.min.js'>\<\/script
 	$("#check-name").on('click', function(e){
 		e.preventDefault();
 		$.get("/api/users/", function(data){
-			var data = data;
 			var curr_username = $('#username-input').val();
+			$("#name-taken-status").html("Free");
 			data.forEach(function(datum){
 				if(datum.username === curr_username){
 					$("#name-taken-status").html("Taken");
-				} else {
-					$("#name-taken-status").html("Free");
-				}
+				} 
 			})
 		})		
 	})
-
 </script>

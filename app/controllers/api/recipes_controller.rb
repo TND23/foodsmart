@@ -2,13 +2,13 @@ module Api
 	class RecipesController < ApiController
 		before_filter :require_user
 		skip_before_filter :verify_authenticity_token, :only => :create
-		
+		before_filter :default_format_html, :only => :index
+
+
 		def index
-			@recipes = Recipe.paginate(:page => params[:page], :per_page => 15)
-			pages = set_recipe_paginator_attrs
-			@recipes.pages = pages["pages"]
-			@recipes.per_page = pages["per_page"]
-			@recipes.total_entries = pages["recipe_count"]
+			@recipes = Recipe.paginate(:page => params[:page], :per_page => 10)
+			count = Recipe.count
+			render :index, :layout => false
 		end
 
 		def new
@@ -56,6 +56,10 @@ module Api
 			.require(:recipe_ingredients)
 			.values
 			.reject{|data| data.values.any?(&:blank?)}
+		end
+
+		def default_format_html
+			request.format = "html"
 		end
 		
 	end

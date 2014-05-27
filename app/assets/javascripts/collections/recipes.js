@@ -7,7 +7,11 @@ App.Collections.Recipes = Backbone.PageableCollection.extend({
 	},
 
 	parse: function(data){
-		console.log(data);
+		this.currentPage = data.current_page;
+		this.totalEntries = data.total_entries;
+		this.pageSize = data.per_page;
+		data = data.models;
+		return data;   
 	},
 
 	searchFor: function(val, method){
@@ -21,20 +25,22 @@ App.Collections.Recipes = Backbone.PageableCollection.extend({
 
 	},
 
+	state:{
+		pageSize: 10,
+		sortKey: "updated",
+		order: 1
+	},
+
 	searchParams: function(){
 		return ["byName", "byRating", "byAuthor", "byIngredients"];
 	},
 
-	// state:{
-	// 	firstPage: 1,
-	// 	currentPage: 1,
-	// 	totalRecords: 22
-	// },
+	// queryParams: {
+	// 	totalPages: null,
+	// 	totalRecords: null,
+	// 	sortKey: "sort",
 
-	queryParams: {
-		currentPage: "current_page",
-		pageSize: "page_size"
-	},
+	// },
 
 	getOrFetch: function(id){
 		var model;
@@ -50,5 +56,3 @@ App.Collections.Recipes = Backbone.PageableCollection.extend({
 });
 
 App.Collections.recipes = new App.Collections.Recipes();
-App.Collections.recipes.fetch();
-// The big old list of recipes

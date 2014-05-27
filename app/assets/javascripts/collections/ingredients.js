@@ -24,4 +24,3 @@ App.Collections.Ingredients = Backbone.Collection.extend({
 });
 
 App.Collections.ingredients = new App.Collections.Ingredients();
-App.Collections.ingredients.fetch();

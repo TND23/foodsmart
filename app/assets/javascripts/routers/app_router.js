@@ -7,7 +7,7 @@ App.Routers.AppRouter = Backbone.Router.extend({
 		"fridge" : "userIngredientIndex",
 		"ingredients" : "ingredientIndex",
 		"ingredientNew" : "ingredientNew",
-//		"recipes" : "recipeIndex",
+		//"recipes" : "recipeIndex",
 		"recipeNew" : "recipeNew",
 		"recipes/:id" : "recipeShow",
 		"recipes/page/:id" : "recipeIndex"
@@ -61,15 +61,17 @@ App.Routers.AppRouter = Backbone.Router.extend({
 		// }
 	},
 
-	recipeIndex: function(){
+	recipeIndex: function(pg){
+		var pg = parseInt(pg);
 		var collection = App.Collections.recipes;
 		var that = this;
 		collection.fetch({
 			success: function(){ 
 				var newView = new App.Views.RecipesIndex({ collection: App.Collections.recipes });		
+				collection.getPage(pg);		
 				that._swapView(newView);
 			}
-		})			
+		})
 	},
 
 	recipeNew: function(){
