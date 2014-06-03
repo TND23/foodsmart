@@ -1,6 +1,4 @@
 App.Models.Recipe = Backbone.Model.extend({
-
-
 	
 	defaults: {
 		instructions: "Default recipe instructions",

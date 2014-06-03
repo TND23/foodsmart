@@ -1,0 +1,46 @@
+<div id='recipe-list'>
+
+	<% collection.models.forEach(function(model){ %>
+		<div class='row'>
+			<div class="col-md-3">	
+				<a class="dish-link" href="/#/recipes/<%=model.id%>" > <%= model.escape("dishname") %> </a>
+			</div>
+			<div class="col-md-4">	
+				<div class='description'>
+					<p>  <%= model.escape("description") %> </p>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<% if (model.escape("rating") === ""){ %>
+					<div class='no-rating'>
+						<div id='all-stars' class="row">
+							<span class="fa-stack fa-md pull-left">
+								<i id='star1' class="fa fa-star-o fa-stack-1x"></i>
+							</span>
+							<span class="fa-stack fa-md pull-left">
+								<i id='star2' class="fa fa-star-o fa-stack-1x"></i>
+							</span>
+							<span class="fa-stack fa-md pull-left">
+								<i id='star3' class="fa fa-star-o fa-stack-1x"></i>
+							</span>
+							<span class="fa-stack fa-md pull-left">
+								<i id='star4' class="fa fa-star-o fa-stack-1x"></i>
+							</span>
+							<span class="fa-stack fa-md pull-left">
+								<i id='star5' class="fa fa-star-o fa-stack-1x"></i>
+							</span>
+						</div>
+						</p>
+					</div>
+				<% } else { %>
+					<div class='rating'>
+						<%= model.escape("rating") %>
+					</div>
+				<% } %>
+			</div>
+		</div>
+
+		<div class='post-recipe'></div>
+
+	<% }); %>
+</div>

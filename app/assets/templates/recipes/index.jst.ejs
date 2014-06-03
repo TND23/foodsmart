@@ -1,58 +1,36 @@
 <header>
-	<form>
 		<input type="text" id="formInput"></input>
-		<input type="button" id="search" value="search"> by </input>
+		<a href="#/recipes/names/" id="input-search" class="btn btn-default">Search</a>
 		<select name='searchable-params'>
 			<option value='rating'>Rating</option>
 			<option value='author'>Author</option>
 			<option value='name'>Name</option>
 			<option value='ingredients'>Ingredients</option>
 		</select>
-	</form>
+
 	<p class='pretty-text'> All Recipes </p>
 </header>
 
-   <button class="prev btn-default btn">Prev</button>
+<div id='paginator'>
+</div>
 
- <div class="btn-group">
-   <button data-toggle="dropdown" class="btn btn-default dropdown-toggle">Page 1 <span class="caret"></span></button>
-   <ul class="dropdown-menu">
-     <% for(p=1;p<=5;p++){ %>
-         <li><a href="#/:<%=p%>" class="page"><%= p %></a></li>
-     <% }%>
-   </ul>
- </div>
+<div class='row centered-text'>
 
-  <button class="btn btn-default next">Next</button>
-
-<div class='pre-recipe'></div>
-
-<div id='recipe-list'>
-
-	<% collection.models.forEach(function(model){ %>
-		<div class='row'>
-			<div class="col-md-4">	
-				<div class='dishname'> 
-					<h3> Dish: <a href="/#/recipes/<%=model.id%>" > <%= model.escape("dishname") %> </a> </h3>
-				</div>
-			</div>
-			<div class="col-md-4">	
-				<div class='description'>
-					<p> Description: <%= model.escape("description") %> </p>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<% if (model.escape("rating") === ""){ %>
-					<div class='no-rating'> </div>
-				<% } else { %>
-					<div class='rating'>
-						<%= model.escape("rating") %>
-					</div>
-				<% } %>
-			</div>
+	<div class="col-md-3">	
+		<h3> Check it out </h3>
+	</div>
+	<div class="col-md-4">	
+		<div class='description'>
+			<h3> Description: </h3>
 		</div>
+	</div>
+	<div class="col-md-4">	
+		<div class='Rating'>
+			<h3> Rating: </h3>
+		</div>
+	</div>
+</div>
 
-		<div class='post-recipe'></div>
+<div id='recipes'>
 
-	<% }); %>
 </div>

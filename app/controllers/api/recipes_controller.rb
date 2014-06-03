@@ -7,6 +7,8 @@ module Api
 
 		def index
 			@recipes = Recipe.paginate(:page => params[:page], :per_page => 10)
+		  .where("dishname LIKE ?", "%#{dishname_key}%")
+
 			count = Recipe.count
 			render :index, :layout => false
 		end
@@ -37,6 +39,14 @@ module Api
 			end
 		end
 
+		def names
+			# http://localhost:3000/api/recipes/names?dishname=soup
+			@recipes = Recipe.where("dishname like ?", "%#{name}%").pluck(:dishname)
+			puts @recipes
+
+			render :json => @recipes
+		end
+
 		def destroy
 		end
 
@@ -47,6 +57,11 @@ module Api
 		end
 
 		private
+
+		def dishname_key
+			params[:dishname].try(:downcase)
+		end
+
 		def recipe_params
 			params.require(:recipe).permit(:instructions, :dishname, :description)
 		end
@@ -64,4 +79,3 @@ module Api
 		
 	end
 end
-

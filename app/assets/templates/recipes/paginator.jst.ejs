@@ -1,0 +1,15 @@
+<div class="row">
+	<button class="prev btn-default btn col-md-1">Prev</button>
+	<div class="col-md-6">
+		<ul>
+			<% var prevPages = Math.max(1, state.currentPage - 5) %>
+			<% var maxPages = Math.min(5, state.totalPages - state.currentPage) %>
+			<% for(p=prevPages; p<=state.currentPage + maxPages; p++){ %>
+				<a href="#/recipes/page/<%=p%>" class="page btn btn-default col-md-1 pag-buttons"><%= p %></a>
+			<% }%>
+		</ul>
+	</div>
+	<button class="btn btn-default next col-md-1">Next</button>
+
+</div>
+

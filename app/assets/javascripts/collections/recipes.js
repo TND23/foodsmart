@@ -6,11 +6,17 @@ App.Collections.Recipes = Backbone.PageableCollection.extend({
 
 	},
 
+	comparator: function(){
+
+	},
+
 	parse: function(data){
 		this.currentPage = data.current_page;
-		this.totalEntries = data.total_entries;
-		this.pageSize = data.per_page;
-		data = data.models;
+		this.state.totalRecords = data.total_entries;
+		this.state.pageSize = data.per_page;
+		this.state.totalPages = Math.ceil(this.state.totalRecords / this.state.pageSize);
+		this.state.lastPage = this.state.totalPages;
+		var data = data.models;
 		return data;   
 	},
 
@@ -18,29 +24,21 @@ App.Collections.Recipes = Backbone.PageableCollection.extend({
 		if (method === "byName"){
 			this.searchByName(val);
 		}
+	},
+
+	searchByName: function(name){
 
 	},
 
-	searchByName: function(){
-
-	},
+	searchVal: "",
 
 	state:{
 		pageSize: 10,
-		sortKey: "updated",
-		order: 1
 	},
 
 	searchParams: function(){
 		return ["byName", "byRating", "byAuthor", "byIngredients"];
 	},
-
-	// queryParams: {
-	// 	totalPages: null,
-	// 	totalRecords: null,
-	// 	sortKey: "sort",
-
-	// },
 
 	getOrFetch: function(id){
 		var model;
@@ -52,7 +50,18 @@ App.Collections.Recipes = Backbone.PageableCollection.extend({
 			model.fetch();
 			return model;
 		}
+	},
+
+	getPage: function(pg){
+		var pg = parseInt(pg);
+		this.state.currentPage = pg;
+		Backbone.PageableCollection.prototype.getPage.call(this, pg, {
+      data: { dishname: this.searchVal }
+		}).done(function(){
+			console.log(this);
+		});
 	}
 });
 
 App.Collections.recipes = new App.Collections.Recipes();
+App.Collections.allRecipes = App.Collections.recipes.fetch(); 

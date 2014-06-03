@@ -28,19 +28,18 @@ class Recipe < ActiveRecord::Base
 	def self.filter_by_ingredients(*ingredients)
 	end
 
-	def self.search(search)
-		if search && !search.empty?
-			find(:all, :conditions => ['dishname LIKE ?', "#{search}"])
+	def self.search_by_name(name)
+		if name && !name.empty?
+			find(:all, :conditions => ['dishname LIKE ?', "#{name}"])
 		else
-			find(:all)
+			return
 		end
 	end
 
-	def send_to_deleted_user
-		
+	private
+	def send_to_deleted_user		
 	end
 
-	private
 	def send_to_owners_cookbook
 		self.cookbook_id = current_user.cookbook.id if current_user
 	end

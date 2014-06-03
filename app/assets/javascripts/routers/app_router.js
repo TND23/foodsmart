@@ -7,7 +7,6 @@ App.Routers.AppRouter = Backbone.Router.extend({
 		"fridge" : "userIngredientIndex",
 		"ingredients" : "ingredientIndex",
 		"ingredientNew" : "ingredientNew",
-		//"recipes" : "recipeIndex",
 		"recipeNew" : "recipeNew",
 		"recipes/:id" : "recipeShow",
 		"recipes/page/:id" : "recipeIndex"
@@ -62,16 +61,16 @@ App.Routers.AppRouter = Backbone.Router.extend({
 	},
 
 	recipeIndex: function(pg){
+		var that = this;
 		var pg = parseInt(pg);
 		var collection = App.Collections.recipes;
-		var that = this;
+		collection.getPage(pg);
 		collection.fetch({
 			success: function(){ 
 				var newView = new App.Views.RecipesIndex({ collection: App.Collections.recipes });		
-				collection.getPage(pg);		
 				that._swapView(newView);
 			}
-		})
+		});
 	},
 
 	recipeNew: function(){
@@ -81,7 +80,6 @@ App.Routers.AppRouter = Backbone.Router.extend({
 
 	recipeShow: function(identification){
 		var that = this;
-		
 		var identification = parseInt(identification); // since the identification is passed in as a string
 		if (App.Collections.recipes.models.length === 0){ // if the recipeCollection hasn't been stored, store it
 			App.Collections.recipes.fetch({
@@ -99,7 +97,6 @@ App.Routers.AppRouter = Backbone.Router.extend({
 	renderShow: function(recipe){
 		var newView = new App.Views.RecipesShow({model: recipe});
 		this._swapView(newView);
-
 	},
 
 	userIngredientIndex: function(){
@@ -111,7 +108,6 @@ App.Routers.AppRouter = Backbone.Router.extend({
 			collection: App.Collections.user_ingredients
 		})
 		this._swapView(newView);
-
 	},
 
 	_swapView: function (newView) {
@@ -120,7 +116,5 @@ App.Routers.AppRouter = Backbone.Router.extend({
 	  }
 	  this._prevView = newView;
 	  $("#content").html(newView.render().$el);
-	  //	  $("#book").html(newView.render().$el);
   }
-
 });

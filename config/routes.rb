@@ -10,6 +10,7 @@ GroceryApp::Application.routes.draw do
     resources :cookbook_recipes, :only => [:create, :update, :destroy, :show]
 
     resources :recipes do
+      get :names, :on => :collection
       resources :cookbook_recipes, :only => [:new]
     	resources :endorsements, :only => [:index, :create, :show, :destroy, :update]
       resources :recipe_ingredients, :except => [:edit]

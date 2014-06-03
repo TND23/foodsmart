@@ -1,4 +1,4 @@
-#recipe-list{
+#recipe-list, .centered-text{
   text-align: center;
   overflow: hidden;
 }
@@ -7,19 +7,23 @@
 
 }
 .description{
-
+	overflow-wrap: break-word;
 }
 
 .no-rating{
 
 }
 
+.dish-link{
+	color: black;
+}
+
 .post-recipe{
-  border-bottom: 2px dashed #56a8de;
+  border-bottom: 2px dashed #443029;
 
 }
 
-.pre-recipe{
+#recipe{
   border-bottom: 2px solid #56a8de;
 
 }
