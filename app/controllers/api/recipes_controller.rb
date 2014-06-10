@@ -4,11 +4,9 @@ module Api
 		skip_before_filter :verify_authenticity_token, :only => :create
 		before_filter :default_format_html, :only => :index
 
-
 		def index
-			@recipes = Recipe.paginate(:page => params[:page], :per_page => 10)
+			@recipes = Recipe.paginate(:page => params[:page], :per_page => 25)
 		  .where("dishname LIKE ?", "%#{dishname_key}%")
-
 			count = Recipe.count
 			render :index, :layout => false
 		end
@@ -22,6 +20,7 @@ module Api
 			@recipe.recipe_ingredients.new(recipe_ingredient_params)	
 			@recipe.user_id = current_user.id
 			if @recipe.save
+				create_new_cookbook_recipe(@recipe)
 				current_user.cookbook.recipes << @recipe
 				render :json => @recipe
 			else
@@ -40,20 +39,14 @@ module Api
 		end
 
 		def names
-			# http://localhost:3000/api/recipes/names?dishname=soup
+			name = params[:name]
 			@recipes = Recipe.where("dishname like ?", "%#{name}%").pluck(:dishname)
-			puts @recipes
-
 			render :json => @recipes
-		end
-
-		def destroy
 		end
 
 		def show
 			@recipe = Recipe.find(params[:id])
 			@recipe_ingredients = @recipe.recipe_ingredients
-#			render "api/recipes/show"
 		end
 
 		private
@@ -75,6 +68,12 @@ module Api
 
 		def default_format_html
 			request.format = "html"
+		end
+
+		def create_new_cookbook_recipe(recipe)
+			cbRecipe = CookbookRecipe.new()
+			cbRecipe.recipe_id = recipe.id
+			cbRecipe.cookbook_id = current_user.cookbook.id
 		end
 		
 	end

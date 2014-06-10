@@ -13,9 +13,7 @@
     username: "<%= current_user.username %>"
   });
 
-
   App.current_user.fetch({
-  	success: function(response){console.log("success")},
   	error: function(response){console.log("error")} 
   });
 </script>

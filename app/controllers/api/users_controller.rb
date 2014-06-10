@@ -1,6 +1,7 @@
 module Api
 	class UsersController < ApiController
-		
+		before_filter :default_format_html, :only => :show
+
 		def index
 			@users = User.all
 		end
@@ -29,8 +30,10 @@ module Api
 
 		def show
 			@user = User.find(params[:id])
+			@cookbook = @user.cookbook
+			@cookbook_recipes = @cookbook.cookbook_recipes
 			if current_user.id == @user.id || current_user.admin
-				render "api/users/show"
+				render :show, :layout => false
 			else
 				render :json => "NO JOY"
 			end
@@ -38,6 +41,11 @@ module Api
 		end
 
 		private
+
+		def default_format_html
+			request.format = "html"
+		end
+		
 		def user_params
 			params.require(:user).permit(:username, :password)
 		end

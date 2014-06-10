@@ -3,12 +3,14 @@ App.Views.RecipesIndex = Backbone.View.extend({
 	
 	events: {
 		"click input-search" : "searchRecipes",
-		"keyup #formInput": "searchRecipes"
+		"keyup #formInput": "delayedKeyPress"
 	},
 
 	initialize: function(options){
-		this.collection = options.collection;
-		this.listenTo(this.collection, "sync", this.refresh);
+	  this.collection = options.collection;
+		this.delayedRender = _.debounce(this.renderRecipes.bind(this), 50);
+		this.delayedKeyPress = _.debounce(this.searchRecipes.bind(this), 500);
+    this.listenTo(this.collection, "change add remove", this.delayedRender);
 	},
 
 	render: function(){

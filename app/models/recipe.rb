@@ -20,22 +20,6 @@ class Recipe < ActiveRecord::Base
 
 	accepts_nested_attributes_for :recipe_ingredients, :reject_if => :all_blank, :allow_destroy => true
 
-	def calculate_rating
-		return 0 if self.endorsements.length == 0
-		self.rating = Endorsement.weigh_averages(endorsements)
-	end
-
-	def self.filter_by_ingredients(*ingredients)
-	end
-
-	def self.search_by_name(name)
-		if name && !name.empty?
-			find(:all, :conditions => ['dishname LIKE ?', "#{name}"])
-		else
-			return
-		end
-	end
-
 	private
 	def send_to_deleted_user		
 	end

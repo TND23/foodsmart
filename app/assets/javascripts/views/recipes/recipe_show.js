@@ -127,11 +127,14 @@ App.Views.RecipesShow = Backbone.View.extend({
 	saveRecipe: function(e){
 		e.preventDefault();
 		var that = this;
-		var user_cookbook = App.current_user.cookbook;
-		if (user_cookbook.cookbook_recipes.findWhere({"dishname": that.model.escape("dishname")})){
+		var userCookbook = App.current_user.get("cookbook");
+		if (_.isEmpty(userCookbook.cookbook_recipes)){
+			
+		}
+		if (userCookbook.cookbook_recipes.findWhere({"dishname": that.model.escape("dishname")})){
 			console.log("That dishname already exists in your cookbook!");
 		} else {
-			user_cookbook.cookbook_recipes.add(this.model);
+			userCookbook.cookbook_recipes.add(this.model);
 		}
 	},
 

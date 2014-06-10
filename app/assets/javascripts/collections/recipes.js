@@ -33,7 +33,7 @@ App.Collections.Recipes = Backbone.PageableCollection.extend({
 	searchVal: "",
 
 	state:{
-		pageSize: 10,
+		pageSize: 25,
 	},
 
 	searchParams: function(){
@@ -54,11 +54,12 @@ App.Collections.Recipes = Backbone.PageableCollection.extend({
 
 	getPage: function(pg){
 		var pg = parseInt(pg);
+		var that = this;
 		this.state.currentPage = pg;
 		Backbone.PageableCollection.prototype.getPage.call(this, pg, {
       data: { dishname: this.searchVal }
-		}).done(function(){
-			console.log(this);
+		}).done(function(data){
+			
 		});
 	}
 });

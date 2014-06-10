@@ -8,6 +8,9 @@ module Api
 		def index
 			cookbook = Cookbook.find(params[:cookbook_id])
 			@cookbook_recipes = cookbook.cookbook_recipes.all
+			# @cookbook_recipes.each do |cr|
+			# 	cr.recipe = Recipe.find(cr.recipe_id)
+			# end
 		end
 
 		def create

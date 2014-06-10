@@ -1,1 +1,0 @@
-json.(@user, :id, :username, :admin, :user_ingredients, :cookbook)	

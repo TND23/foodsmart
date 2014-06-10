@@ -6,7 +6,7 @@ App.Collections.CookbookRecipes = Backbone.Collection.extend({
 	},
 	
 	initialize: function(models, options){
-		this.cookbook_id = options.cookbook.id;
+		this.cookbook_id = options.cookbook_id;
 	}
 
 });
