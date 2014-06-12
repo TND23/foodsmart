@@ -7,7 +7,6 @@ App.Collections.Ingredients = Backbone.Collection.extend({
 		//this.recipe = options.recipe;
 	},
 	
-
 	getOrFetch: function(id){
 		var model;
 		var ingredients = this;

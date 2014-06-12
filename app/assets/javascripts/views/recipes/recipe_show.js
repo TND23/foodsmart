@@ -95,6 +95,7 @@ App.Views.RecipesShow = Backbone.View.extend({
 		var model = this.model = options.model;
 		this.ensureEndorsements(options.model);
 		this.listenTo(model.endorsements, 'add', view.renderEndorsementsPartial)
+		this.listenTo(App.current_user.cookbook.cookbook_recipes, 'add, change', this.updateCookbook);
 	},	
 
 	removeIngredientField: function(e){
@@ -127,13 +128,23 @@ App.Views.RecipesShow = Backbone.View.extend({
 	saveRecipe: function(e){
 		e.preventDefault();
 		var that = this;
-		var userCookbook = App.current_user.get("cookbook");
-		if (_.isEmpty(userCookbook.cookbook_recipes)){
-			
+		var userCookbook = App.current_user.cookbook;
+		if (_.isEmpty(userCookbook.cookbook_recipes.models)){
+			userCookbook.cookbook_recipes.fetch({success: function(){that.checkRecipes(userCookbook)}});
 		}
+		else {
+			this.checkRecipes(userCookbook);
+		}
+	},
+
+	checkRecipes: function(userCookbook){
+		var that = this;
+		var userCookbook = userCookbook;
 		if (userCookbook.cookbook_recipes.findWhere({"dishname": that.model.escape("dishname")})){
 			console.log("That dishname already exists in your cookbook!");
 		} else {
+			console.log(this.model);
+			var new_cookbook_recipe = new App.Models.CookbookRecipe({recipe: this.model, cookbook_recipe_id: this.model.id});
 			userCookbook.cookbook_recipes.add(this.model);
 		}
 	},
@@ -160,6 +171,11 @@ App.Views.RecipesShow = Backbone.View.extend({
 			}	
 		}
 	},	
+
+	updateCookbook: function(){
+		console.log('here');
+		App.current_user.cookbook.save();
+	},
 
 	updateName: function(){
 		$dishname = $("#dishname").val();

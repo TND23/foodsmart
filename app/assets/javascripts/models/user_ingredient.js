@@ -7,7 +7,7 @@ App.Models.UserIngredient = Backbone.Model.extend({
 	},
 
 	initialize: function(models, options){
-		this.set("user_id", this.collection.get("user_id"));
+		this.set("user_id", App.current_user.get("id"));
 	},
 
 	findIngredient: function(name){
@@ -20,15 +20,15 @@ App.Models.UserIngredient = Backbone.Model.extend({
 		}
 	},
 
-	validate: function(){
-		var name = this.get("name");
-		if (this.findIngredient(name)){
-			return true;
-		} 
-		// todo: logic
-		// else {
-			// this.ingredient = []
-		// }
+	// validate: function(){
+	// 	var name = this.get("name");
+	// 	if (this.findIngredient(name)){
+	// 		return true;
+	// 	} 
+	// 	// todo: logic
+	// 	// else {
+	// 		// this.ingredient = []
+	// 	// }
 			
-	}
+	// }
 });

@@ -25,7 +25,7 @@ App.Routers.AppRouter = Backbone.Router.extend({
 
 	cookbookRecipesShow: function(){
 		var that = this;
-		var cookbook = App.current_user.get("cookbook");
+		var cookbook = App.current_user.cookbook;
 		var collection = cookbook.cookbook_recipes;
 		collection.fetch({ 
 			success: function(){

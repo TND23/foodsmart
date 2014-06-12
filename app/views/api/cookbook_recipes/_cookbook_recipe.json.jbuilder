@@ -1,5 +1,4 @@
 json.cookbook_recipe_id cookbook_recipe.id
 json.cookbook_id cookbook_recipe.cookbook_id
-json.cookbook_recipe_recipe_id cookbook_recipe.recipe_id 
 json.notes cookbook_recipe.notes
-json.recipe Recipe.find(cookbook_recipe.recipe_id)
+json.referenced_recipe Recipe.find(cookbook_recipe.recipe_id)

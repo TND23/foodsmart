@@ -1,6 +1,7 @@
 App.Collections.CookbookRecipes = Backbone.Collection.extend({
-
+	
 	model: App.Models.CookbookRecipe,
+
 	url: function(){
 		return "api/cookbooks/" + this.cookbook_id + "/cookbook_recipes"; 
 	},

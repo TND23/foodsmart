@@ -17,6 +17,10 @@ module Api
 			@cookbooks = Cookbook.all
 		end
 
+		def update
+			
+		end
+
 		private
 
 		def default_format_html

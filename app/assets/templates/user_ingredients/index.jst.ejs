@@ -1,21 +1,45 @@
-<form action="api/users/<%=App.current_user.id%>/user_ingredients" method="POST">
+
 	<label>Name</label>
 	<input class="user_ingredient_name" name='user_ingredient[name]'>
 	<label>Amount</label>
-	<input name='user_ingredient[quantity]'>
+	<input class="user_ingredient_quantity" name='user_ingredient[quantity]'>
 	<label>Units</label>
-	<input name='user_ingredient[units]'>
-	<input type="hidden" name="authenticity_token" value=<%=App.token%>>
-	<input type="submit">
-</form>
+	<input class="user_ingredient_units" name='user_ingredient[units]'>
+
+	<a href="#submit" id="submit-recipe" class="btn btn-default">Submit</a>
+
+<br>
+
+<header>
+		<input type="text" id="formInput"></input>
+		<a href="#search"class="btn btn-default">Find Ingredients</a>
+	<p class='pretty-text'> Your Ingredients </p>
+</header>
+<br>
 
 <div id='user-ingredient-container'>
+	<div class='row centered-text'>
+		<div class='col-md-3'>
+			<label class='ingredient-label'>Name</label>
+		</div>
+		<div class='col-md-3'>
+			<label class='ingredient-label'>Quantity</label>
+		</div>
+		<div class='col-md-3'>
+			<label class='ingredient-label'>Units</label>
+		</div>
+	</div>
 	<% App.current_user.user_ingredients.forEach(function(ingredient){ %>
-		<label class='ingredient-label'>Name</label>
-		<%= ingredient.escape("name") %>
-		<label class='ingredient-label'>Quantity</label>
-		<%= ingredient.escape("quantity") %>
-		<label class='ingredient-label'>Units</label>
-		<%= ingredient.escape("units") %>
+		<div class='row centered-text'>
+			<div class='col-md-3'>
+				<%= ingredient.escape("name") %>
+			</div>
+			<div class='col-md-3'>
+				<%= ingredient.escape("quantity") %>
+			</div>
+			<div class='col-md-3'>
+				<%= ingredient.escape("units") %>
+			</div>
+		</div>
 	<% }); %>
 </div>

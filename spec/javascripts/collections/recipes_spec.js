@@ -15,6 +15,10 @@ describe('App.Collections.Recipes', function(){
 
 	});
 
+	it('should know what app is', function(){
+		
+	});
+
 
 	describe('searching', function(){
 		it ('should have search parameters', function(){
@@ -59,18 +63,6 @@ describe('App.Collections.Recipes', function(){
 		expect(recipes.models).toBeDefined();
 	});
 
-
-
-	// it ('has a working calculate rating function', function(){
-	// 		recipe.set("endorsements", 
-	// 			[{"id":1,"comments":"This is certainly a recipe.","stars":3,"recipe_id":1,"user_id":2},
-	// 			{"id":2,"comments":"This is certainly a recipe.","stars":2,"recipe_id":1,"user_id":3}]
-	// 		);
-	// 	expect(recipe.calculateRating).toBeDefined();
-	// 	expect(recipe.calculateRating()).toEqual(2.5);
-	// 	recipe.set("endorsements", []);
-	// 	expect(recipe.calculateRating()).toEqual(null);
-	// });
 
 	it ('has an ingredients filter', function(){
 		var stub = sinon.stub(this.rating);

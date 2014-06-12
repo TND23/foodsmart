@@ -4,7 +4,8 @@ describe Api::CookbooksController do
 
 
 	describe "#show" do
-
+		cookbook = Cookbook.create
+		get :show
 	end
 
 	describe "edit" do

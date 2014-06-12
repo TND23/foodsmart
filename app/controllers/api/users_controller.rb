@@ -31,6 +31,7 @@ module Api
 		def show
 			@user = User.find(params[:id])
 			@cookbook = @user.cookbook
+			@user_ingredients = @user.user_ingredients
 			@cookbook_recipes = @cookbook.cookbook_recipes
 			if current_user.id == @user.id || current_user.admin
 				render :show, :layout => false
