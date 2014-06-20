@@ -1,7 +1,9 @@
 <% var stars = endorsement.get("stars"); %>
 <% var comments = endorsement.escape("comments"); %>
-
+<% var username = endorsement.escape("endorser"); %>
+<% console.log(endorsement) %>
 <div class='row'>
 	<p> <%=stars%> </p>
 	<p> <%=comments%></p>
+	<p> <%=username %></p>
 </div>

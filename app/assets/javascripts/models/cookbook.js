@@ -1,8 +1,8 @@
 App.Models.Cookbook = Backbone.Model.extend({
 
 	initialize: function(models, options){
-		this.user = options.user;
-		var cookbook_id = options.cookbook_id;
+		// this.user = options.user;
+		this.cookbook_id = options.cookbook_id;
 		this.cookbook_recipes = new App.Collections.CookbookRecipes([], {cookbook_id: options.cookbook_id});
 	},
 
@@ -11,5 +11,8 @@ App.Models.Cookbook = Backbone.Model.extend({
 			return "something undefined";
 		}
 	},
-	urlRoot: "api/cookbooks/"
+	
+	urlRoot: function(){
+		return "api/cookbooks/" + this.cookbook_id;
+	} 
 });

@@ -3,13 +3,14 @@ module Api
 		before_filter :require_user
 
 		def create
-			@endorsement = Endorsement.new(endorsement_params)
-			@endorsement.user_id = current_user.id
 			recipe = Recipe.find(params[:recipe_id])
-			@endorsement.recipe_id = recipe.id
+			@endorsement = Endorsement.new(endorsement_params)
+			@endorsement.user_id, @endorsement.recipe_id = current_user.id, recipe.id
 			duplication = Endorsement.is_duplicate?(current_user, recipe)
 			if !duplication
 				if @endorsement.save
+					recipe.update_rating
+					recipe.save
 					render :json => @endorsement
 				else
 					render :json => @endorsement.errors

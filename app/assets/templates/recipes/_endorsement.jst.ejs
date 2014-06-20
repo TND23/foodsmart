@@ -40,9 +40,10 @@
 			<div class="col-md-2">
 				<button id="endorse">Rate this Recipe</button>
 			</div>
-
 		</div>
 	</div>
+	<% var recipe = recipe %>
+
 	<div id="endorsements-row" class="row">
 		<%= JST['recipes/_all_endorsements']({recipe: recipe}) %>
 	</div>

@@ -5,6 +5,7 @@ module Api
 		before_filter :default_format_html, :only => :index
 
 		def index
+			# select all recipes where the name is like the paramter searched for
 			@recipes = Recipe.paginate(:page => params[:page], :per_page => 25)
 		  .where("dishname LIKE ?", "%#{dishname_key}%")
 			count = Recipe.count
@@ -22,7 +23,7 @@ module Api
 			if @recipe.save
 				create_new_cookbook_recipe(@recipe)
 				current_user.cookbook.recipes << @recipe
-				render :json => @recipe
+				redirect_to "/#recipes/page/1"
 			else
 				flash.now[:errors] = @user.errors.full_messages
 				render :new

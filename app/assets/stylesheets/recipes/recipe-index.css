@@ -3,6 +3,11 @@
   overflow: hidden;
 }
 
+#small-cont{
+	height: 30px;
+	background-color: yellow;
+}
+
 .dishname{
 
 }
@@ -14,6 +19,9 @@
 
 }
 
+.search-bar{
+	background-color: white;
+}
 .dish-link{
 	color: black;
 }

@@ -1,8 +1,6 @@
 App.Views.RecipesShow = Backbone.View.extend({
 	template: JST["recipes/show"],
-
-// pagination strategy
-// record no of items total, page length, current index, and the items
+	
 	events: {
 		'click #edit-name' : 'updateName',
 		'click .recipe-row' : 'addStyle',
@@ -95,7 +93,7 @@ App.Views.RecipesShow = Backbone.View.extend({
 		var model = this.model = options.model;
 		this.ensureEndorsements(options.model);
 		this.listenTo(model.endorsements, 'add', view.renderEndorsementsPartial)
-		this.listenTo(App.current_user.cookbook.cookbook_recipes, 'add, change', this.updateCookbook);
+		//this.listenTo(App.current_user.cookbook.cookbook_recipes, 'add, change', this.updateCookbook);
 	},	
 
 	removeIngredientField: function(e){
@@ -143,9 +141,10 @@ App.Views.RecipesShow = Backbone.View.extend({
 		if (userCookbook.cookbook_recipes.findWhere({"dishname": that.model.escape("dishname")})){
 			console.log("That dishname already exists in your cookbook!");
 		} else {
-			console.log(this.model);
 			var new_cookbook_recipe = new App.Models.CookbookRecipe({recipe: this.model, cookbook_recipe_id: this.model.id});
 			userCookbook.cookbook_recipes.add(this.model);
+			new_cookbook_recipe.save();
+			//userCookbook.cookbook_recipes.sync("create", new_cookbook_recipe, {success: function(){console.log("sucess");}})
 		}
 	},
 

@@ -33,8 +33,17 @@
 						</p>
 					</div>
 				<% } else { %>
-					<div class='rating'>
-						<%= model.escape("rating") %>
+					<div class='rating'>						
+						<div id='all-stars' class="row">
+
+							<% var rating = model.escape("rating") %>
+							<% for (var i = 1; i <= rating; i++){ %>
+								<span class="fa-stack fa-md pull-left">
+									<i id='star<%=i%>' class="fa fa-star fa-stack-1x yellow-color"></i>
+								</span>
+							<% } %>
+							
+						</div>
 					</div>
 				<% } %>
 			</div>

@@ -11,6 +11,7 @@ App.Collections.Recipes = Backbone.PageableCollection.extend({
 	},
 
 	parse: function(data){
+		// set state for pagination
 		this.currentPage = data.current_page;
 		this.state.totalRecords = data.total_entries;
 		this.state.pageSize = data.per_page;
@@ -26,9 +27,6 @@ App.Collections.Recipes = Backbone.PageableCollection.extend({
 		}
 	},
 
-	searchByName: function(name){
-
-	},
 
 	searchVal: "",
 
@@ -59,7 +57,7 @@ App.Collections.Recipes = Backbone.PageableCollection.extend({
 		Backbone.PageableCollection.prototype.getPage.call(this, pg, {
       data: { dishname: this.searchVal }
 		}).done(function(data){
-			
+			// TODO 
 		});
 	}
 });

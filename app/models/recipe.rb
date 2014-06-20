@@ -19,6 +19,15 @@ class Recipe < ActiveRecord::Base
 	has_many :endorsements
 
 	accepts_nested_attributes_for :recipe_ingredients, :reject_if => :all_blank, :allow_destroy => true
+	def update_rating
+		self.rated ||= true
+		weighted_rating, length = 0.0, 0
+		self.endorsements.each do |endorsement|
+			length += 1
+			weighted_rating += endorsement.stars.to_f
+		end
+		self.rating = weighted_rating / length
+	end
 
 	private
 	def send_to_deleted_user		

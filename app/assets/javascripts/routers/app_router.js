@@ -2,7 +2,7 @@ App.Routers.AppRouter = Backbone.Router.extend({
 	// re-work paperclip 
 	routes: {
 		"" : "root",
-		"cookbookRecipes": "cookbookRecipesShow",
+		"cookbookRecipes": "cookbookRecipesIndex",
 		"home" : "showHome",
 		"fridge" : "userIngredientIndex",
 		"ingredients" : "ingredientIndex",
@@ -23,13 +23,13 @@ App.Routers.AppRouter = Backbone.Router.extend({
 		this._swapView(newView);
 	},
 
-	cookbookRecipesShow: function(){
+	cookbookRecipesIndex: function(){
 		var that = this;
 		var cookbook = App.current_user.cookbook;
 		var collection = cookbook.cookbook_recipes;
 		collection.fetch({ 
 			success: function(){
-				var newView = new App.Views.CookbookRecipesShow({collection: collection});
+				var newView = new App.Views.CookbookRecipesIndex({collection: collection});
 				that._swapView(newView);
 			}
 		});
@@ -86,13 +86,20 @@ App.Routers.AppRouter = Backbone.Router.extend({
 			App.Collections.recipes.fetch({
 				success: function(){ 
 					var recipe = App.Collections.recipes.get(identification);
-					that.renderShow(recipe);
+					that.getEndorsements(recipe);
 				}
 			}) 
 		} else {
 			var recipe = App.Collections.recipes.get(identification);
-			this.renderShow(recipe);
+			this.getEndorsements(recipe);
 		}
+	},
+
+	getEndorsements: function(recipe){
+		var that = this;
+		recipe.endorsements.fetch({success: function(){
+			that.renderShow(recipe);
+		}});
 	},
 
 	renderShow: function(recipe){

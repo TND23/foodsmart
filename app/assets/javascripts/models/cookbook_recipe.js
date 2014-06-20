@@ -12,6 +12,11 @@ App.Models.CookbookRecipe = Backbone.Model.extend({
 		notes: null
 	},
 
+	url: function(){
+		return "api/cookbooks/" + this.get("cookbook_id") + "/cookbook_recipes"; 
+	}, 
+
+
 	validate: function(){
 		//var cookbook = App.CollectioCookbook.find(this.cookbook_id);
 		// reject if this cookbook alreayd has this recipe.

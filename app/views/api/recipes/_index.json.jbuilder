@@ -5,6 +5,7 @@ json.total_entries recipes.total_entries
 json.models recipes do |recipe|
 	json.instructions recipe.instructions
 	json.user_id recipe.user_id
+	json.author recipe.user.username
 	json.id recipe.id
 	json.dishname recipe.dishname
 	json.rating recipe.rating

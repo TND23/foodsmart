@@ -2,6 +2,10 @@
 	<button class="prev btn-default btn col-md-1 col-lg-1 col-sm-1 col-xs-1">Prev</button>
 	<div class="col-md-6 col-lg-6 col-sm-10 col-xs-10">
 		<ul>
+				<% var pgsors = 0; %>
+			<% if (state.totalPages - state.currentPage < 9) { %>
+				<% pgsors = 9 - state.totalPages - state.currentPage; %>
+			<% } %>
 			<% var prevPages = Math.max(1, state.currentPage - 5) %>
 			<% var maxPages = Math.min(5, state.totalPages - state.currentPage) %>
 			<% for(p=prevPages; p<=state.currentPage + maxPages; p++){ %>

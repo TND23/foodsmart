@@ -1,16 +1,16 @@
 <div class='recipe-page'>
-<header>
-		<input type="text" id="formInput"></input>
-		<a href="#/recipes/names/" id="input-search" class="btn btn-default">Search</a>
-		<select name='searchable-params'>
-			<option value='name'>Name</option>
-			<option value='rating'>Rating</option>
-			<option value='author'>Author</option>
-			<option value='ingredients'>Ingredients</option>
-		</select>
-
-	<p class='pretty-text'> All Recipes </p>
+<header class='search-bar'>
+	<div class = 'row'>
+		<div class='col-lg-4 col-sm-4 col-md-4'>
+			<input type="text" id="formInput"></input>
+			<a href="#/recipes/names/" id="input-search" class="btn btn-default">Search</a>
+		</div>
+		<div class='col-lg-4 col-sm-4 col-md-4'>	
+			
+		</div>	
+	</div>
 </header>
+	<p class='pretty-text'> All Recipes </p>
 
 <div id='paginator'>
 </div>
@@ -32,7 +32,5 @@
 	</div>
 </div>
 
-<div id='recipes'>
-
-</div>
+<div id='recipes'></div>
 </div>

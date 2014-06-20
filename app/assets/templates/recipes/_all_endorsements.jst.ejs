@@ -1,11 +1,9 @@
-<% if( recipe.endorsements.length > 0){ %>
+<% var recipe = recipe %>
+<% if( recipe.endorsements.models.length > 0){ %>
+<% var endorsements = recipe.endorsements.models; %>
+<% App.ends = endorsements; %>
 	<% recipe.endorsements.forEach(function(endorsement){ %>
-		<% var stars = endorsement.get("stars"); %>
-		<% var comments = endorsement.escape("comments"); %>
-		<div class='row'>
-			<p> <%=stars%> </p>
-			<p> <%=comments%></p>
-		</div>
+		<%= JST['endorsements/show']({endorsement: endorsement}) %>
 	<% }); %>
 <% } else { %>
 	<p> No Endorsements Yet </p>

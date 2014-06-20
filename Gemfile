@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 
 gem 'bcrypt-ruby', :require => 'bcrypt'
-gem 'cocoon'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'database_cleaner'
 gem 'debugger'

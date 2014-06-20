@@ -13,19 +13,26 @@ module Api
 			# end
 		end
 
+
 		def create
-			@cookbook = current_user.cookbook
-			@recipe_id = params[:id]
-			@cookbook_recipe = CookbookRecipe.new(:cookbook_id => @cookbook.id, :recipe_id => @recipe_id)
-			if @cookbook_recipe.save
+			cookbook = current_user.cookbook
+			recipe_id = params[:recipe][:id]
+
+			@cookbook_recipe = cookbook.cookbook_recipes.new(recipe_id)				
+				if @cookbook_recipe.save
 				render :json => @cookbook_recipe
 			else
+				puts "5"
 				render :json => "Error"
 			end
+
 		end
 
 		def show
 			@cookbook_recipe = CookbookRecipe.find(params[:id])
+			if @cookbook_recipe.cookbook_id != current_user.cookbook.id
+				render :json => "You sure that's yours?"
+			end
 		end
 
 		def update
@@ -33,6 +40,7 @@ module Api
 		end
 
 		def destroy
+			
 			@cookbook_recipe = CookbookRecipe.find(params[:id])
 		end
 
@@ -42,3 +50,4 @@ module Api
 		end
 	end
 end
+

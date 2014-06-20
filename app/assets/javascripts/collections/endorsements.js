@@ -2,11 +2,11 @@ App.Collections.Endorsements = Backbone.PageableCollection.extend({
 
 	model: App.Models.Endorsement,
 	
-	url: function(recipe){
+	url: function(){
 		return "api/recipes/" + this.recipe_id + "/endorsements"
 	},
 
-	initialize: function(options){
+	initialize: function(models, options){
 		this.recipe_id = options.recipe.id;
 	},
 
